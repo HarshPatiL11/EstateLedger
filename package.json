@@ -1,5 +1,6 @@
 {
   "name": "estateledger",
+  "type": "module",
   "version": "1.0.0",
   "description": "A Realestate app made using mern stack",
   "main": "server.js",
