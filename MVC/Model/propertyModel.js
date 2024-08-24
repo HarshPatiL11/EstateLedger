@@ -143,7 +143,7 @@ const PropertySchema = new mongoose.Schema(
       required: [true, "Enter whether the owner wants to sell, lease, or both"],
     },
     // Image array for property images
-    img: [
+    propertyImg: [
       {
         data: {
           type: Buffer,
