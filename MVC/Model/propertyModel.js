@@ -142,6 +142,26 @@ const PropertySchema = new mongoose.Schema(
       enum: ["Sell", "Lease", "Both"],
       required: [true, "Enter whether the owner wants to sell, lease, or both"],
     },
+    rentAmount: {
+      type: Number,
+      required: function () {
+        return this.sellOrLease === "Lease" || this.sellOrLease === "Both";
+      },
+      validate: {
+        validator: function (value) {
+          return this.sellOrLease === "Lease" || this.sellOrLease === "Both"
+            ? value > 0
+            : true;
+        },
+        message: "Rent amount must be greater than 0 when selling or leasing.",
+      },
+    },
+    rentFrequency: {
+      type: String,
+      enum: ["Monthly", "Quarterly", "Yearly"],
+      required: [true, "Enter the rent frequency"],
+    },
+
     // Image array for property images
     propertyImg: [
       {
