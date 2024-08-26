@@ -65,6 +65,35 @@ export const registerUser = async (req, res) => {
   }
 };
 
+
+
+
+// Delete user
+export const userDelete = async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.userId);
+    if (user) {
+      await user.deleteOne();
+      return res.status(200).send({
+        success: true,
+        message: "User deleted successfully",
+      });
+    } else {
+      return res.status(404).send({
+        success: false,
+        message: "User not found",
+      });
+    }
+  } catch (error) {
+    console.error(`Error in API: ${error}`);
+    res.status(500).send({
+      status: "error",
+      message: "Internal Server Error || Error in delete API",
+    });
+  }
+};
+
+
 // User login controller
 export const userLoginController = async (req, res) => {
   try {
