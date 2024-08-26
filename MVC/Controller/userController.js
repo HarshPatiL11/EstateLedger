@@ -1,13 +1,28 @@
 import { comparePassword, hashPassword } from "../Helper/AuthHelper.js";
 import UserModel from "../Model/userModel.js";
 
+
+// get all users (all users)
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await UserModel.find({});
+    if (users.length === 0) return res.status(404).send("No users found");
+
+    res.status(200).json(users); // Return the users
+  } catch (error) {
+    console.error(`Error getting all users: ${error}`);
+    res.status(500).send("Internal Server Error || Error in get all users API");
+  }
+};
+
+
 // Get user by token
 export const getUserByToken = async (req, res) => {
   try {
     console.log("User ID from token:", req.userId);
     const user = await UserModel.findById(req.userId);
-    if (!user) return res.status(404).send("User not found"); // Handle not found case
-    res.status(200).json(user); // Return the user
+    if (!user) return res.status(404).send("User not found"); 
+    res.status(200).json(user); 
   } catch (error) {
     console.error(`Error getting user by token: ${error}`);
     res
@@ -57,6 +72,46 @@ export const userUpdateController = async (req, res) => {
     res.status(500).send({
       status: "error",
       message: "Internal Server Error || Error in update API",
+    });
+  }
+};
+
+// update userType(Admin only)
+export const updateUserTypeController = async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const { userType } = req.body;
+    const validUserTypes = ["client", "owner", "admin"];
+    if (!validUserTypes.includes(userType)) {
+      return res.status(400).send({
+        success: false,
+        message:
+          "Invalid userType. Allowed values are 'client', 'owner', or 'admin'.",
+      });
+    }
+
+    const user = await UserModel.findById(_id);
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // update userType
+    user.userType = userType;
+    await user.save();
+
+    res.status(200).send({
+      success: true,
+      message: "User type updated successfully",
+      user,
+    });
+  } catch (error) {
+    console.error(`Error updating userType: ${error}`);
+    res.status(500).send({
+      status: "error",
+      message: "Internal Server Error || Error in update userType API",
     });
   }
 };

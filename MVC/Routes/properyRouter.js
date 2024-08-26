@@ -5,16 +5,16 @@ import { ownerMiddleware } from "../Middleware/AdminMiddleware";
 const propertyRouter =express.Router();
 
 // create property
-propertyRouter.post('/property/register',ownerMiddleware,registerProperty)
+propertyRouter.post("/register", ownerMiddleware, registerProperty);
 
 // property filter 
-propertyRouter.post('/property/filter',filterProperties);
+propertyRouter.post('/filter',filterProperties);
 
 // property get 
 propertyRouter.get('/property/all',getAllProperties)
 propertyRouter.get("/property/:id", getPropertyById);
 
 // property delete 
-propertyRouter.delete('/property/delete/:id',ownerMiddleware,deleteProperty)
+propertyRouter.delete("/delete/:id", ownerMiddleware, deleteProperty);
 
 export default propertyRouter;

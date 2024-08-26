@@ -6,7 +6,7 @@ import { comparePassword, hashPassword } from "../Helper/AuthHelper.js";
 const JWT_SECRET = process.env.JWT_SECRET;
 console.log("JWT_SECRET:", JWT_SECRET);
 
-// Add user
+// Add user9
 export const registerUser = async (req, res) => {
   try {
     const { name, lastName, email, password, phone, frgtKey } = req.body;
@@ -64,9 +64,6 @@ export const registerUser = async (req, res) => {
     return res.status(500).send("Internal Server Error");
   }
 };
-
-
-
 
 // Delete user
 export const userDelete = async (req, res) => {
