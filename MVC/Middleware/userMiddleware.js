@@ -1,9 +1,9 @@
-import UserModel from "../Models/UserModel.js";
+import UserSchema from "../Model/userModel.js";
 
 // Middleware to confirm the user's identity
 export const userMiddleware = async (req, res, next) => {
   try {
-    const user = await UserModel.findById(req.userId);
+    const user = await UserSchema.findById(req.userId);
     if (!user) {
       return res.status(404).send({
         success: false,

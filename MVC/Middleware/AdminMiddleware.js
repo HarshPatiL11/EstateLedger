@@ -1,8 +1,8 @@
-import UserModel from "../Models/UserModel.js";
+import UserSchema from "../Model/userModel.js";
 
 export const adminMiddleware = async (req, res, next) => {
   try {
-    const user = await UserModel.findById(req.body.id);
+    const user = await UserSchema.findById(req.body.id);
     if (user.userType !== "admin") {
       return res.status(401).send({
         success: false,
@@ -23,7 +23,7 @@ export const adminMiddleware = async (req, res, next) => {
 
 export const ownerMiddleware = async (req, res, next) => {
   try {
-    const user = await UserModel.findById(req.body.id);
+    const user = await UserSchema.findById(req.body.id);
     if (user.userType !== "admin" || user.userType !== "owner") {
       return res.status(401).send({
         success: false,

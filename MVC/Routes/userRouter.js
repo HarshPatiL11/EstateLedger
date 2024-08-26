@@ -1,7 +1,11 @@
 import express from 'express';
-import { userMiddleware } from '../Middleware/userMiddleware';
-import UserSchema from '../Model/userModel'
-import { resetPasswordController, updatePasswordController, userUpdateController } from '../Controller/userController';
+import { userMiddleware } from "../Middleware/userMiddleware.js";
+import UserSchema from "../Model/userModel.js";
+import {
+  resetPasswordController,
+  updatePasswordController,
+  userUpdateController,
+} from "../Controller/userController.js";
 
 const userRouter = express.Router();
 

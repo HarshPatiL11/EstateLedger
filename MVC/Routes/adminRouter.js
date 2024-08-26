@@ -1,16 +1,16 @@
 import express from "express";
-import { userDelete } from "../Controller/authController";
-import { adminMiddleware } from "../Middleware/AdminMiddleware";
+import { userDelete } from "../Controller/authController.js";
+import { adminMiddleware } from "../Middleware/AdminMiddleware.js";
 import {
   deleteProperty,
   getAllProperties,
-} from "../Controller/propertyController";
+} from "../Controller/propertyController.js";
 import {
   getAllUsers,
   getUserByID,
   updateUserTypeController,
   userUpdateController,
-} from "../Controller/userController";
+} from "../Controller/userController.js";
 
 const adminRouter = express.Router();
 //Routers

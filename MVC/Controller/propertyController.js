@@ -1,5 +1,5 @@
 import fs from "fs";
-import Property from "../Models/PropertyModel.js";
+import Property from "../Model/PropertyModel.js";
 
 // add Property API
 export const registerProperty = async (req, res) => {

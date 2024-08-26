@@ -3,7 +3,7 @@ import {
   filterProperties,
   getAllProperties,
   getPropertyById,
-} from "../Controller/propertyController";
+} from "../Controller/propertyController.js";
 
 const propertyRouter = express.Router();
 

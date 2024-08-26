@@ -4,9 +4,8 @@ import {
   userDelete,
   userLoginController,
   userLogoutController,
-} from "../Controller/authController";
-import { adminMiddleware } from "../Middleware/AdminMiddleware";
-import { userMiddleware } from "../Middleware/userMiddleware";
+} from "../Controller/authController.js";
+import { userMiddleware } from "../Middleware/userMiddleware.js";
 
 const authRouter = express.Router();
 //Routers
