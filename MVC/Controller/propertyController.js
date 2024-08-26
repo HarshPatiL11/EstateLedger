@@ -2,7 +2,7 @@ import fs from "fs";
 import Property from "../Models/PropertyModel.js";
 
 // add Property API
-export const createProperty = async (req, res) => {
+export const registerProperty = async (req, res) => {
   try {
     const {
       owner,
@@ -35,7 +35,7 @@ export const createProperty = async (req, res) => {
       sellOrLease,
     } = req.fields;
 
-    // Validate required fields
+    // validate required fields
     if (
       !owner ||
       !address ||
@@ -134,8 +134,8 @@ export const createProperty = async (req, res) => {
       transactionType,
       waterAvailability,
       sellOrLease,
-      propertyImg, // Include the images array
-      singleLogo: logoData, // Include the logo data
+      propertyImg,
+      singleLogo: logoData,
     });
 
     await newProperty.save();
@@ -152,12 +152,13 @@ export const createProperty = async (req, res) => {
       .send({ success: false, message: "Internal server error", error });
   }
 };
-// get All Properties
+
+// get All Properties API
 export const getAllProperties = async (req, res) => {
   try {
     const properties = await Property.find({});
 
-    // Convert image data to base64
+    // convert image data to base64
     const propertiesWithImg = properties.map((property) => {
       const images = property.propertyImg.map((img) => ({
         data: img.data
@@ -205,7 +206,7 @@ export const getPropertyById = async (req, res) => {
       });
     }
 
-    // Convert image data to base64 for the single property
+    // convert image data to base64 for the single property
     const images = property.propertyImg.map((img) => ({
       data: img.data
         ? `data:${img.contentType};base64,${img.data.toString("base64")}`
@@ -233,7 +234,7 @@ export const getPropertyById = async (req, res) => {
   }
 };
 
-//filter api
+//filter Properties API
 export const filterProperties = async (req, res) => {
   try {
     const {
@@ -252,7 +253,7 @@ export const filterProperties = async (req, res) => {
       rentFrequency,
     } = req.query;
 
-    // Build the query object
+    // build the query object
     const query = {};
 
     if (layout) {
@@ -340,7 +341,7 @@ export const filterProperties = async (req, res) => {
   }
 };
 
-// Delete Property APi
+// delete Property APi
 export const deleteProperty = async (req, res) => {
   try {
     const propertyId = req.params.id;
