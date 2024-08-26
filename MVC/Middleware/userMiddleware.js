@@ -1,7 +1,7 @@
 import UserModel from "../Models/UserModel.js";
 
 // Middleware to confirm the user's identity
-export const confirmUserIdentity = async (req, res, next) => {
+export const userMiddleware = async (req, res, next) => {
   try {
     const user = await UserModel.findById(req.userId);
     if (!user) {
@@ -10,7 +10,6 @@ export const confirmUserIdentity = async (req, res, next) => {
         message: "User not found",
       });
     }
-
     if (user._id.toString() !== req.body.id) {
       return res.status(403).send({
         success: false,
