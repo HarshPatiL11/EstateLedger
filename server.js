@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 // set routes
 const router = express.Router();
 
-router.use("/user", authRouter);
+router.use("/user", authRouter);- 
 router.use("/user", userRouter);
 router.use("/admin", adminRouter);
 router.use("/owner", ownerRouter);
