@@ -6,12 +6,14 @@ import {
   userLogoutController,
 } from "../Controller/authController.js";
 import { userMiddleware } from "../Middleware/userMiddleware.js";
+import { authMiddle } from "../Middleware/AuthMiddleware.js";
 
 const authRouter = express.Router();
 //Routers
-authRouter.post("/user/register", registerUser);
-authRouter.post("/user/login", userLoginController);
-authRouter.post("/user/register", userLogoutController);
-authRouter.delete('/user/delete-profile',userMiddleware,userDelete)
+authRouter.post("/register", registerUser);//working
+authRouter.post("/login", userLoginController);//working
+authRouter.post("/logout", authMiddle, userLogoutController);//working
+authRouter.delete("/delete-profile", authMiddle, userDelete);//working
+
 // export
 export default authRouter;
