@@ -1,13 +1,13 @@
 import { comparePassword, hashPassword } from "../Helper/AuthHelper.js";
-import UserModel from "../Model/userModel.js";
+import UserSchema from "../Model/userModel.js";
 
 
-// get all users (all users)
+// get all users (admin only)
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await UserModel.find({});
+    const users = await UserSchema.find({});
     if (users.length === 0) return res.status(404).send("No users found");
-
+      users.forEach((user) => (user.password = undefined));
     res.status(200).json(users); // Return the users
   } catch (error) {
     console.error(`Error getting all users: ${error}`);
@@ -20,7 +20,7 @@ export const getAllUsers = async (req, res) => {
 export const getUserByToken = async (req, res) => {
   try {
     console.log("User ID from token:", req.userId);
-    const user = await UserModel.findById(req.userId);
+    const user = await UserSchema.findById(req.userId);
     if (!user) return res.status(404).send("User not found"); 
     res.status(200).json(user); 
   } catch (error) {
@@ -34,8 +34,24 @@ export const getUserByToken = async (req, res) => {
 // Get user by ID
 export const getUserByID = async (req, res) => {
   try {
-    const { _id } = req.params;
-    const user = await UserModel.findById(_id);
+    const { id } = req.params;
+
+     if (!id) {
+       return res.status(400).send({
+         success: false,
+         message: "User ID is required",
+       });
+     }
+
+     // Validate if the user is an admin
+     if (req.userType !== "admin") {
+       return res.status(403).send({
+         success: false,
+         message: "Forbidden: Only admins can access users using ID",
+       });
+     }
+
+    const user = await UserSchema.findById(id);
     if (user) return res.status(200).json(user);
     else return res.status(404).send("User not found");
   } catch (error) {
@@ -49,7 +65,7 @@ export const getUserByID = async (req, res) => {
 // Update user details
 export const userUpdateController = async (req, res) => {
   try {
-    const user = await UserModel.findById(req.userId);
+    const user = await UserSchema.findById(req.userId);
     if (!user)
       return res.status(404).send({
         success: false,
@@ -76,10 +92,63 @@ export const userUpdateController = async (req, res) => {
   }
 };
 
+//update user using id (admin only)
+export const updateUserUsingID = async(req,res)=>{
+  try {
+    const { id } = req.params;
+
+    // Check if the user ID in the request parameters is valid
+    if (!id) {
+      return res.status(400).send({
+        success: false,
+        message: "User ID is required",
+      });
+    }
+
+    const user = await UserSchema.findById(id);
+
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // Check if the user making the request is an admin or the same user
+    if (req.userType !== "admin" && req.userId !== id) {
+      return res.status(403).send({
+        success: false,
+        message:
+          "Forbidden: You can only update your own details or be an admin",
+      });
+    }
+
+    const { name, lastName, phone } = req.body;
+
+    if (name) user.name = name;
+    if (lastName) user.lastName = lastName;
+    if (phone) user.phone = phone;
+
+    await user.save();
+
+    res.status(200).send({
+      success: true,
+      message: "User data updated successfully",
+    });
+  } catch (error) {
+    console.error(`Error in API: ${error}`);
+    res.status(500).send({
+      success: false,
+      message: "Internal Server Error || Error in update API",
+    });
+  }
+}
+
+
 // update userType(Admin only)
 export const updateUserTypeController = async (req, res) => {
   try {
-    const { _id } = req.params;
+    const { id } = req.params;
     const { userType } = req.body;
     const validUserTypes = ["client", "owner", "admin"];
     if (!validUserTypes.includes(userType)) {
@@ -90,16 +159,21 @@ export const updateUserTypeController = async (req, res) => {
       });
     }
 
-    const user = await UserModel.findById(_id);
+    const user = await UserSchema.findById(id);
     if (!user) {
       return res.status(404).send({
         success: false,
         message: "User not found",
       });
     }
-
-    // update userType
-    user.userType = userType;
+    if (user.userType === userType){
+       return res.status(404).send({
+         success: false,
+         message: `User already a ${userType} `,
+       });
+    }
+      // update userType
+      user.userType = userType;
     await user.save();
 
     res.status(200).send({
@@ -119,13 +193,13 @@ export const updateUserTypeController = async (req, res) => {
 // Reset password
 export const resetPasswordController = async (req, res) => {
   try {
-    const { email, newPassword, answer } = req.body;
-    if (!email || !newPassword || !answer) {
+    const { email, newPassword, frgtKey } = req.body;
+    if (!email || !newPassword || !frgtKey) {
       return res
         .status(400)
         .send({ success: false, message: "Enter all details" });
     }
-    const user = await UserModel.findOne({ email, frgtKey: answer });
+    const user = await UserSchema.findOne({ email, frgtKey });
     if (!user) {
       return res.status(404).send({
         success: false,
@@ -151,7 +225,7 @@ export const resetPasswordController = async (req, res) => {
 // Update password
 export const updatePasswordController = async (req, res) => {
   try {
-    const user = await UserModel.findById(req.userId);
+    const user = await UserSchema.findById(req.userId);
     if (!user) {
       return res.status(404).send({
         success: false,

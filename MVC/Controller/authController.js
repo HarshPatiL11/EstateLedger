@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import UserModel from "../Model/userModel.js";
+import UserSchema from "../Model/userModel.js";
 
 import { comparePassword, hashPassword } from "../Helper/AuthHelper.js";
 
@@ -32,7 +32,7 @@ export const registerUser = async (req, res) => {
     }
 
     // Check if user exists
-    const chkExisting = await UserModel.findOne({ email });
+    const chkExisting = await UserSchema.findOne({ email });
     if (chkExisting) {
       return res.status(400).send("Email already registered");
     }
@@ -40,7 +40,7 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await hashPassword(password);
 
     // Create user
-    const newUser = await UserModel.create({
+    const newUser = await UserSchema.create({
       name,
       lastName,
       email,
@@ -68,7 +68,7 @@ export const registerUser = async (req, res) => {
 // Delete user
 export const userDelete = async (req, res) => {
   try {
-    const user = await UserModel.findById(req.userId);
+    const user = await UserSchema.findById(req.userId);
     if (user) {
       await user.deleteOne();
       return res.status(200).send({
@@ -90,8 +90,48 @@ export const userDelete = async (req, res) => {
   }
 };
 
+// delete user using id (admin only)
+export const userDeleteUsingId = async (req, res) => {
+  try {
+     const { id } = req.params;;
 
-// User login controller
+    if (!id) {
+      return res.status(400).send({
+        success: false,
+        message: "User ID is required",
+      });
+    }
+
+    // Validate if the user is an admin
+    if (req.userType !== "admin") {
+      return res.status(403).send({
+        success: false,
+        message: "Forbidden: Only admins can delete users using ID",
+      });
+    }
+
+    const user = await UserSchema.findById(id);
+    if (user) {
+      await user.deleteOne();
+      return res.status(200).send({
+        success: true,
+        message: "User deleted successfully",
+      });
+    } else {
+      return res.status(404).send({
+        success: false,
+        message: "User not found",
+      });
+    }
+  } catch (error) {
+    console.error(`Error in API: ${error}`);
+    res.status(500).send({
+      status: "error",
+      message: "Internal Server Error || Error in delete API",
+    });
+  }
+};
+
 export const userLoginController = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -102,7 +142,9 @@ export const userLoginController = async (req, res) => {
     }
 
     // Check if user exists
-    const user = await UserModel.findOne({ email });
+    const user = await UserSchema.findOne({ email });
+    console.log("Retrieved User:", user); // Debug log
+
     if (!user) {
       return res.status(404).send("User not found");
     }
@@ -114,7 +156,11 @@ export const userLoginController = async (req, res) => {
     }
 
     // Generate token
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign(
+      { id: user._id, userType: user.userType },
+      JWT_SECRET,
+      { expiresIn: "1h" }
+    );
 
     // Hide password from response
     user.password = undefined;
@@ -133,25 +179,24 @@ export const userLoginController = async (req, res) => {
 
 // User logout controller
 export const userLogoutController = async (req, res) => {
-  try {
-    const user = await UserModel.findById(req.userId);
-    if (!user) {
-      return res.status(404).send({
-        success: false,
-        message: "User not found",
-      });
-    }
-
-    res.status(200).send({
-      success: true,
-      message:
-        "User logged out successfully. Please clear your token on the client side.",
-    });
-  } catch (error) {
-    console.log(`Error in API: ${error}`);
-    res.status(500).send({
-      status: "error",
-      message: "Internal Server Error || Error in Logout API",
+try {
+  const user = await UserSchema.findById(req.userId);
+  if (!user) {
+    return res.status(404).send({
+      success: false, 
+      message: "User not found",
     });
   }
+  res.status(200).send({
+    success: true,
+    message:
+      "User logged out successfully. Please clear your token on the client side.",
+  });
+} catch (error) {
+  console.log(`Error in API: ${error}`);
+  res.status(500).send({
+    status: "error",
+    message: "Internal Server Error || Error in Logout API",
+  });
+}
 };
