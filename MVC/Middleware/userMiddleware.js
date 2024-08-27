@@ -1,16 +1,8 @@
 import UserSchema from "../Model/userModel.js";
 
-// Middleware to confirm the user's identity
 export const userMiddleware = async (req, res, next) => {
   try {
-    const user = await UserSchema.findById(req.userId);
-    if (!user) {
-      return res.status(404).send({
-        success: false,
-        message: "User not found",
-      });
-    }
-    if (user._id.toString() !== req.body.id) {
+    if (req.userId !== req.body.id) {
       return res.status(403).send({
         success: false,
         message: "You are not authorized to perform this action",
@@ -28,3 +20,4 @@ export const userMiddleware = async (req, res, next) => {
     });
   }
 };
+
