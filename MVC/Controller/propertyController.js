@@ -1,11 +1,12 @@
 import fs from "fs";
 import Property from "../Model/PropertyModel.js";
 
-// add Property API
-export const registerProperty = async (req, res) => {
+  // add Property API
+
+  export const registerProperty = async (req, res) => {
   try {
+    const owner = req.userId;
     const {
-      owner,
       address,
       additionalRooms,
       ageOfConstruction,
@@ -27,14 +28,14 @@ export const registerProperty = async (req, res) => {
       pricePerSqft,
       propClass,
       project,
-      sellStartPrice,
+      SellStartprice,
       status,
       totalFloors,
       transactionType,
       waterAvailability,
       sellOrLease,
       rentAmount,
-      rentFrequency, 
+      rentFrequency,
     } = req.fields;
 
     // validate required fields
@@ -59,12 +60,12 @@ export const registerProperty = async (req, res) => {
       !pricePerSqft ||
       !propClass ||
       !project ||
-      !sellStartPrice ||
+      !SellStartprice ||
       !status ||
       !totalFloors ||
       !transactionType ||
       !waterAvailability ||
-      (sellOrLease === 'Lease' || sellOrLease === 'Both') && (!rentAmount || !rentFrequency) // Add this validation
+      (sellOrLease === 'Lease' || sellOrLease === 'Both') && (!rentAmount || !rentFrequency)
     ) {
       return res.status(400).send({
         success: false,
@@ -130,13 +131,13 @@ export const registerProperty = async (req, res) => {
       pricePerSqft,
       propClass,
       project,
-      sellStartPrice,
+      SellStartprice,
       status,
       totalFloors,
       transactionType,
       waterAvailability,
       sellOrLease,
-      rentAmount, 
+      rentAmount,
       rentFrequency,
       propertyImg,
       singleLogo: logoData,
@@ -157,7 +158,8 @@ export const registerProperty = async (req, res) => {
   }
 };
 
-// get All Properties API
+
+  // get All Properties API
 export const getAllProperties = async (req, res) => {
   try {
     const properties = await Property.find({});
