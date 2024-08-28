@@ -18,6 +18,7 @@ const adminRouter = express.Router();
 //Routers
 
 // admin panel  user routes 
+// admin panel get user
 adminRouter.get("/users/get/all", authMiddle, adminMiddleware, getAllUsers); //working
 
 adminRouter.get(
@@ -27,7 +28,7 @@ adminRouter.get(
   getUserByID
 );                   //working          
 
-// update  user details
+//admin panel update  user details
 adminRouter.put(
   "/users/update/:id",
   authMiddle,
