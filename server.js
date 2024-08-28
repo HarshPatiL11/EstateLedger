@@ -24,16 +24,18 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
+// set router
+const router = express.Router();
+
 // test server
 app.get("/", (req, res) => {
   res.send(`<h1>hello port ${PORT}</h1>`);
 });
 
-// set routes
-const router = express.Router();
+
 
 router.use("/user", authRouter);
-router.use("/user", userRouter);
+router.use("/profile", userRouter);
 router.use("/admin", adminRouter);
 router.use("/owner", ownerRouter);
 router.use("/property", propertyRouter);

@@ -11,7 +11,7 @@ const propertyRouter = express.Router();
 propertyRouter.post("/filter", filterProperties);
 
 // property get
-propertyRouter.get("/property/all", getAllProperties);
-propertyRouter.get("/property/:id", getPropertyById);
+propertyRouter.get("/all", getAllProperties);
+propertyRouter.get("/:id", getPropertyById);
 
 export default propertyRouter;

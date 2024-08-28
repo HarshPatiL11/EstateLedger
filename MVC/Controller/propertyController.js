@@ -1,11 +1,12 @@
 import fs from "fs";
 import Property from "../Model/PropertyModel.js";
 
-// add Property API
-export const registerProperty = async (req, res) => {
+  // add Property API
+
+  export const registerProperty = async (req, res) => {
   try {
+    const owner = req.userId;
     const {
-      owner,
       address,
       additionalRooms,
       ageOfConstruction,
@@ -27,12 +28,14 @@ export const registerProperty = async (req, res) => {
       pricePerSqft,
       propClass,
       project,
-      sellStartPrice,
+      SellStartprice,
       status,
       totalFloors,
       transactionType,
       waterAvailability,
       sellOrLease,
+      rentAmount,
+      rentFrequency,
     } = req.fields;
 
     // validate required fields
@@ -57,12 +60,12 @@ export const registerProperty = async (req, res) => {
       !pricePerSqft ||
       !propClass ||
       !project ||
-      !sellStartPrice ||
+      !SellStartprice ||
       !status ||
       !totalFloors ||
       !transactionType ||
       !waterAvailability ||
-      !sellOrLease
+      (sellOrLease === 'Lease' || sellOrLease === 'Both') && (!rentAmount || !rentFrequency)
     ) {
       return res.status(400).send({
         success: false,
@@ -128,12 +131,14 @@ export const registerProperty = async (req, res) => {
       pricePerSqft,
       propClass,
       project,
-      sellStartPrice,
+      SellStartprice,
       status,
       totalFloors,
       transactionType,
       waterAvailability,
       sellOrLease,
+      rentAmount,
+      rentFrequency,
       propertyImg,
       singleLogo: logoData,
     });
@@ -153,7 +158,8 @@ export const registerProperty = async (req, res) => {
   }
 };
 
-// get All Properties API
+
+  // get All Properties API
 export const getAllProperties = async (req, res) => {
   try {
     const properties = await Property.find({});
@@ -340,6 +346,124 @@ export const filterProperties = async (req, res) => {
     });
   }
 };
+
+
+export const updateProperty = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const property = await Property.findById(id);
+
+    if (property) {
+      // Update fields if provided
+      property.address = req.body.address || property.address;
+      property.additionalRooms =
+        req.body.additionalRooms || property.additionalRooms;
+      property.ageOfConstruction =
+        req.body.ageOfConstruction || property.ageOfConstruction;
+      property.carpetarea = req.body.carpetarea || property.carpetarea;
+      property.developer = req.body.developer || property.developer;
+      property.electricityStatus =
+        req.body.electricityStatus || property.electricityStatus;
+      property.flooring = req.body.flooring || property.flooring;
+      property.furnishing = req.body.furnishing || property.furnishing;
+      property.floor = req.body.floor || property.floor;
+      property.lifts = req.body.lifts || property.lifts;
+      property.location = req.body.location || property.location;
+      property.loanOffered = req.body.loanOffered || property.loanOffered;
+      property.landmarks = req.body.landmarks || property.landmarks;
+      property.layout = req.body.layout || property.layout;
+      property.ownershipType = req.body.ownershipType || property.ownershipType;
+      property.overlooking = req.body.overlooking || property.overlooking;
+      property.priceBreakup = req.body.priceBreakup || property.priceBreakup;
+      property.pricePerSqft = req.body.pricePerSqft || property.pricePerSqft;
+      property.propClass = req.body.propClass || property.propClass;
+      property.project = req.body.project || property.project;
+      property.sellStartPrice =
+        req.body.sellStartPrice || property.sellStartPrice;
+      property.status = req.body.status || property.status;
+      property.totalFloors = req.body.totalFloors || property.totalFloors;
+      property.transactionType =
+        req.body.transactionType || property.transactionType;
+      property.waterAvailability =
+        req.body.waterAvailability || property.waterAvailability;
+      property.sellOrLease = req.body.sellOrLease || property.sellOrLease;
+
+      // Update rentAmount and rentFrequency if applicable
+      if (req.body.sellOrLease === "Lease" || req.body.sellOrLease === "Both") {
+        if (req.body.rentAmount) {
+          property.rentAmount = req.body.rentAmount;
+        }
+        if (req.body.rentFrequency) {
+          property.rentFrequency = req.body.rentFrequency;
+        }
+      } else {
+        property.rentAmount = undefined;
+        property.rentFrequency = undefined;
+      }
+
+      
+      if (req.files?.propertyImg) {
+        const propertyImg = [];
+        let i = 0;
+        while (req.files[`propertyImg[${i}]`]) {
+          const image = req.files[`propertyImg[${i}]`];
+          if (image.size > 1000000) {
+            return res.status(400).send({
+              error: "Each image should be less than 1 MB",
+            });
+          }
+
+          const imageData = {
+            data: fs.readFileSync(image.path),
+            contentType: image.type,
+          };
+
+          propertyImg.push(imageData);
+          i++;
+        }
+        property.propertyImg = propertyImg;
+      }
+
+      // Handle logo image
+      if (req.files?.singleLogo) {
+        const singleLogo = req.files.singleLogo;
+        if (singleLogo.size > 1000000) {
+          return res
+            .status(400)
+            .send({ error: "Logo should be less than 1 MB" });
+        }
+
+        property.singleLogo = {
+          data: fs.readFileSync(singleLogo.path),
+          contentType: singleLogo.type,
+        };
+      }
+
+      // Save updated property
+      const updatedProperty = await property.save();
+
+      res.status(200).send({
+        status: "success",
+        message: "Property updated successfully",
+        updatedProperty,
+      });
+    } else {
+      res.status(404).send({
+        status: "error",
+        message: "Property not found",
+      });
+    }
+  } catch (error) {
+    console.error(`Error in API: ${error}`);
+    res.status(500).send({
+      status: "error",
+      message: "Internal Server Error",
+    });
+  }
+};
+
+
+
 
 // delete Property APi
 export const deleteProperty = async (req, res) => {

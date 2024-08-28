@@ -6,11 +6,14 @@ import {
   updatePasswordController,
   userUpdateController,
 } from "../Controller/userController.js";
+import { authMiddle } from '../Middleware/AuthMiddleware.js';
 
 const userRouter = express.Router();
 
-userRouter.put("/update-profile", userMiddleware, userUpdateController);
-userRouter.put("/update-password", userMiddleware, updatePasswordController);
-userRouter.put("/reset-password", userMiddleware, resetPasswordController);
+
+userRouter.put("/update-profile", authMiddle, userUpdateController);//working
+userRouter.put("/update-password", authMiddle, updatePasswordController);//working
+userRouter.put("/reset-password", authMiddle, resetPasswordController);//working
+
 
 export default userRouter;

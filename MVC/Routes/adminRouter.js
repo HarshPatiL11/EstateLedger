@@ -1,5 +1,5 @@
 import express from "express";
-import { userDelete } from "../Controller/authController.js";
+import { userDelete, userDeleteUsingId } from "../Controller/authController.js";
 import { adminMiddleware } from "../Middleware/AdminMiddleware.js";
 import {
   deleteProperty,
@@ -9,32 +9,70 @@ import {
   getAllUsers,
   getUserByID,
   updateUserTypeController,
+  updateUserUsingID,
   userUpdateController,
 } from "../Controller/userController.js";
+import { authMiddle } from "../Middleware/AuthMiddleware.js";
 
 const adminRouter = express.Router();
 //Routers
 
-// get all props or user
-adminRouter.get("users/get/all", adminMiddleware, getAllUsers);
-adminRouter.get("users/get/:id", adminMiddleware, getUserByID);
+// admin panel  user routes 
+// admin panel get user
+adminRouter.get("/users/get/all", authMiddle, adminMiddleware, getAllUsers); //working
 
-adminRouter.get("property/get/all", adminMiddleware, getAllProperties);
+adminRouter.get(
+  "/users/get/:id",
+  authMiddle,
+  adminMiddleware,
+  getUserByID
+);                   //working          
 
-// update props or user
-adminRouter.put("users/update/:id", adminMiddleware, userUpdateController);
-// adminRouter.put("property/update/:id", adminMiddleware, updateProperty);
-
-// upgrade user
+//admin panel update  user details
 adminRouter.put(
-  "users/update-userType/:id",
+  "/users/update/:id",
+  authMiddle,
+  adminMiddleware,
+  updateUserUsingID
+);            //working
+
+
+// upgrade userType
+adminRouter.put(
+  "/users/update-userType/:id",
+  authMiddle,
   adminMiddleware,
   updateUserTypeController
-);
+);            //working
 
-// delete prop or user
-adminRouter.delete("/delete-account/:id", adminMiddleware, userDelete);
-adminRouter.delete("/delete-property/:id", adminMiddleware, deleteProperty);
+
+// delete user account
+adminRouter.delete(
+  "/users/delete-account/:id",
+  authMiddle,
+  adminMiddleware,
+  userDeleteUsingId
+);   //working
+
+// admin panel  Property routes 
+
+adminRouter.get(
+  "/property/get/all",
+  authMiddle,
+  adminMiddleware,
+  getAllProperties
+);                                
+
+
+// adminRouter.put("property/update/:id", adminMiddleware, updateProperty);
+
+
+adminRouter.delete(
+  "/delete-property/:id",
+  authMiddle,
+  adminMiddleware,
+  deleteProperty
+);
 
 // export
 export default adminRouter;

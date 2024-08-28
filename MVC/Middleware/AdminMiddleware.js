@@ -2,8 +2,7 @@ import UserSchema from "../Model/userModel.js";
 
 export const adminMiddleware = async (req, res, next) => {
   try {
-    const user = await UserSchema.findById(req.body.id);
-    if (user.userType !== "admin") {
+    if (req.userType !== "admin") {
       return res.status(401).send({
         success: false,
         message: "Only Admin Access",
@@ -23,11 +22,10 @@ export const adminMiddleware = async (req, res, next) => {
 
 export const ownerMiddleware = async (req, res, next) => {
   try {
-    const user = await UserSchema.findById(req.body.id);
-    if (user.userType !== "admin" || user.userType !== "owner") {
+    if (req.userType !== "admin" && req.userType !== "owner") {
       return res.status(401).send({
         success: false,
-        message: "Only owner or admin  Access",
+        message: "Only Owner or Admin Access",
       });
     } else {
       next();
