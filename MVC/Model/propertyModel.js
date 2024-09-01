@@ -55,7 +55,7 @@ const PropertySchema = new mongoose.Schema(
     location: {
       type: String,
       required: [true, "Enter the location"],
-    },
+    },//only local location
     loanOffered: {
       type: String,
     },
@@ -162,7 +162,6 @@ const PropertySchema = new mongoose.Schema(
       required: [true, "Enter the rent frequency"],
     },
 
-    // Image array for property images
     propertyImg: [
       {
         data: {
@@ -175,7 +174,6 @@ const PropertySchema = new mongoose.Schema(
         },
       },
     ],
-    // Single image for the property logo or primary image
     singleLogo: {
       data: {
         type: Buffer,

@@ -1,0 +1,22 @@
+.HomeMain {
+  background: url(../Images/HomeMain1.webp) no-repeat center center;
+  background-size: cover;
+  height: 550px;
+  padding: 1% 4% 3% 4%;
+}
+
+.HomeContent {
+  border: 10px solid white;
+  height: 100%;
+  box-sizing: border-box; /* Include border and padding in the element's total width and height */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center content horizontally and vertically */
+  color: white; /* Ensure text inside HomeContent is visible */
+}
+
+.HomeContent p{
+    font-size: 7rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}

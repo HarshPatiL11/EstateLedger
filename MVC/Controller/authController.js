@@ -155,12 +155,12 @@ export const userLoginController = async (req, res) => {
       return res.status(400).send("Invalid credentials");
     }
 
-    // Generate token
-    const token = jwt.sign(
-      { id: user._id, userType: user.userType },
-      JWT_SECRET,
-      { expiresIn: "1h" }
-    );
+      // Generate token
+      const token = jwt.sign(
+        { id: user._id, userType: user.userType },
+        JWT_SECRET,
+        { expiresIn: "1h" }
+      );
 
     // Hide password from response
     user.password = undefined;
