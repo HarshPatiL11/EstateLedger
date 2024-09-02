@@ -5,7 +5,7 @@ import "../CSS/PopularProps.css";
 import Card from "./Card.jsx";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
-const PopularProps = () => {
+export const PropertyLocationCard = () => {
   const [popCards, setPopCards] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -92,5 +92,3 @@ const PopularProps = () => {
     </div>
   );
 };
-
-export default PopularProps;

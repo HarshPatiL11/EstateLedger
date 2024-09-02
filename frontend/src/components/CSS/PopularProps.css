@@ -27,6 +27,10 @@
   font-size: 1.4rem;
   margin-bottom: 30px;
 }
+.Popular-Props-Header p {
+    margin-bottom: 0px;
+}
+
 
 .Popular-cards {
   display: flex;
