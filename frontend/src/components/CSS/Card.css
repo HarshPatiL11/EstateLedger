@@ -7,7 +7,7 @@
   background-color: #fff;
   margin: 16px;
   cursor: pointer;
-  transition: box-shadow 0.25s ease-out, transform 0.25s ease-out; /* Added transform transition */
+  transition: box-shadow 0.25s ease-out, transform 0.25s ease-out; 
   position: relative; 
 }
 .card p{
@@ -17,7 +17,7 @@
 
 .card:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  transform: scale(1); /* Prevent scaling to avoid height changes */
+  transform: scale(1); 
 }
 
 .image-container {
