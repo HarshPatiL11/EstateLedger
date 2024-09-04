@@ -2,9 +2,11 @@ import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Pages/Home.jsx";
-import Login from "./components/Pages/Login.jsx";
 import LoginPage from "./components/Pages/NewLogin.jsx";
 import Layout from "./components/Layout/Layout.jsx";
+import UserRegister from "./components/Pages/UserRegister.jsx";
+import LoginPageB from "./components/Pages/Login3.jsx";
+import PropertyFilter from "./components/Pages/FilterComponent.jsx";
 
 function App() {
   return (
@@ -24,7 +26,23 @@ function App() {
             path="/login"
             element={
               <>
-                <LoginPage />
+                <LoginPageB />
+              </>
+            }
+          />
+          <Route
+            path="/filter"
+            element={
+              <>
+                <PropertyFilter />
+              </>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <>
+                <UserRegister />
               </>
             }
           />
