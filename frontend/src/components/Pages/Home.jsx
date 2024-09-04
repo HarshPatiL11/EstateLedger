@@ -3,6 +3,8 @@ import Layout from "../Layout/Layout.jsx";
 import "../CSS/Home.css";
 import PopularProps from "./PopularProps.jsx";
 import { PropertyLocationCard } from "./PropertyLocationCard.jsx";
+import PropBuy from "./PropsBuy.jsx";
+import PropertyOnLease from "./PropsLease.jsx";
 
 const Home = () => {
   return (
@@ -14,6 +16,8 @@ const Home = () => {
       </div>
       <PopularProps />
       <PropertyLocationCard/>
+      <PropBuy/>
+      <PropertyOnLease/>
     </>
   );
 };
