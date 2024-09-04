@@ -25,8 +25,10 @@ const Navbar = () => {
       </a>
 
       <div id="navigation-bar" className="nav-bar" ref={navbar}>
-        <a href="#">Leash/Sell</a>
-        <a href="#">Buy/Rent</a>
+        <a href="#">Buy</a>
+        <a href="#">Rent</a>
+        <a href="#">Lease/Sell</a>
+
         <a href="#">About</a>
         <a href="#">Contact</a>
         <Link to="/login">Login</Link>
