@@ -5,7 +5,7 @@ import "../CSS/PopularProps.css";
 import Card from "./Card.jsx";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
-const PopularProps = () => {
+const PropertyOnLease = () => {
   const [popCards, setPopCards] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -13,16 +13,20 @@ const PopularProps = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get("/api/v1/property/all");
+        const response = await axios.get("/api/v1/property/filter", {
+          params: {
+            sellOrLease: ["Lease", "Both"],
+          },
+        });
 
-        console.log("API Response:", response.data); // Log the entire response
+        console.log("API Response:", response.data);
         if (response.data && response.data.propertiesWithImg) {
           setPopCards(response.data.propertiesWithImg);
         } else {
           throw new Error("Unexpected data structure");
         }
       } catch (error) {
-        console.error("Error fetching properties:", error); // Log the full error
+        console.error("Error fetching properties:", error);
         setError(`Error fetching properties: ${error.message}`);
       }
     };
@@ -45,27 +49,24 @@ const PopularProps = () => {
     } else if (amount >= 100000) {
       return `${(amount / 100000).toFixed(1)} lac`;
     } else if (amount >= 1000) {
-      return `${(amount / 1000).toFixed(1)} thousand`;
+      return `${(amount / 1000).toFixed(1)} k`;
     } else {
       return amount.toString();
     }
   };
 
-  const displayedCards = popCards.slice(0, 4);
+  const displayedCards = popCards;
 
   return (
-    <div className="Popular-Props-Main">
-      <div className="Popular-Props-Content">
-        <div className="Popular-Props-Header">
-          <h2>Popular Properties</h2>
+    <div className="PropertyOnLease-Main">
+      <div className="PropertyOnLease-Content">
+        <div className="PropertyOnLease-Header">
+          <h2>Properties on Lease</h2>
         </div>
         {error && <p className="error">{error}</p>}
-        <div className="Popular-cards">
+        <div className="PropertyOnLease-cards">
           {displayedCards.map((property) => {
-            const amount =
-              property.sellOrLease === "Sell" || property.sellOrLease === "both"
-                ? property.SellStartprice
-                : property.rentAmount;
+            const amount = property.rentAmount;
             const formattedAmount = formatAmount(amount);
 
             return (
@@ -93,4 +94,4 @@ const PopularProps = () => {
   );
 };
 
-export default PopularProps;
+export default PropertyOnLease;

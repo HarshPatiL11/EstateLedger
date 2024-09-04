@@ -13,19 +13,15 @@ const PropBuy = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        // Send an array of values for the sellOrLease parameter
         const response = await axios.get("/api/v1/property/filter", {
-          sellOrLease: ["Sell", "Both"], // Filter for properties that are for sale or both
+          params: { sellOrLease: ["Sell", "Both"] },
         });
-
-        console.log("API Response:", response.data); // Log the entire response
         if (response.data && response.data.propertiesWithImg) {
           setPopCards(response.data.propertiesWithImg);
         } else {
           throw new Error("Unexpected data structure");
         }
       } catch (error) {
-        console.error("Error fetching properties:", error); // Log the full error
         setError(`Error fetching properties: ${error.message}`);
       }
     };

@@ -5,7 +5,7 @@ import "../CSS/PopularProps.css";
 import Card from "./Card.jsx";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
-const PropertyOnLease = () => {
+const PopularPropsHomeCard = () => {
   const [popCards, setPopCards] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -13,10 +13,7 @@ const PropertyOnLease = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        // Filter for properties that are for lease or both
-        const response = await axios.get("/api/v1/property/filter", {
-          sellOrLease: ["Lease", "Both"],
-        });
+        const response = await axios.get("/api/v1/property/all");
 
         console.log("API Response:", response.data); // Log the entire response
         if (response.data && response.data.propertiesWithImg) {
@@ -48,24 +45,27 @@ const PropertyOnLease = () => {
     } else if (amount >= 100000) {
       return `${(amount / 100000).toFixed(1)} lac`;
     } else if (amount >= 1000) {
-      return `${(amount / 1000).toFixed(1)} k`;
+      return `${(amount / 1000).toFixed(1)} thousand`;
     } else {
       return amount.toString();
     }
   };
 
-  const displayedCards = popCards;
+  const displayedCards = popCards.slice(0, 3);
 
   return (
-    <div className="PropertyOnLease-Main">
-      <div className="PropertyOnLease-Content">
-        <div className="PropertyOnLease-Header">
-          <h2>Properties on Lease</h2>
+    <div className="Popular-Props-Main">
+      <div className="Popular-Props-Content">
+        <div className="Popular-Props-Header">
+          <h2>Popular Properties</h2>
         </div>
         {error && <p className="error">{error}</p>}
-        <div className="PropertyOnLease-cards">
+        <div className="Popular-cards">
           {displayedCards.map((property) => {
-            const amount = property.rentAmount; // Show only rentAmount
+            const amount =
+              property.sellOrLease === "Sell" || property.sellOrLease === "both"
+                ? property.SellStartprice
+                : property.rentAmount;
             const formattedAmount = formatAmount(amount);
 
             return (
@@ -93,4 +93,4 @@ const PropertyOnLease = () => {
   );
 };
 
-export default PropertyOnLease;
+export default PopularPropsHomeCard;
