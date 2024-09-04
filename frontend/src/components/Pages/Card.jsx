@@ -18,7 +18,6 @@ const Card = ({
       <div className="image-container">
         <img src={image} alt="Property Thumbnail" className="card-thumbnail" />
         <div className="image-label"><MdOutlinePhotoLibrary/>{imageNum}</div>
-        {/* Assuming 12 images as an example */}
       </div>
       <div className="card-details">
         <h3 className="type">
