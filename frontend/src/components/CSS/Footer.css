@@ -1,0 +1,22 @@
+/* Footer.css */
+.footer {
+  background-color: #000;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  width: 100%;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+/* Ensure the footer sticks to the bottom of the page only if content is insufficient */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1; /* Ensure this grows to take up space */
+}

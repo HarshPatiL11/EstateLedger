@@ -1,0 +1,139 @@
+@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+
+
+.login * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+.Login-Bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background-image: url('../Images/Login2.jpg');
+  background-size: cover;
+  filter: blur(5px);
+  z-index: 0;
+}
+
+.Login-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.loginContent {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+}
+
+.Login-header {
+  margin-bottom: 50px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 35px;
+  font-weight: 200;
+  text-align: center;
+}
+
+.Login-header span {
+  color: #5379fa;
+}
+
+.Login-header span:first-child {
+  color: #5379fa; /* Make "Es" orange */
+}
+
+.Login-header span:last-child {
+  color: white; /* Make "Led" white */
+}
+.login {
+  padding: 20px;
+  border-radius: 8px;
+  width: 350px;
+  text-align: center;
+}
+
+.login input[type=email],
+.login input[type=password] {
+  width: 100%;
+  height: 35px;
+  margin-bottom: 10px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  padding: 4px;
+}
+
+.login input[type=submit] {
+  width: 100%;
+  height: 40px;
+  background: #5379fa;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login input[type=submit]:hover {
+  background: #3b5ac9;
+}
+
+.signup-link {
+  margin-top: 15px;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.signup-link a {
+  color: #5379fa;
+  text-decoration: none;
+}
+
+.error {
+  color: #f44336;
+  margin-bottom: 15px;
+}
+
+.success {
+  color: #4caf50;
+  margin-bottom: 15px;
+}
+.login input[type=email]:focus,
+.login input[type=password]:focus {
+  border: 2px solid rgba(255, 255, 255, 0.8);
+;
+  outline: none;
+}

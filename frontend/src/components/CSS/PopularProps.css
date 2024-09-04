@@ -1,0 +1,40 @@
+.Popular-Props-Main {
+  padding: 20px;
+  background-color: #fff;
+
+}
+
+.Popular-Props-Header {
+  margin: 20px 30px;
+  color: #FFB000; /* Header text color */
+  background-color: #fff; /* Background color for header */
+}
+
+.Popular-Props-Header h2 {
+  font-size: 2.4rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+    line-height: 32px;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.Popular-Props-Header h5 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 1.4rem;
+  margin-bottom: 30px;
+}
+.Popular-Props-Header p {
+    margin-bottom: 0px;
+}
+
+
+.Popular-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}

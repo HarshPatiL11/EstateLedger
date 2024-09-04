@@ -1,0 +1,97 @@
+.page-header {
+  background-color: #000000;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  position: sticky; /* Make the navbar sticky */
+  top: 0; /* Stick the navbar to the top */
+  z-index: 1000; /* Ensure it stays on top of other content */
+}
+
+.logo {
+  color: white;
+  align-self: center;
+  margin-left: 1.2rem;
+  font-size: 2.1rem;
+  font-weight: 800;
+}
+
+.logo a {
+  color: white;
+    font-family: 'Exo', sans-serif;
+  text-decoration: none;
+}
+
+.nav-bar {
+  display: flex;
+  margin-right: 2.5rem;
+}
+
+.nav-bar a {
+  color: white;
+  padding: 1.2rem;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.menu-icon {
+  color: white;
+  cursor: pointer;
+  display: none;
+}
+
+.login-btn {
+  font-size: 0.9rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 0.9rem;
+  background-color: blue;
+  color: white;
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+@media screen and (max-width: 600px) {
+  .nav-bar {
+    display: none;
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    text-align: center;
+    z-index: 999; /* Ensure it is above other content */
+  }
+
+  .nav-bar.responsive {
+    display: block;
+  }
+
+  .nav-bar a {
+    display: block;
+    font-size: 18px;
+    padding: 15px 12px;
+  }
+
+  .menu-icon {
+    display: block;
+    z-index: 1001; /* Ensure it is above other content */
+    margin-left: 25px;
+  }
+
+  .login-btn {
+    padding: 10px 20px;
+  }
+
+  .logo {
+    font-size: 1.4rem;
+  }
+}

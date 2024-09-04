@@ -6,29 +6,21 @@ import { comparePassword, hashPassword } from "../Helper/AuthHelper.js";
 const JWT_SECRET = process.env.JWT_SECRET;
 console.log("JWT_SECRET:", JWT_SECRET);
 
-// Add user9
+
+// add user
 export const registerUser = async (req, res) => {
   try {
-    const { name, lastName, email, password, phone, frgtKey } = req.body;
+    const { name, email, password } = req.body;
 
     // Validate input
     if (!name) {
       return res.status(400).send("Enter your name");
-    }
-    if (!lastName) {
-      return res.status(400).send("Enter your last name");
     }
     if (!email) {
       return res.status(400).send("Enter your email ID");
     }
     if (!password) {
       return res.status(400).send("Enter your password");
-    }
-    if (!phone) {
-      return res.status(400).send("Enter your phone number");
-    }
-    if (!frgtKey) {
-      return res.status(400).send("Set a forget password key");
     }
 
     // Check if user exists
@@ -42,28 +34,22 @@ export const registerUser = async (req, res) => {
     // Create user
     const newUser = await UserSchema.create({
       name,
-      lastName,
       email,
       password: hashedPassword,
-      phone,
-      frgtKey,
     });
-
-    // Generate token (optional, depending on your use case)
-    // const token = jwt.sign({ id: newUser._id }, JWT_SECRET, { expiresIn: "1h" });
 
     // Send response
     return res.status(201).send({
       status: "success",
       message: "User registered successfully",
       user: newUser,
-      // token,
     });
   } catch (error) {
     console.log(`Error in API: ${error}`);
     return res.status(500).send("Internal Server Error");
   }
 };
+
 
 // Delete user
 export const userDelete = async (req, res) => {
@@ -155,12 +141,12 @@ export const userLoginController = async (req, res) => {
       return res.status(400).send("Invalid credentials");
     }
 
-    // Generate token
-    const token = jwt.sign(
-      { id: user._id, userType: user.userType },
-      JWT_SECRET,
-      { expiresIn: "1h" }
-    );
+      // Generate token
+      const token = jwt.sign(
+        { id: user._id, userType: user.userType },
+        JWT_SECRET,
+        { expiresIn: "1h" }
+      );
 
     // Hide password from response
     user.password = undefined;
