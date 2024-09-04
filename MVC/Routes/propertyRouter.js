@@ -8,7 +8,7 @@ import {
 const propertyRouter = express.Router();
 
 // property filter
-propertyRouter.post("/filter", filterProperties);
+propertyRouter.get("/filter", filterProperties);
 
 // property get
 propertyRouter.get("/all", getAllProperties);

@@ -11,25 +11,19 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "Enter Your Name"],
     },
-    lastName: {
-      type: String,
-      required: [true, "Enter Your lastName"],
-    },
     email: {
       type: String,
       required: [true, "Enter Your Email ID"],
     },
     phone: {
       type: String,
-      required: [true, "Enter Your Phone no."],
     },
     password: {
       type: String,
-      required: [true, "Enter Your Phone no."],
+      required: [true, "Enter Your Password"],
     },
     frgtKey: {
       type: String,
-      required: [true, "Set Forget Password key."],
     },
     profile: {
       type: String,
