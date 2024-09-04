@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "../CSS/propsFilter.css";
 
 const PropertyFilter = () => {
   const [filters, setFilters] = useState({
@@ -22,7 +23,25 @@ const PropertyFilter = () => {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setFilters({ ...filters, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // Allow only numeric values
+    if (
+      [
+        "minAge",
+        "maxAge",
+        "minPrice",
+        "maxPrice",
+        "minRentAmount",
+        "maxRentAmount",
+      ].includes(name)
+    ) {
+      if (/^\d*\.?\d*$/.test(value)) {
+        setFilters({ ...filters, [name]: value });
+      }
+    } else {
+      setFilters({ ...filters, [name]: value });
+    }
   };
 
   const handleFilter = async () => {
@@ -114,7 +133,7 @@ const PropertyFilter = () => {
         />
 
         <input
-          type="number"
+          type="text"
           name="minAge"
           value={filters.minAge}
           onChange={handleChange}
@@ -122,7 +141,7 @@ const PropertyFilter = () => {
         />
 
         <input
-          type="number"
+          type="text"
           name="maxAge"
           value={filters.maxAge}
           onChange={handleChange}
@@ -130,7 +149,7 @@ const PropertyFilter = () => {
         />
 
         <input
-          type="number"
+          type="text"
           name="minPrice"
           value={filters.minPrice}
           onChange={handleChange}
@@ -138,7 +157,7 @@ const PropertyFilter = () => {
         />
 
         <input
-          type="number"
+          type="text"
           name="maxPrice"
           value={filters.maxPrice}
           onChange={handleChange}
@@ -146,7 +165,7 @@ const PropertyFilter = () => {
         />
 
         <input
-          type="number"
+          type="text"
           name="minRentAmount"
           value={filters.minRentAmount}
           onChange={handleChange}
@@ -154,7 +173,7 @@ const PropertyFilter = () => {
         />
 
         <input
-          type="number"
+          type="text"
           name="maxRentAmount"
           value={filters.maxRentAmount}
           onChange={handleChange}

@@ -1,10 +1,10 @@
 import React from "react";
 import Layout from "../Layout/Layout.jsx";
 import "../CSS/Home.css";
-import PopularProps from "./PopularProps.jsx";
+import PopularPropsHomeCard from "./PopularPropsHomeCard.jsx";
 import { PropertyLocationCard } from "./PropertyLocationCard.jsx";
-import PropBuy from "./PropsBuy.jsx";
-import PropertyOnLease from "./PropsLease.jsx";
+import PropBuy from "./PropsBuyHome.jsx";
+import PropertyOnLease from "./PropsLeaseHome.jsx";
 
 const Home = () => {
   return (
@@ -14,10 +14,10 @@ const Home = () => {
           <p>Find Your Dream</p>
         </div>
       </div>
-      <PopularProps />
-      <PropertyLocationCard/>
-      <PropBuy/>
-      <PropertyOnLease/>
+      <PopularPropsHomeCard />
+      <PropertyLocationCard />
+      <PropBuy />
+      <PropertyOnLease />
     </>
   );
 };

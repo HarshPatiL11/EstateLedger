@@ -4,10 +4,10 @@
 
 }
 
-
 .Popular-Props-Header {
   margin: 20px 30px;
-  color: #FFB000; /* Header color */
+  color: #FFB000; /* Header text color */
+  background-color: #fff; /* Background color for header */
 }
 
 .Popular-Props-Header h2 {

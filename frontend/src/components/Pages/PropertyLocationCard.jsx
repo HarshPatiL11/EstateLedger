@@ -45,7 +45,7 @@ export const PropertyLocationCard = () => {
     } else if (amount >= 100000) {
       return `${(amount / 100000).toFixed(1)} lac`;
     } else if (amount >= 1000) {
-      return `${(amount / 1000).toFixed(1)} thousand`;
+      return `${(amount / 1000).toFixed(1)} k`;
     } else {
       return amount.toString();
     }

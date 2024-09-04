@@ -7,6 +7,7 @@ import Layout from "./components/Layout/Layout.jsx";
 import UserRegister from "./components/Pages/UserRegister.jsx";
 import LoginPageB from "./components/Pages/Login3.jsx";
 import PropertyFilter from "./components/Pages/FilterComponent.jsx";
+import PopularProps from "./components/Pages/PopularPropsAll.jsx";
 
 function App() {
   return (
@@ -19,6 +20,14 @@ function App() {
             element={
               <>
                 <Home />
+              </>
+            }
+          />
+          <Route
+            path="/all-properties"
+            element={
+              <>
+                <PopularProps />
               </>
             }
           />
