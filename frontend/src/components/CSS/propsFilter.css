@@ -1,0 +1,78 @@
+/* PropertyFilter.css */
+
+/* Style the filter form container */
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Style individual input fields and select elements */
+.filter-form input,
+.filter-form select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 200px; /* Adjust width as needed */
+}
+
+/* Style the button */
+.filter-form button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Style the properties list container */
+.properties-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+/* Style individual property cards */
+.property-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: calc(33.333% - 1rem); /* Adjust width for card layout */
+  box-sizing: border-box;
+}
+
+/* Style the property images */
+.property-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .property-card {
+    width: calc(50% - 1rem); /* Adjust width for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .property-card {
+    width: 100%; /* Full width for mobile screens */
+  }
+}
