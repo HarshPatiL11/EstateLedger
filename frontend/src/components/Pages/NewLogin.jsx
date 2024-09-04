@@ -4,6 +4,8 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../Redux/AuthSlice";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -29,22 +31,21 @@ const LoginPage = () => {
     setError(null);
     setSuccess(null);
     try {
-      const response = await axios.post(
-        "/api/v1/user/login",
-        {
-          email: formData.userEmail,
-          password: formData.userPassword,
-        }
-      );
+      const response = await axios.post("/api/v1/user/login", {
+        email: formData.userEmail,
+        password: formData.userPassword,
+      });
       console.log(response.data);
       const { token } = response.data;
       localStorage.setItem("userToken", token);
+      toast.success("Registration successful!");
       setSuccess("Login successful!");
       dispatch(login()); // Assuming 'login' action updates the global state
       navigate("/");
     } catch (error) {
       setError("Login failed! Please check your credentials.");
       console.error(error);
+       toast.error("User Login failed! Please try again.");
     }
   };
 
