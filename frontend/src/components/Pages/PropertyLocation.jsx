@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../CSS/PopularPropsAll.css";
+import "../CSS/PopularProps.css";
 import Card from "./Card.jsx";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
-const PopularProps = () => {
+const PropertyLocation = () => {
   const [popCards, setPopCards] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -13,7 +13,9 @@ const PopularProps = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get("/api/v1/property/all");
+        const response = await axios.get("/api/v1/property/filter", {
+          params: { location: ["Thane"] },
+        });
 
         console.log("API Response:", response.data); // Log the entire response
         if (response.data && response.data.propertiesWithImg) {
@@ -35,9 +37,7 @@ const PopularProps = () => {
     navigate(`/properties/get/${property._id}`);
   };
 
-  const handleViewMore = () => {
-    navigate("/properties/all-properties");
-  };
+
 
   const formatAmount = (amount) => {
     if (amount >= 10000000) {
@@ -51,15 +51,14 @@ const PopularProps = () => {
     }
   };
 
-
   return (
-    <div className="popular-props-container">
-      <div className="popular-props-content">
-        <div className="popular-props-header">
-          <h2>Popular Properties</h2>
+    <div className="Popular-Props-Main">
+      <div className="Popular-Props-Content">
+        <div className="Popular-Props-Header">
+          <h2>Homes in Thane</h2>
         </div>
-        {error && <p className="popular-props-error">{error}</p>}
-        <div className="popular-props-cards">
+        {error && <p className="error">{error}</p>}
+        <div className="Popular-cards">
           {popCards.map((property) => {
             const amount =
               property.sellOrLease === "Sell" || property.sellOrLease === "both"
@@ -89,4 +88,4 @@ const PopularProps = () => {
   );
 };
 
-export default PopularProps;
+export default PropertyLocation;

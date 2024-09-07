@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "../CSS/Login3.css";
+import "../../CSS/Login3.css";
 import axios from "axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../Redux/AuthSlice";
+import { login } from "../../Redux/AuthSlice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -93,13 +93,18 @@ const LoginPageB = () => {
                   required
                 />
               </div>
-              <button type="submit" className="register-btn">
+              <button type="submit" className="login-btn">
                 Login
               </button>
             </form>
-            <p className="signup-link">
-              Don't have an account? <Link to="/register">Sign up</Link>
-            </p>
+            <div className="signup-link">
+              <p className="">
+                Don't have an account? <Link to="/user/register">Sign up</Link>
+              </p>
+              <p className="">
+                Forgot password? <Link to="/user/forgetpassword">Here</Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

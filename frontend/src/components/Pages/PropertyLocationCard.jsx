@@ -5,7 +5,7 @@ import "../CSS/PopularProps.css";
 import Card from "./Card.jsx";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
-export const PropertyLocationCard = () => {
+ const PropertyLocationCard = () => {
   const [popCards, setPopCards] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -13,7 +13,9 @@ export const PropertyLocationCard = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get("/api/v1/property/all");
+       const response = await axios.get("/api/v1/property/filter", {
+         params: { location: ["Thane"] },
+       });
 
         console.log("API Response:", response.data); // Log the entire response
         if (response.data && response.data.propertiesWithImg) {
@@ -36,7 +38,7 @@ export const PropertyLocationCard = () => {
   };
 
   const handleViewMore = () => {
-    navigate("/all-properties");
+    navigate("/properties/location");
   };
 
   const formatAmount = (amount) => {
@@ -51,13 +53,13 @@ export const PropertyLocationCard = () => {
     }
   };
 
-  const displayedCards = popCards.slice(0, 4);
+  const displayedCards = popCards.slice(0, 3);
 
   return (
     <div className="Popular-Props-Main">
       <div className="Popular-Props-Content">
         <div className="Popular-Props-Header">
-          <h2>Popular Properties</h2>
+          <h2>Homes in Thane</h2>
         </div>
         {error && <p className="error">{error}</p>}
         <div className="Popular-cards">
@@ -92,3 +94,5 @@ export const PropertyLocationCard = () => {
     </div>
   );
 };
+
+export default PropertyLocationCard;

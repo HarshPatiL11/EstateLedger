@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
 
 
 router.use("/user", authRouter);
-router.use("/profile", userRouter);
+router.use("/user/profile", userRouter);
 router.use("/admin", adminRouter);
 router.use("/owner", ownerRouter);
 router.use("/property", propertyRouter);

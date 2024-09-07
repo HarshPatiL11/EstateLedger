@@ -1,6 +1,6 @@
 import { comparePassword, hashPassword } from "../Helper/AuthHelper.js";
 import UserSchema from "../Model/userModel.js";
-
+import Property from "../Model/PropertyModel.js";
 
 // get all users (admin only)
 export const getAllUsers = async (req, res) => {
@@ -19,7 +19,6 @@ export const getAllUsers = async (req, res) => {
 // Get user by token
 export const getUserByToken = async (req, res) => {
   try {
-    console.log("User ID from token:", req.userId);
     const user = await UserSchema.findById(req.userId);
     if (!user) return res.status(404).send("User not found"); 
     res.status(200).json(user); 

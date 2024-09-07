@@ -22,6 +22,13 @@ export const adminMiddleware = async (req, res, next) => {
 
 export const ownerMiddleware = async (req, res, next) => {
   try {
+    const user = await UserSchema.findById(req.userId);
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "User not found",
+      });
+    }
     if (req.userType !== "admin" && req.userType !== "owner") {
       return res.status(401).send({
         success: false,
@@ -39,3 +46,4 @@ export const ownerMiddleware = async (req, res, next) => {
     });
   }
 };
+  

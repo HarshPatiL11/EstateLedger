@@ -32,7 +32,7 @@ const PopularPropsHomeCard = () => {
 
   const handleView = (property) => {
     console.log("Navigating to Property with ID:", property._id);
-    navigate(`/Properties/${property._id}`);
+    navigate(`/properties/get/${property._id}`);
   };
 
   const handleViewMore = () => {

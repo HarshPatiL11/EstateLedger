@@ -1,0 +1,89 @@
+.ProfileSection {
+  padding: 20px;
+  background: linear-gradient(135deg, #004225, #FFCF9D);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.UserDetailContainer {
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  text-align: center;
+}
+
+.UserDetailContainer .profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 3px solid #FFB000;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.userDetails {
+  text-align: left;
+  margin: 20px 0;
+}
+
+.userDetail {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.userDetailLabel {
+  font-weight: bold;
+  color: #004225;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.update-btn,
+.reset-password-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.3s;
+}
+
+.update-btn {
+  background-color: #FFB000;
+  color: #fff;
+}
+
+.update-btn:hover {
+  background-color: #FFCF9D;
+}
+
+.reset-password-btn {
+  background-color: #FF0000;
+  color: #fff;
+}
+
+.reset-password-btn:hover {
+  background-color: #FF7F7F;
+}

@@ -7,6 +7,7 @@ import {
 import { ownerMiddleware } from "../Middleware/AdminMiddleware.js";
 import { authMiddle } from "../Middleware/AuthMiddleware.js";
 import formidable from "express-formidable";
+import { getPropertiesByOwnerName, getPropertiesByOwnerToken } from "../Controller/ownerPropController.js";
 
 const ownerRouter = express.Router();
 
@@ -18,7 +19,7 @@ ownerRouter.post(
   formidable(),
   registerProperty
 );
-
+ownerRouter.get("/property/get",authMiddle,ownerMiddleware,getPropertiesByOwnerToken)
 // update property
 ownerRouter.put(
   "/property/update/:id",
