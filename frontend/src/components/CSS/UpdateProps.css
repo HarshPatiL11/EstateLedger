@@ -1,0 +1,173 @@
+/* UpdateProps.css */
+
+/* Container for the form */
+.update-property-container {
+  padding: 1.5rem; /* Increased padding for more white space */
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow for better depth */
+}
+
+/* Heading styles */
+.update-property-container h2 {
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 1.5rem; /* More spacing below heading */
+  font-size: 2.2rem; /* Slightly larger font */
+  font-weight: 600;
+}
+
+/* Form styling */
+.update-property-container form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid for better layout */
+  gap: 1rem; /* Increased gap for better spacing */
+}
+
+/* Form group styling */
+.update-property-container .update-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label styling */
+.update-property-container .update-form-group label {
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #495057;
+}
+
+/* Input and select styling */
+.update-property-container .update-form-group input,
+.update-property-container .update-form-group select {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+/* Focus states for inputs and selects */
+.update-property-container .update-form-group input:focus,
+.update-property-container .update-form-group select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Error message styling */
+.update-property-container .update-error {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Dropzone styling */
+.update-property-container .update-dropzone {
+  padding: 1.25rem;
+  border: 2px dashed #007bff;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  color: #007bff;
+  margin-bottom: 1rem; /* Add margin for better spacing */
+}
+
+.update-property-container .update-dropzone:hover {
+  background-color: #e9f7ff;
+}
+
+/* Submit button styling */
+.update-property-container .update-submit-button {
+  padding: 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.update-property-container .update-submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Cancel button styling */
+.update-property-container .update-cancel-button {
+  padding: 1rem;
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.update-property-container .update-cancel-button:hover {
+  background-color: #5a6268;
+}
+
+/* Image previews */
+.update-image-previews img {
+  width: 100px; /* Reduce size for better fit */
+  height: 100px;
+  object-fit: cover;
+  margin-right: 10px;
+  margin-bottom: 10px; /* Add bottom margin for spacing */
+}
+
+/* Logo preview */
+.update-preview-logo img {
+  width: 100px; /* Consistent with image previews */
+  height: 100px;
+  object-fit: cover;
+}
+
+/* Responsive Styles for screens with max-width 600px */
+@media (max-width: 600px) {
+  .update-property-container {
+    max-width: 90%;
+    padding: 1rem;
+  }
+
+  .update-property-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .update-property-container form {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+  }
+
+  .update-property-container .update-form-group label {
+    font-size: 0.9rem;
+  }
+
+  .update-property-container .update-form-group input,
+  .update-property-container .update-form-group select {
+    font-size: 0.9rem;
+  }
+
+  .update-property-container .update-error {
+    font-size: 0.8rem;
+  }
+
+  .update-property-container .update-dropzone {
+    padding: 0.8rem;
+  }
+
+  .update-property-container .update-submit-button,
+  .update-property-container .update-cancel-button {
+    font-size: 1rem;
+  }
+
+  .update-image-previews img,
+  .update-preview-logo img {
+    width: 90px; /* Slightly smaller for mobile */
+    height: 90px;
+  }
+}
