@@ -1,13 +1,18 @@
+// PropertyList.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Table from "../Table"; // Adjust the path according to your structure
+import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import "../../CSS/PropertyList.css";
+import Modal from "../Modal"; // Import the Modal component
+import PropertyUpdatePage from "./UpdatePropsPage"; // Import the update page component
 
 const PropertyList = () => {
   const [properties, setProperties] = useState([]);
+  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const token = localStorage.getItem("userToken");
 
   useEffect(() => {
-    // Fetching property data from API using axios
     axios
       .get("/api/v1/owner/property/get", {
         headers: {
@@ -15,7 +20,6 @@ const PropertyList = () => {
         },
       })
       .then((response) => {
-        // Access properties from response.data
         if (response.data.success) {
           setProperties(response.data.properties);
         } else {
@@ -27,14 +31,36 @@ const PropertyList = () => {
       });
   }, [token]);
 
+  const handleUpdate = (property) => {
+    setSelectedProperty(property);
+    setIsModalOpen(true);
+  };
+
+  const handleDelete = (propertyId) => {
+    axios
+      .delete(`/api/v1/owner/property/${propertyId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        if (response.data.success) {
+          setProperties(
+            properties.filter((property) => property.id !== propertyId)
+          );
+        } else {
+          console.error("Failed to delete property:", response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting property:", error);
+      });
+  };
+
   return (
-    <div>
+    <div className="property-list">
       <h1>Property Listings</h1>
-      <table
-        border="1"
-        cellPadding="10"
-        style={{ width: "100%", textAlign: "left", borderCollapse: "collapse" }}
-      >
+      <table className="property-table">
         <thead>
           <tr>
             <th>Owner</th>
@@ -43,22 +69,51 @@ const PropertyList = () => {
             <th>Selling Price (₹)</th>
             <th>Rent Amount (₹)</th>
             <th>Sell or Lease</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {properties.map((property, index) => (
-            <Table
-              key={index}
-              owner={property.owner}
-              project={property.project}
-              carpetarea={property.carpetarea}
-              SellStartprice={property.SellStartprice}
-              sellOrLease={property.sellOrLease}
-              rentAmount={property.rentAmount}
-            />
+          {properties.map((property) => (
+            <tr key={property.id}>
+              <td>{property.owner}</td>
+              <td>{property.project}</td>
+              <td>{property.carpetarea}</td>
+              <td>{property.SellStartprice}</td>
+              <td>{property.rentAmount}</td>
+              <td>{property.sellOrLease}</td>
+              <td>
+                <button
+                  className="action-button"
+                  onClick={() => handleUpdate(property)}
+                >
+                  <FaPencilAlt />
+                </button>
+                <button
+                  className="action-button"
+                  onClick={() => handleDelete(property.id)}
+                >
+                  <FaTrash />
+                </button>
+              </td>
+            </tr>
           ))}
         </tbody>
       </table>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <PropertyUpdatePage
+          property={selectedProperty}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={(updatedProperty) => {
+            setProperties(
+              properties.map((prop) =>
+                prop.id === updatedProperty.id ? updatedProperty : prop
+              )
+            );
+            setIsModalOpen(false);
+          }}
+        />
+      </Modal>
     </div>
   );
 };
