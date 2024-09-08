@@ -16,6 +16,11 @@ import PropertyOnLease from "./components/Pages/PropsLeaseHome.jsx";
 import PropertyLocation from "./components/Pages/PropertyLocation.jsx";
 import AddProperty from "./components/Pages/OwnerPages/PropertyAdd.jsx";
 import PropertyById from "./components/Pages/PropertyById.jsx";
+import ADMLogin from "./components/Pages/AdminPages/AdmLogin.jsx";
+import UserProfile2 from "./components/Pages/UserPages/Profile2.jsx";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import PopularPropsALl from "./components/Pages/PopularPropsAll.jsx";
+
 
 function App() {
   return (
@@ -27,10 +32,13 @@ function App() {
           {/* User Routes */}
           <Route path="/user/register" element={<UserRegister />} />
           <Route path="/user/login" element={<LoginPageB />} />
-          <Route path="/user/profile" element={<UserProfile />} />
+          <Route path="/user/profile" element={<UserProfile2 />} />
 
           {/* Property routes */}
-          <Route path="/properties/all-properties" element={<PopularProps />} />
+          <Route
+            path="/properties/all-properties"
+            element={<PopularPropsALl />}
+          />
           <Route path="/properties/filter" element={<PropertyFilter />} />
           <Route path="/properties/Buy" element={<PropBuy />} />
           <Route path="/properties/Rent" element={<PropertyOnLease />} />
@@ -40,7 +48,7 @@ function App() {
           <Route path="/owner/become-owner" />
           <Route path="/owner/property/add" element={<AddProperty />} />
           {/* admin Routes */}
-          <Route path="/admin/manage/users/all" />
+          <Route path="/admin" element={<ADMLogin />} />
           <Route path="/admin/manage/users/:id" />
           <Route path="/admin/manage/properties/all" />
           <Route path="/admin/manage/properties/:id" />
