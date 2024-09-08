@@ -49,7 +49,7 @@ const UserRegister = () => {
           autoClose:1600, // Set autoClose duration to 2 seconds (2000 milliseconds)
         });
         setTimeout(() => {
-          navigate(`/login?email=${encodeURIComponent(formData.email)}`);
+          navigate(`/user/login?email=${encodeURIComponent(formData.email)}`);
         }, 2010);
       } else {
         console.error("Registration failed:", error.response.data);

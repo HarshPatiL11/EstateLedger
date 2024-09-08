@@ -18,9 +18,9 @@ const PropertyFilter = () => {
     maxRentAmount: "",
     rentFrequency: "",
   });
-
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,6 +46,7 @@ const PropertyFilter = () => {
 
   const handleFilter = async () => {
     setLoading(true);
+    setError(null);
 
     // Filter out empty values from the filters object
     const filteredParams = Object.fromEntries(
@@ -59,9 +60,15 @@ const PropertyFilter = () => {
       const response = await axios.get(
         `/api/v1/property/filter?${queryString}`
       );
-      setProperties(response.data.propertiesWithImg);
+      if (response.data && response.data.propertiesWithImg) {
+        setProperties(response.data.propertiesWithImg);
+      } else {
+        setProperties([]);
+        setError("No properties found.");
+      }
     } catch (error) {
       console.error("Error fetching properties:", error);
+      setError(`Error fetching properties: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -69,8 +76,8 @@ const PropertyFilter = () => {
 
   return (
     <div>
-      <h2>Filter Properties</h2>
       <div className="filter-form">
+        {/* Form elements */}
         <select name="layout" value={filters.layout} onChange={handleChange}>
           <option value="">Select Layout</option>
           <option value="1 RK">1 RK</option>
@@ -194,15 +201,15 @@ const PropertyFilter = () => {
         <button onClick={handleFilter}>Filter Properties</button>
       </div>
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="properties-list">
-          {properties.length > 0 ? (
-            properties.map((property) => (
-              <div key={property._id} className="property-card">
+      <div className="properties-list">
+        {loading && <p>Loading...</p>}
+        {error && <p className="error-message">{error}</p>}
+        {properties.length > 0 ? (
+          <ul>
+            {properties.map((property) => (
+              <li key={property._id}>
                 <h3>{property.layout}</h3>
-                <p>{property.location}</p>
+                <p>Location: {property.location}</p>
                 <p>Price: {property.SellStartprice}</p>
                 <p>Rent: {property.rentAmount}</p>
                 {property.propertyImg && property.propertyImg.length > 0 && (
@@ -212,13 +219,13 @@ const PropertyFilter = () => {
                     style={{ width: "100px", height: "100px" }}
                   />
                 )}
-              </div>
-            ))
-          ) : (
-            <p>No properties found</p>
-          )}
-        </div>
-      )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          !loading && <p>No properties found</p>
+        )}
+      </div>
     </div>
   );
 };
