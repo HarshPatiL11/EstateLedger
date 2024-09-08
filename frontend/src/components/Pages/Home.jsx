@@ -18,9 +18,6 @@ const Home = () => {
       </div>
       <PopularPropsHomeCard />
       <PropertyLocationCard />
-      <PropBuy />
-      <PropertyOnLease />
-      <PropertyList/>
     </>
   );
 };

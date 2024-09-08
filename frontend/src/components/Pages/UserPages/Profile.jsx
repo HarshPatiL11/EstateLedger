@@ -5,7 +5,6 @@ import { login, logout } from "../../Redux/AuthSlice.js";
 import { useNavigate } from "react-router-dom";
 import "../../Css/UserProfile.css";
 import AdminPanel from "../AdminPanel.jsx";
-import VendorPanel from "../VendorPanel.jsx";
 import ClientPanel from "../UserPages/ClientPanel.jsx";
 
 const UserProfile = () => {
@@ -61,8 +60,6 @@ const UserProfile = () => {
     switch (user.userType) {
       case "admin":
         return <AdminPanel />;
-      case "vendor":
-        return <VendorPanel />;
       case "client":
         return <ClientPanel />;
       default:

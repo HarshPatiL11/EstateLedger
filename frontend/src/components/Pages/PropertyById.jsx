@@ -1,39 +1,47 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import '../CSS/PropertyById.css'
 
 const PropertyById = () => {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  console.log("Logging id 1st time getId ", id);
 
   useEffect(() => {
     const fetchProperty = async () => {
+      console.log("Logging id in fetch Prop ", id);
+
       try {
-        const response = await axios.get(`api/v1/property/${id}`);
-        console.log(response.data.propertiesWithImg);
-        
-        setProperty(response.data.propertiesWithImg); // Ensure this matches the response structure
+        const response = await axios.get(
+          `http://localhost:8000/api/v1/property/${id}`
+        );
+        console.log(response.data.propertyWithImg);
+
+        setProperty(response.data.propertyWithImg); // Ensure this matches the response structure
         setLoading(false);
+        console.log("Success fetched Prop ", id, property);
       } catch (error) {
         console.error("Error fetching property data:", error);
         setError(error);
         setLoading(false);
+        console.log("errror in fetched Prop ", id);
       }
     };
 
     fetchProperty();
-  }, [id]);
+  }, [id, property]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error loading property data.</div>;
+  if (loading) return <div className="loading">Loading...</div>;
+  if (error) return <div className="error">Error loading property data.</div>;
 
   return (
-    <div>
+    <div className="property-details-container">
       <h1>Property Details</h1>
       {property && (
-        <div>
+        <div className="property-details">
           <p>
             <strong>Address:</strong> {property.address}
           </p>
@@ -121,16 +129,14 @@ const PropertyById = () => {
           )}
           {/* Display property images if available */}
           {property.propertyImg && property.propertyImg.length > 0 && (
-            <div>
+            <div className="property-images">
               <h3>Property Images</h3>
               {property.propertyImg.map((img, index) => (
                 <img
                   key={index}
-                  src={`data:${img.contentType};base64,${Buffer.from(
-                    img.data
-                  ).toString("base64")}`}
+                  src={img.data}
                   alt={`Property Image ${index + 1}`}
-                  style={{ maxWidth: "100%", height: "auto" }}
+                  className="property-image"
                 />
               ))}
             </div>

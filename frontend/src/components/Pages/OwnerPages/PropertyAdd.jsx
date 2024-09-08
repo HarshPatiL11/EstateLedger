@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
 import { toast } from "react-toastify";
-import "../../CSS/AddProps.css";
+import "../../CSS/AddProps2.css";
+import { useNavigate } from "react-router";
+import { login, logout } from "../../Redux/AuthSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const FACING_OPTIONS = ["North", "South", "East", "West"];
 const FLOORING_OPTIONS = ["Marble", "Wooden", "Tiles"];
@@ -38,6 +41,41 @@ const SELL_OR_LEASE = ["Sell", "Lease", "Both"];
 const RENT_FREQUENCY_OPTIONS = ["Monthly", "Quarterly", "Annually"];
 
 const AddProperty = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  const token = localStorage.getItem("userToken");
+  if (!token || !isLoggedIn) {
+    toast.error("No authentication token found. Please log in.");
+    dispatch(logout());
+    navigate("/user/login");
+    return;
+  }
+const chkUser = async () => {
+  try {
+    const response = await axios.get("/api/v1/user/profile", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response.data.userType);
+    
+    // Check if the user is an Admin or Owner
+    if (response.data.userType !== "Admin" && response.data.userType !== "Owner") {
+      toast.error("You do not have permission to add properties.");
+      navigate("/user/login");
+    }
+  } catch (error) {
+    toast.error("Failed to fetch user profile. Please log in again.");
+    console.log(error);
+    
+    navigate("/user/login");
+  }
+};
+  useEffect(() => {
+    chkUser();
+  }, []);
   const {
     register,
     handleSubmit,
@@ -47,14 +85,37 @@ const AddProperty = () => {
   } = useForm();
   const [propertyImages, setPropertyImages] = useState([]);
   const [logoImage, setLogoImage] = useState(null);
+  const [imagePreviews, setImagePreviews] = useState([]);
+  const [logoPreview, setLogoPreview] = useState(null);
 
   const onDrop = (acceptedFiles) => {
     setPropertyImages(acceptedFiles);
+    // Generate previews for property images
+    setImagePreviews(acceptedFiles.map((file) => URL.createObjectURL(file)));
   };
 
   const onDropLogo = (acceptedFiles) => {
     setLogoImage(acceptedFiles[0]);
   };
+
+  useEffect(() => {
+    if (logoImage) {
+      const preview = URL.createObjectURL(logoImage);
+      setLogoPreview(preview);
+
+      // Cleanup object URL on component unmount
+      return () => URL.revokeObjectURL(preview);
+    } else {
+      setLogoPreview(null);
+    }
+  }, [logoImage]);
+
+  useEffect(() => {
+    // Cleanup object URLs for property image previews
+    return () => {
+      imagePreviews.forEach((preview) => URL.revokeObjectURL(preview));
+    };
+  }, [imagePreviews]);
 
   const {
     getRootProps: getRootPropsImages,
@@ -77,7 +138,6 @@ const AddProperty = () => {
       formData.append("singleLogo", logoImage);
     }
 
-    const token = localStorage.getItem("userToken");
     try {
       const response = await axios.post(
         "http://localhost:8000/api/v1/owner/property/add-property/",
@@ -91,6 +151,8 @@ const AddProperty = () => {
       );
       toast.success(response.data.message);
       reset();
+      setImagePreviews([]); // clear image previews after submission
+      setLogoPreview(null);
     } catch (error) {
       toast.error(error.response.data.message || "Something went wrong");
     }
@@ -398,12 +460,24 @@ const AddProperty = () => {
           <input {...getInputPropsImages()} />
           <p>Drag 'n' drop property images here, or click to select files</p>
         </div>
+        {/* Image Previews */}
+        <div className="image-previews">
+          {imagePreviews.map((preview, index) => (
+            <img key={index} src={preview} alt={`Property Preview ${index}`} />
+          ))}
+        </div>
 
         {/* Single Logo */}
         <div {...getRootPropsLogo()} className="form-group dropzone">
           <input {...getInputPropsLogo()} />
           <p>Drag 'n' drop logo image here, or click to select a file</p>
         </div>
+        {/* Logo Preview */}
+        {logoPreview && (
+          <div className="logo-preview">
+            <img src={logoPreview} alt="Logo Preview" />
+          </div>
+        )}
 
         <button type="submit">Add Property</button>
       </form>

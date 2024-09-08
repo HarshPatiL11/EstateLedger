@@ -32,10 +32,10 @@ import { FaRegArrowAltCircleRight } from "react-icons/fa";
     fetchProperties();
   }, []);
 
-  const handleView = (property) => {
-    console.log("Navigating to Property with ID:", property._id);
-    navigate(`/Properties/${property._id}`);
-  };
+const handleView = (property) => {
+  console.log("Navigating to Property with ID:", property._id);
+  navigate(`/properties/get/${property._id}`);
+};
 
   const handleViewMore = () => {
     navigate("/properties/location");

@@ -79,9 +79,9 @@ const PropsBuy = () => {
 
 
 
-  // Function to handle property view
   const handleView = (property) => {
-  navigate(`/properties/get/${property._id}`);
+    console.log("Navigating to Property with ID:", property._id);
+    navigate(`/properties/get/${property._id}`);
   };
 
   // Function to format amount

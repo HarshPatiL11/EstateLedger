@@ -12,6 +12,6 @@ propertyRouter.get("/filter", filterProperties);
 
 // property get
 propertyRouter.get("/all", getAllProperties);
-propertyRouter.get("/:id", getPropertyById);
+  propertyRouter.get("/:id", getPropertyById);
 
 export default propertyRouter;

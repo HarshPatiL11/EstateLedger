@@ -57,7 +57,7 @@ const Navbar = () => {
       <div id="navigation-bar" className="nav-bar" ref={navbar}>
         <Link to="/properties/Buy">Buy</Link>
         <Link to={"/properties/Rent"}>Rent</Link>
-        <Link to={"/property/add"}>Lease/Sell</Link>
+        <Link to={"/owner/property/add"}>Lease/Sell</Link>
         <a href="#">About</a>
         <a href="#">Contact</a>
         {isLoggedIn ? (

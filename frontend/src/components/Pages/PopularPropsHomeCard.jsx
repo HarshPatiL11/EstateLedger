@@ -6,6 +6,8 @@ import Card from "./Card.jsx";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
 const PopularPropsHomeCard = () => {
+          console.log("Loog1 before fetchPrps get all api");
+
   const [popCards, setPopCards] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -13,7 +15,14 @@ const PopularPropsHomeCard = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get("/api/v1/property/all");
+        console.log("Loog2 before fetchPrps get all api");
+
+        const response = await axios.get("/api/v1/property/filter", {
+          timeout: 500000,
+        }); // 5 seconds
+
+        if (response)
+          console.log("API called sccesfuly", response.data.propertiesWithImg);
 
         console.log("API Response:", response.data); // Log the entire response
         if (response.data && response.data.propertiesWithImg) {
@@ -36,7 +45,7 @@ const PopularPropsHomeCard = () => {
   };
 
   const handleViewMore = () => {
-    navigate("/all-properties");
+    navigate("/properties/all-properties");
   };
 
   const formatAmount = (amount) => {

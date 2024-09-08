@@ -10,7 +10,7 @@
   font-style: normal;
   position: sticky; /* Make the navbar sticky */
   top: 0; /* Stick the navbar to the top */
-  z-index: 1000; /* Ensure it stays on top of other content */
+  z-index: 10; /* Ensure it stays on top of other content */
 }
 
 .logo {
@@ -68,7 +68,7 @@
     width: 100%;
     background-color: #003366; /* Navy Blue for the background */
     text-align: center;
-    z-index: 999; /* Ensure it is above other content */
+    z-index: 10; /* Ensure it is above other content */
   }
 
   .nav-bar.responsive {
@@ -84,7 +84,7 @@
 
   .menu-icon {
     display: block;
-    z-index: 1001; /* Ensure it is above other content */
+    z-index: 10; /* Ensure it is above other content */
     margin-left: 25px;
     color: #87CEEB; /* Sky Blue for the menu icon */
   }

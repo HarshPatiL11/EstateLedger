@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../CSS/propsFilter.css";
+import "../CSS/propsFilter2.css";
 import Card from "./Card"; // Ensure Card component is properly imported
 import { useNavigate } from "react-router-dom";
 
@@ -69,9 +69,10 @@ const PropertyOnLease = () => {
   }, [filters]);
 
   // Function to handle property view
-  const handleView = (property) => {
-    navigate(`/properties/get/${property._id}`);
-  };
+ const handleView = (property) => {
+   console.log("Navigating to Property with ID:", property._id);
+   navigate(`/properties/get/${property._id}`);
+ };
 
   // Function to format amount
   const formatAmount = (amount) => {

@@ -195,7 +195,7 @@ export const getAllProperties = async (req, res) => {
 // get Property by ID API
 export const getPropertyById = async (req, res) => {
   try {
-    const propertyId = req.params._id;
+    const propertyId = req.params.id;
     if (!propertyId) {
       return res.status(404).send({
         success: false,
