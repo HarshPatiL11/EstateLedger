@@ -1,11 +1,16 @@
 import express from "express";
 import { userDelete, userDeleteUsingId } from "../Controller/authController.js";
 import { adminMiddleware } from "../Middleware/AdminMiddleware.js";
+import formidable from "express-formidable";
+
 import {
+  approveProperty,
   deleteProperty,
   getAllProperties,
+  updateProperty,
 } from "../Controller/propertyController.js";
 import {
+  approveUser,
   getAllUsers,
   getUserByID,
   updateUserTypeController,
@@ -37,6 +42,7 @@ adminRouter.put(
 );            //working
 
 
+
 // upgrade userType
 adminRouter.put(
   "/users/update-userType/:id",
@@ -45,6 +51,7 @@ adminRouter.put(
   updateUserTypeController
 );            //working
 
+adminRouter.put("/users/approve/:id", authMiddle, adminMiddleware, approveUser);            
 
 // delete user account
 adminRouter.delete(
@@ -63,10 +70,25 @@ adminRouter.get(
   getAllProperties
 );                                
 
-
 // adminRouter.put("property/update/:id", adminMiddleware, updateProperty);
+// Verify Property
+adminRouter.put(
+  "/property/approve/:id",
+  authMiddle,
+  adminMiddleware,
+  approveProperty
+);
 
+// update property
+adminRouter.put(
+  "/property/update/:id",
+  authMiddle,
+  adminMiddleware,
+  formidable(),
+  updateProperty
+);
 
+// Delete Property usin Id
 adminRouter.delete(
   "/delete-property/:id",
   authMiddle,

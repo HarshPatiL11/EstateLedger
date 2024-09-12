@@ -58,8 +58,8 @@ const Navbar = () => {
         <Link to="/properties/Buy">Buy</Link>
         <Link to={"/properties/Rent"}>Rent</Link>
         <Link to={"/owner/property/add"}>Lease/Sell</Link>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <Link to={"/about"}>About</Link>
+        <Link to={"/contact-us"}>Contact</Link>
         {isLoggedIn ? (
           <>
             <Link to="/user/profile">

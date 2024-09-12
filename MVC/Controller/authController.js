@@ -163,6 +163,7 @@ export const userLoginController = async (req, res) => {
   }
 };
 
+
 // User logout controller
 export const userLogoutController = async (req, res) => {
 try {

@@ -2,6 +2,8 @@ import express from 'express';
 import { userMiddleware } from "../Middleware/userMiddleware.js";
 import UserSchema from "../Model/userModel.js";
 import {
+  becomeOwnerController,
+  getInterestedPropsByUserId,
   resetPasswordController,
   updatePasswordController,
   userUpdateController,
@@ -9,11 +11,9 @@ import {
 import { authMiddle } from '../Middleware/AuthMiddleware.js';
 
 const userRouter = express.Router();
-
-
+userRouter.get("/interested/properties",authMiddle,getInterestedPropsByUserId)
+userRouter.put('/become-owner' , authMiddle , becomeOwnerController)
 userRouter.put("/update-profile", authMiddle, userUpdateController);//working
 userRouter.put("/update-password", authMiddle, updatePasswordController);//working
-userRouter.put("/reset-password", authMiddle, resetPasswordController);//working
-
 
 export default userRouter;

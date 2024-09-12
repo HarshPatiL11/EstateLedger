@@ -20,7 +20,7 @@
 /* Form styling */
 .update-property-container form {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid for better layout */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid for better layout */
   gap: 1rem; /* Increased gap for better spacing */
 }
 
@@ -126,6 +126,20 @@
   object-fit: cover;
 }
 
+.update-form-buttons{
+  display: flex;
+  position: relative;
+  top: 40px;
+  gap: 10px;
+}
+.update-form-buttons>button{
+    display: flex;
+    height: 39px;
+    align-items: center;
+    justify-content: cente
+}
+
+
 /* Responsive Styles for screens with max-width 600px */
 @media (max-width: 600px) {
   .update-property-container {
@@ -160,9 +174,21 @@
     padding: 0.8rem;
   }
 
+.update-form-buttons{
+  position: relative;
+  top: 5px;
+  justify-content: center;
+}
+.update-form-buttons>button{
+    display: flex;
+    height: 39px;
+    align-items: center;
+    justify-content: center;
+}
   .update-property-container .update-submit-button,
   .update-property-container .update-cancel-button {
     font-size: 1rem;
+  
   }
 
   .update-image-previews img,
@@ -171,3 +197,4 @@
     height: 90px;
   }
 }
+

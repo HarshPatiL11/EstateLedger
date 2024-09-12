@@ -41,6 +41,7 @@ const RENT_FREQUENCY_OPTIONS = ["Monthly", "Quarterly", "Annually"];
 
 const UpdatePropertyForm = ({ property, onClose }) => {
   const navigate = useNavigate();
+  const token = localStorage.getItem("userToken");
   const {
     register,
     handleSubmit,
@@ -87,42 +88,42 @@ const UpdatePropertyForm = ({ property, onClose }) => {
   } = useDropzone({ onDrop, multiple: true, accept: "image/*" });
   const { getRootProps: getRootPropsLogo, getInputProps: getInputPropsLogo } =
     useDropzone({ onDrop: onDropLogo, multiple: false, accept: "image/*" });
+const onSubmit = async (data) => {
+  const formData = new FormData();
+  Object.keys(data).forEach((key) => {
+    formData.append(key, data[key]);
+  });
 
-  const onSubmit = async (data) => {
-    const formData = new FormData();
-    Object.keys(data).forEach((key) => {
-      formData.append(key, data[key]);
-    });
+  propertyImages.forEach((file, index) => {
+    formData.append(`propertyImg[${index}]`, file);
+  });
 
-    propertyImages.forEach((file, index) => {
-      formData.append(`propertyImg[${index}]`, file);
-    });
+  if (logoImage) {
+    formData.append("singleLogo", logoImage);
+  }
 
-    if (logoImage) {
-      formData.append("singleLogo", logoImage);
-    }
-
-    try {
-      const response = await axios.put(
-        `http://localhost:8000/api/v1/owner/property/update-property/${property._id}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      toast.success(response.data.message);
-      reset();
-      setImagePreviews([]);
-      setLogoPreview(null);
-      onClose();
-    } catch (error) {
-      toast.error(error.response.data.message || "Something went wrong");
-    }
-  };
-
+  try {
+    const response = await axios.put(
+      `/api/v1/owner/property/update/${property._id}`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("Response:", response); // Log the full response
+    toast.success(response.data.message);
+    reset();
+    setImagePreviews([]);
+    setLogoPreview(null);
+    onClose();
+  } catch (error) {
+    console.error("Error:", error); // Log the error
+    toast.error(error.response?.data?.message || "Something went wrong");
+  }
+};
   return (
     <div className="update-property-container">
       <h2>Update Property</h2>
@@ -332,7 +333,7 @@ const UpdatePropertyForm = ({ property, onClose }) => {
 
         <div className="update-form-buttons">
           <button type="submit" className="update-submit-button">
-            Update Property
+            Update
           </button>
           <button
             type="button"

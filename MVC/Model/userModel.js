@@ -25,6 +25,10 @@ const UserSchema = new mongoose.Schema(
     frgtKey: {
       type: String,
     },
+    approved: {
+      type: Boolean,
+      default: false,
+    },
     profile: {
       type: String,
       default:

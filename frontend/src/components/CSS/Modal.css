@@ -1,31 +1,81 @@
+/* Modal.css */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: auto;
-  overflow:scroll;
+  z-index: 20;
+  overflow: auto; /* Allow scrolling if content overflows */
 }
 
+/* Adjust modal content dimensions and ensure it is scrollable */
 .modal-content {
-  padding: 20px;
-    border-radius: 8px;
-    margin-top: 7vh;
-    width: 80VW;
-    height: 75vh;
-    overflow: scroll;
+  border-radius: 8px;
+  
+  margin: 2vh auto; /* Centered vertically with some margin from top */
+  padding: 12px 10px 12px 32px;
+  width: 80vw; /* Width relative to viewport width */
+  max-height: 80vh; /* Maximum height relative to viewport height */
+  overflow: auto; /* Enable scrolling inside the modal content if needed */
+  background: transparent;
 }
 
-.modal-close {
-  top: 10px;
-  right: 10px;
+/* Scrollbar styles for WebKit-based browsers (Chrome, Safari, Edge) */
+.modal-overlay::-webkit-scrollbar {
+  width: 10px; /* Adjust the width of the scrollbar */
+}
+
+.modal-overlay::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.7); /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded edges */
+}
+
+.modal-overlay::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.2); /* Color of the track */
+  border-radius: 10px;
+}
+
+/* Scrollbar styles for Firefox */
+.modal-overlay {
+  scrollbar-width: thin; /* Makes the scrollbar thinner */
+  scrollbar-color: rgba(0, 0, 0, 0.7) rgba(255, 255, 255, 0.2); /* thumb and track colors */
+}
+
+/* Optional: Additional styles for modal buttons */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
   border: none;
-  background: none;
-  font-size: 24px;
+  border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
+}
+
+.modal-buttons button:first-child {
+  background-color: #008080; /* Teal */
+  color: #fff;
+}
+
+.modal-buttons button:first-child:hover {
+  background-color: #005757; /* Darker Teal */
+}
+
+.modal-buttons button:last-child {
+  background-color: #ff0000; /* Red */
+  color: #fff;
+}
+
+.modal-buttons button:last-child:hover {
+  background-color: #ff7f7f; /* Light Red */
 }

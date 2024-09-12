@@ -36,86 +36,97 @@ const PropertyList = () => {
     setIsModalOpen(true);
   };
 
-  const handleDelete = (propertyId) => {
-    axios
-      .delete(`/api/v1/owner/property/${propertyId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        if (response.data.success) {
-          setProperties(
-            properties.filter((property) => property.id !== propertyId)
-          );
-        } else {
-          console.error("Failed to delete property:", response.data.message);
-        }
-      })
-      .catch((error) => {
-        console.error("Error deleting property:", error);
-      });
-  };
+const handleDelete = (propertyId) => {
+  console.log(propertyId);
 
-  return (
-    <div className="property-list">
-      <h1>Property Listings</h1>
-      <table className="property-table">
-        <thead>
-          <tr>
-            <th>Owner</th>
-            <th>Project</th>
-            <th>Carpet Area (sqft)</th>
-            <th>Selling Price (₹)</th>
-            <th>Rent Amount (₹)</th>
-            <th>Sell or Lease</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {properties.map((property) => (
-            <tr key={property.id}>
-              <td>{property.owner}</td>
-              <td>{property.project}</td>
-              <td>{property.carpetarea}</td>
-              <td>{property.SellStartprice}</td>
-              <td>{property.rentAmount}</td>
-              <td>{property.sellOrLease}</td>
-              <td>
-                <button
-                  className="action-button"
-                  onClick={() => handleUpdate(property)}
-                >
-                  <FaPencilAlt />
-                </button>
-                <button
-                  className="action-button"
-                  onClick={() => handleDelete(property.id)}
-                >
-                  <FaTrash />
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+  axios
+    .delete(`/api/v1/owner/property/delete/${propertyId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      if (response.data.success) {
+        setProperties(
+          properties.filter((property) => property._id !== propertyId)
+        );
+      } else {
+        console.error("Failed to delete property:", response.data.message);
+      }
+    })
+    .catch((error) => {
+      console.error("Error deleting property:", error);
+    });
+};
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <PropertyUpdatePage
-          property={selectedProperty}
-          onClose={() => setIsModalOpen(false)}
-          onSuccess={(updatedProperty) => {
-            setProperties(
-              properties.map((prop) =>
-                prop.id === updatedProperty.id ? updatedProperty : prop
-              )
+return (
+  <div className="property-list">
+    <h1>Property Listings</h1>
+    <table className="property-table">
+      <thead>
+        <tr>
+          <th>Owner</th>
+          <th>Project</th>
+          <th>Carpet Area (sqft)</th>
+          <th>Selling Price (₹)</th>
+          <th>Rent Amount (₹)</th>
+          <th>Sell or Lease</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {Array.isArray(properties) && properties.length > 0 ? (
+          properties.map((property) => {
+            console.log(property);
+            return (
+              <tr key={property._id}>
+                <td>{property.owner}</td>
+                <td>{property.project}</td>
+                <td>{property.carpetarea}</td>
+                <td>{property.SellStartprice}</td>
+                <td>{property.rentAmount}</td>
+                <td>{property.sellOrLease}</td>
+                <td>
+                  <button
+                    className="action-button"
+                    onClick={() => handleUpdate(property)}
+                  >
+                    <FaPencilAlt />
+                  </button>
+                  <button
+                    className="action-button"
+                    onClick={() => handleDelete(property._id)}
+                  >
+                    <FaTrash />
+                  </button>
+                </td>
+              </tr>
             );
-            setIsModalOpen(false);
-          }}
-        />
-      </Modal>
-    </div>
-  );
+          })
+        ) : (
+          <tr>
+            <td colSpan="7">No properties found</td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+
+    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <PropertyUpdatePage
+        property={selectedProperty}
+        onClose={() => setIsModalOpen(false)}
+        onSuccess={(updatedProperty) => {
+          setProperties(
+            properties.map((prop) =>
+              prop.id === updatedProperty.id ? updatedProperty : prop
+            )
+          );
+          setIsModalOpen(false);
+        }}
+      />
+    </Modal>
+  </div>
+);
 };
 
 export default PropertyList;

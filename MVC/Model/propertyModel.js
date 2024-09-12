@@ -122,7 +122,6 @@ const PropertySchema = new mongoose.Schema(
     status: {
       type: String,
       required: [true, "Enter the status"],
-      enum: ["Under Construction", "Ready to Move"],
     },
     totalFloors: {
       type: Number,
@@ -197,6 +196,10 @@ const PropertySchema = new mongoose.Schema(
         required: false,
       },
     },
+      isApproved: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
@@ -212,4 +215,8 @@ PropertySchema.pre('validate', function (next) {
   next();
 });
 
-export default mongoose.model("Property", PropertySchema);
+const PropertyModel =
+  mongoose.models.Property || mongoose.model("Property", PropertySchema);
+
+
+export default PropertyModel;

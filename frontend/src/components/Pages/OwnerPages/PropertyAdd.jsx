@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useDropzone } from "react-dropzone";
 import { toast } from "react-toastify";
 import "../../CSS/AddProps2.css";
 import { useNavigate } from "react-router";
 import { login, logout } from "../../Redux/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useDropzone } from "react-dropzone";
+
 
 const FACING_OPTIONS = ["North", "South", "East", "West"];
 const FLOORING_OPTIONS = ["Marble", "Wooden", "Tiles"];
@@ -41,41 +42,49 @@ const SELL_OR_LEASE = ["Sell", "Lease", "Both"];
 const RENT_FREQUENCY_OPTIONS = ["Monthly", "Quarterly", "Annually"];
 
 const AddProperty = () => {
+  const [propertyImages, setPropertyImages] = useState([]);
+  const [logoImage, setLogoImage] = useState(null);
+  const [imagePreviews, setImagePreviews] = useState([]);
+  const [logoPreview, setLogoPreview] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  const token = localStorage.getItem("userToken");
-  if (!token || !isLoggedIn) {
-    toast.error("No authentication token found. Please log in.");
-    dispatch(logout());
-    navigate("/user/login");
-    return;
-  }
-const chkUser = async () => {
-  try {
-    const response = await axios.get("/api/v1/user/profile", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(response.data.userType);
-    
-    // Check if the user is an Admin or Owner
-    if (response.data.userType !== "Admin" && response.data.userType !== "Owner") {
-      toast.error("You do not have permission to add properties.");
-      navigate("/user/login");
-    }
-  } catch (error) {
-    toast.error("Failed to fetch user profile. Please log in again.");
-    console.log(error);
-    
-    navigate("/user/login");
-  }
-};
   useEffect(() => {
+    const chkUser = async () => {
+      const token = localStorage.getItem("userToken");
+      if (!token || !isLoggedIn) {
+        toast.error("No authentication token found. Please log in.");
+        dispatch(logout());
+        navigate("/user/login");
+        return;
+      }
+
+      try {
+        const response = await axios.get("/api/v1/user/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        // Check if the user is an Admin or Owner
+        if (
+          response.data.userType !== "admin" &&
+          response.data.userType !== "owner"
+        ) {
+          toast.error("You do not have permission to add properties.");
+          navigate("/user/become-seller");
+        }
+      } catch (error) {
+        toast.error("Failed to fetch user profile. Please log in again.");
+        console.log(error);
+        navigate("/user/login");
+      }
+    };
+
     chkUser();
-  }, []);
+  }, [dispatch, isLoggedIn, navigate]);
+
   const {
     register,
     handleSubmit,
@@ -83,15 +92,13 @@ const chkUser = async () => {
     reset,
     getValues,
   } = useForm();
-  const [propertyImages, setPropertyImages] = useState([]);
-  const [logoImage, setLogoImage] = useState(null);
-  const [imagePreviews, setImagePreviews] = useState([]);
-  const [logoPreview, setLogoPreview] = useState(null);
 
   const onDrop = (acceptedFiles) => {
-    setPropertyImages(acceptedFiles);
-    // Generate previews for property images
-    setImagePreviews(acceptedFiles.map((file) => URL.createObjectURL(file)));
+    setPropertyImages((prevImages) => [...prevImages, ...acceptedFiles]);
+    setImagePreviews((prevPreviews) => [
+      ...prevPreviews,
+      ...acceptedFiles.map((file) => URL.createObjectURL(file)),
+    ]);
   };
 
   const onDropLogo = (acceptedFiles) => {
@@ -102,8 +109,6 @@ const chkUser = async () => {
     if (logoImage) {
       const preview = URL.createObjectURL(logoImage);
       setLogoPreview(preview);
-
-      // Cleanup object URL on component unmount
       return () => URL.revokeObjectURL(preview);
     } else {
       setLogoPreview(null);
@@ -111,7 +116,6 @@ const chkUser = async () => {
   }, [logoImage]);
 
   useEffect(() => {
-    // Cleanup object URLs for property image previews
     return () => {
       imagePreviews.forEach((preview) => URL.revokeObjectURL(preview));
     };
@@ -139,6 +143,7 @@ const chkUser = async () => {
     }
 
     try {
+      const token = localStorage.getItem("userToken");
       const response = await axios.post(
         "http://localhost:8000/api/v1/owner/property/add-property/",
         formData,
@@ -149,15 +154,15 @@ const chkUser = async () => {
           },
         }
       );
+
       toast.success(response.data.message);
       reset();
-      setImagePreviews([]); // clear image previews after submission
+      setImagePreviews([]);
       setLogoPreview(null);
     } catch (error) {
       toast.error(error.response.data.message || "Something went wrong");
     }
   };
-
   return (
     <div className="add-property-container">
       <h2>Add New Property</h2>

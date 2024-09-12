@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "../../Redux/AuthSlice.js";
 import { useNavigate } from "react-router-dom";
-import "../../Css/UserProfile.css";
+// import "../../Css/UserProfile.css";
 import AdminPanel from "../AdminPanel.jsx";
 import ClientPanel from "../UserPages/ClientPanel.jsx";
 

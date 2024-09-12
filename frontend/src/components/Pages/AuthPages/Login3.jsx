@@ -20,11 +20,16 @@ const LoginPageB = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Extract email from URL query parameters
+    // Extract email and password from URL query parameters
     const queryParams = new URLSearchParams(location.search);
     const email = queryParams.get("email");
+    const password = queryParams.get("newPassword");
+
     if (email) {
       setFormData((prev) => ({ ...prev, userEmail: email }));
+    }
+    if (password) {
+      setFormData((prev) => ({ ...prev, userPassword: password }));
     }
   }, [location.search]);
 

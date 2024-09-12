@@ -85,11 +85,18 @@ const PropsBuy = () => {
   };
 
   // Function to format amount
+ 
   const formatAmount = (amount) => {
-    // Add your logic for formatting amount here
-    return amount; // Placeholder
+    if (amount >= 10000000) {
+      return `${(amount / 10000000).toFixed(1)} cr`;
+    } else if (amount >= 100000) {
+      return `${(amount / 100000).toFixed(1)} lac`;
+    } else if (amount >= 1000) {
+      return `${(amount / 1000).toFixed(1)} k`;
+    } else {
+      return amount.toString();
+    }
   };
-
 const handleResetFilters = () => {
   setFilters({
     layout: "",
@@ -206,7 +213,7 @@ const handleResetFilters = () => {
         <div className="Popular-Props-Main">
           <div className="Popular-Props-Content">
             <div className="Popular-Props-Header">
-              <h2>Popular Properties</h2>
+              <h2> Properties on Sale</h2>
             </div>
             {error && <p className="error">{error}</p>}
             <div className="Popular-cards">

@@ -22,6 +22,7 @@ const app = express();
 // middlewares
 app.use(cors());
 app.use(express.json());
+// app.use(express.json({ limit: "30mb" }));
 app.use(morgan("dev"));
 
 // set router
@@ -31,7 +32,6 @@ const router = express.Router();
 app.get("/", (req, res) => {
   res.send(`<h1>hello port ${PORT}</h1>`);
 });
-
 
 
 router.use("/user", authRouter);
