@@ -4,6 +4,8 @@ import axios from "axios";
 import "../CSS/PopularPropsAll.css";
 import Card from "./Card.jsx";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PopularProps = () => {
   const [popCards, setPopCards] = useState([]);
@@ -82,6 +84,7 @@ const PopularProps = () => {
           
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import "../../CSS/BecomeOwner.css"; // Import CSS module
+import "../../CSS/BecomeOwner.css"; 
 import { logout } from "../../Redux/AuthSlice"; // Import the logout action
 
 const BecomeOwner = () => {
@@ -56,7 +56,7 @@ const BecomeOwner = () => {
     try {
       const response = await axios.put(
         "/api/v1/user/profile/become-owner",
-        {}, // Assuming no data needs to be sent in the body
+        {}, 
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -92,7 +92,7 @@ const BecomeOwner = () => {
           Become Owner
         </button>
       </div>
-      {/* <ToastContainer /> */}
+      <ToastContainer />
     </div>
   );
 };

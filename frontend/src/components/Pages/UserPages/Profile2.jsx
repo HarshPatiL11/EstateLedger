@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../Redux/AuthSlice.js";
 import { useNavigate } from "react-router-dom";
 import "../../Css/UserProfile.css";
-import AdminPanel from "../AdminPanel.jsx";
 import ClientPanel from "../UserPages/ClientPanel.jsx";
 import PropertyList from "../OwnerPages/ManageProps.jsx";
 import Modal from "../Modal.jsx";
@@ -13,6 +12,9 @@ import ManageAllUsers from "../AdminPages/ManageAllUsers.jsx";
 import ManageAllProps from "../AdminPages/ManageAllProps.jsx";
 import InterestedUsersList from "../OwnerPages/InterestedUsersList.jsx";
 import ApprovedInterest from "./ApprovedInterest.jsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const UserProfile = () => {
   const token = localStorage.getItem("userToken");
@@ -299,6 +301,7 @@ const UserProfile = () => {
           </div>
         </div>
       </Modal>
+      <ToastContainer/>
     </div>
   );
 };

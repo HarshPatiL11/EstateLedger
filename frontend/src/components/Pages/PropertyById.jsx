@@ -5,6 +5,7 @@
   import "../CSS/PropertyById.css";
   import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
   import { MdVerified } from "react-icons/md";
+import "react-toastify/dist/ReactToastify.css";
 
   const PropertyById = () => {
     const { id } = useParams();

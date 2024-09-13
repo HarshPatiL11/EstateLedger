@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import "../CSS/contact.css";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +20,8 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    alert("Form submitted!");
+    toast.success("Form submitted!");
+    setFormData({ name: "", email: "", message: "" });
   };
 
   return (
@@ -85,6 +88,7 @@ const Contact = () => {
           </form>
         </section>
       </div>
+      <ToastContainer />
     </div>
   );
 };

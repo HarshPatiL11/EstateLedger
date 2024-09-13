@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../CSS/propsFilter.css";
+import { ToastContainer } from "react-toastify";
 
 const PropertyFilter = () => {
   const [filters, setFilters] = useState({
@@ -226,6 +227,7 @@ const PropertyFilter = () => {
           !loading && <p>No properties found</p>
         )}
       </div>
+      <ToastContainer/>
     </div>
   );
 };

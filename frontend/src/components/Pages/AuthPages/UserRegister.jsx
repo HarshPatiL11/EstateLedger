@@ -111,7 +111,7 @@ const UserRegister = () => {
           </div>
         </div>
       </div>
-      {/* <ToastContainer /> */}
+      <ToastContainer />
     </>
   );
 };

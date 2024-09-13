@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "../../CSS/UpdateProps.css";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
+import "react-toastify/dist/ReactToastify.css";
 
 const FACING_OPTIONS = ["North", "South", "East", "West"];
 const FLOORING_OPTIONS = ["Marble", "Wooden", "Tiles"];
@@ -344,6 +345,7 @@ const onSubmit = async (data) => {
           </button>
         </div>
       </form>
+      <ToastContainer/>
     </div>
   );
 };

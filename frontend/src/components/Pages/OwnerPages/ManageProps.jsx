@@ -5,6 +5,7 @@ import { FaPencilAlt, FaTrash } from "react-icons/fa";
 import "../../CSS/PropertyList.css";
 import Modal from "../Modal"; // Import the Modal component
 import PropertyUpdatePage from "./UpdatePropsPage"; // Import the update page component
+import { ToastContainer } from "react-toastify";
 
 const PropertyList = () => {
   const [properties, setProperties] = useState([]);
@@ -125,6 +126,7 @@ return (
         }}
       />
     </Modal>
+    <ToastContainer/>
   </div>
 );
 };

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../CSS/PropertyList.css"; // Reuse the same CSS for consistent styling
 import { MdVerified } from "react-icons/md";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ClientPanel = () => {
   const [interestedProjects, setInterestedProjects] = useState([]);
@@ -65,6 +67,7 @@ const ClientPanel = () => {
           )}
         </tbody>
       </table>
+      <ToastContainer/>
     </div>
   );
 };

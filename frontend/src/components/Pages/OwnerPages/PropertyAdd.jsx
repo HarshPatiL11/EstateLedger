@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "../../CSS/AddProps2.css";
 import { useNavigate } from "react-router";
 import { login, logout } from "../../Redux/AuthSlice";
@@ -486,6 +486,7 @@ const AddProperty = () => {
 
         <button type="submit">Add Property</button>
       </form>
+      <ToastContainer/>
     </div>
   );
 };

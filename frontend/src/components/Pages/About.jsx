@@ -4,6 +4,7 @@ import React from "react";
 import { FaCheckCircle, FaQuestionCircle } from "react-icons/fa";
 import { useState } from "react";
 import "../CSS/about.css";
+import { ToastContainer } from "react-toastify";
 
 const About = () => {
   const [showFAQs, setShowFAQs] = useState(false);
@@ -75,6 +76,7 @@ const About = () => {
           )}
         </section>
       </div>
+      <ToastContainer/>
     </div>
   );
 };
