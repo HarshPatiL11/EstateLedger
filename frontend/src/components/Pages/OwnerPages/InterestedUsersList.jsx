@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../../CSS/PropertyList.css"; // Reuse the same CSS file for consistent styling
-import Modal from "../Modal"; // Import the Modal component
-import { FaEye } from "react-icons/fa"; // Use a suitable icon for viewing details
-import { MdVerified } from "react-icons/md"; // Verified icon
-import { toast, ToastContainer } from "react-toastify"; // Import toast
-import "react-toastify/dist/ReactToastify.css"; // Import toast CSS
+import "../../CSS/PropertyList.css"; 
+import Modal from "../Modal"; 
+import { FaEye } from "react-icons/fa"; 
+import { MdVerified } from "react-icons/md"; 
+import { toast, ToastContainer } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css"; 
 
 const InterestedUsersList = () => {
   const [interestedUsers, setInterestedUsers] = useState([]);
