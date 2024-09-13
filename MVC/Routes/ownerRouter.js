@@ -1,7 +1,6 @@
 import express from "express";
 import {
   deleteProperty,
-  getInterestedUsersByOwnerId,
   getInterestedUsersByPorpId,
   registerProperty,
   updateProperty,
@@ -14,6 +13,7 @@ import {
   getPropertiesByOwnerToken,
 } from "../Controller/ownerPropController.js";
 import { getInterestedUserByID } from "../Controller/userController.js";
+import { approveInterestedUser, getInterestedUsersByOwnerId } from "../Controller/interestedController.js";
 
 const ownerRouter = express.Router();
 
@@ -56,6 +56,14 @@ ownerRouter.get(
   getInterestedUserByID
 );
 
+// Aprpve user
+ownerRouter.put(
+  "/interested/user/:_id/approve", // Use _id in the route
+  authMiddle,
+  ownerMiddleware,
+  approveInterestedUser
+);
+
 // update property
 ownerRouter.put(
   "/property/update/:id",
@@ -64,6 +72,8 @@ ownerRouter.put(
   formidable(),
   updateProperty
 );
+
+
 
 // property delete
 ownerRouter.delete(

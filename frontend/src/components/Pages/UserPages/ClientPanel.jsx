@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../CSS/PropertyList.css"; // Reuse the same CSS for consistent styling
+import { MdVerified } from "react-icons/md";
 
 const ClientPanel = () => {
   const [interestedProjects, setInterestedProjects] = useState([]);
@@ -30,7 +31,7 @@ const ClientPanel = () => {
     };
 
     fetchInterestedProjects();
-  }, [token]); // Remove userId from dependency array, as it is fetched internally
+  }, [token]);
 
   return (
     <div className="property-list">
@@ -40,6 +41,8 @@ const ClientPanel = () => {
         <thead>
           <tr>
             <th>Project Name</th>
+            <th>Date of Interest</th>
+            <th>Approved</th>
           </tr>
         </thead>
         <tbody>
@@ -47,12 +50,17 @@ const ClientPanel = () => {
           interestedProjects.length > 0 ? (
             interestedProjects.map((property, index) => (
               <tr key={index}>
-                <td>{property.project || "N/A"}</td>
+                <td>{property.projectName || "N/A"}</td>
+                <td>
+                  {new Date(property.interestedDate).toLocaleDateString() ||
+                    "N/A"}
+                </td>
+                <td>{property.isApprove ? <MdVerified /> : "N/A"}</td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="1">No interested properties found</td>
+              <td colSpan="3">No interested properties found</td>
             </tr>
           )}
         </tbody>

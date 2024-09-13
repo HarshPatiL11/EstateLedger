@@ -16,7 +16,7 @@ const Home = () => {
       </div>
       <PopularPropsHomeCard />
       <PropertyLocationCard />
-      <InterestedUsersList/>
+      {/* <InterestedUsersList/> */}
     </>
   );
 };

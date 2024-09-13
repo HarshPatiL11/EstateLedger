@@ -1,12 +1,27 @@
 /* about.css */
 
+.about-Main{
+    background: url(/src/components/Images/Login3.jpg) no-repeat center center;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    padding: 30px;
+    justify-content: center;
+    align-items: center
+}
 .App-info {
-  background-color: #F5F5F5; /* Background Color */
-  color: #333333; /* Text Color */
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 800px;
-  margin: 0 auto;
+ background-color: #F5F5F5;
+    color: #333333;
+    display: flex;
+    padding: 20px;
+    gap: 29px;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
 }
 
 .App-info h1 {

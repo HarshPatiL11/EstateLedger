@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import PropertySchema from "../Model/propertyModel.js";
-import InterestedSchema from "../Model/InterestPropsModel.js";
 import InterestPropsModel from "../Model/InterestPropsModel.js";
 
 // add Property API
@@ -241,56 +240,8 @@ export const getPropertyById = async (req, res) => {
 };
 
 // Get all users interested in an owner's property
-export const getInterestedUsersByOwnerId = async (req, res) => {
-  try {
-    const ownerId = req.userId; // Get ownerId from params or another source
-    console.log(`Owner ID: ${ownerId}`);
 
-    // Check if ownerId is valid
-    if (!ownerId) {
-      console.error("Invalid owner ID");
-      return res.status(400).json({ message: "Owner ID is required" });
-    }
 
-    // Find interested users based on ownerId
-    const interestedList = await InterestPropsModel.find({ ownerid: ownerId })
-      .populate({
-        path: "userId",
-        select: "name email phone", // Only select the necessary fields
-      })
-      .populate({
-        path: "propertyId",
-        select: "project", // Only select the project name
-      });
-
-    // console.log(`Interested List: ${JSON.stringify(interestedList)}`);
-
-    // Handle case where no interested users are found
-    if (interestedList.length === 0) {
-      console.warn("No interested users found for the given owner ID");
-      return res.status(404).json({ message: "No interested users found" });
-    }
-
-    // Format the response to include user and property details
-    const interestedUsers = interestedList.map((item) => ({
-      userId: item.userId._id,
-      name: item.userId.name,
-      email: item.userId.email,
-      phone: item.userId.phone,
-      propertyId: item.propertyId._id,
-      projectName: item.propertyId.project,
-      interestedDate: item.createdAt,
-    }));
-
-    res.json({ success: true, interestedUsers });
-  } catch (error) {
-    console.error("Error in getInterestedUsersByOwnerId:", {
-      message: error.message,
-      stack: error.stack,
-    });
-    res.status(500).json({ success: false, message: "Server error" });
-  }
-};
 
 export const getInterestedUsersByPorpId = async (req, res) => {
   try {
@@ -612,6 +563,7 @@ export const deleteProperty = async (req, res) => {
   }
 };
 
+// approve property -
 export const approveProperty = async (req, res) => {
   try {
    const propertyId = req.params.id;
@@ -642,3 +594,4 @@ export const approveProperty = async (req, res) => {
       .json({ success: false, message: "Failed to approve property", error });
   }
 };
+

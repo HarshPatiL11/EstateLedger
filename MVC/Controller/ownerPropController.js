@@ -2,6 +2,7 @@ import fs from "fs";
 import PropertySchema from "../Model/PropertyModel.js";
 
 import UserSchema from "../Model/userModel.js";
+import InterestPropsModel from "../Model/InterestPropsModel.js";
 
 
 export const getPropertiesByOwnerName = async (req, res) => {
@@ -76,4 +77,5 @@ export const getPropertiesByOwnerToken = async (req, res) => {
     });
   }
 };
+
 

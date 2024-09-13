@@ -6,15 +6,28 @@ import InterestPropsModel from "../Model/InterestPropsModel.js";
 // get all users (admin only)
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await UserSchema.find({});
+    const { userType } = req.query; // Extract userType from query parameters
+
+    // Build the query filter
+    const filter = {};
+    if (userType && userType !== "all") {
+      filter.userType = userType; // Add filter for userType
+    }
+
+    const users = await UserSchema.find(filter);
+
     if (users.length === 0) return res.status(404).send("No users found");
-      users.forEach((user) => (user.password = undefined));
+
+    // Remove sensitive data
+    users.forEach((user) => (user.password = undefined));
+
     res.status(200).json(users); // Return the users
   } catch (error) {
     console.error(`Error getting all users: ${error}`);
     res.status(500).send("Internal Server Error || Error in get all users API");
   }
 };
+
 
 
 // Get user by token
@@ -223,10 +236,9 @@ export const getInterestedPropsByUserId = async (req, res) => {
     console.log(`Received userId: ${userId}`); // Log the received userId for debugging
 
     // Query the database for interested properties
-    const interestedList = await InterestPropsModel.find({ userId }).populate(
-      "propertyId",
-      "project" // Only populate the 'project' field from propertyId
-    );
+    const interestedList = await InterestPropsModel.find({ userId })
+      .populate("propertyId", "project") // Only populate the 'project' field from propertyId
+      .exec();
 
     console.log(`Interested List: ${JSON.stringify(interestedList)}`); // Log the result
 
@@ -237,9 +249,11 @@ export const getInterestedPropsByUserId = async (req, res) => {
         .json({ message: "No interested properties found" });
     }
 
-    // Extract the 'project' field from the populated propertyId
+    // Attach additional details to each interest
     const interestedProjects = interestedList.map((item) => ({
-      project: item.propertyId.project,
+      projectName: item.propertyId.project,
+      interestedDate: item.createdAt, // Include the date when the user expressed interest
+      isApprove: item.isApprove, // Include the approval status
     }));
 
     res.json({ interestedProjects });
@@ -248,7 +262,6 @@ export const getInterestedPropsByUserId = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
 
 // update userType(Admin only)
 export const updateUserTypeController = async (req, res) => {

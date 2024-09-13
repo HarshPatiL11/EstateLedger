@@ -27,6 +27,13 @@ export const expressInterest = async (req, res) => {
       return res.status(404).json({ message: "Owner not found" });
     }
 
+      const existingInterest = await Interested.findOne({ userId, propertyId });
+      if (existingInterest) {
+        console.log(
+          `User with ID ${userId} has already shown interest in property with ID ${propertyId}.`
+        );
+        return res.status(409).json({ message: "Interest already recorded" }); // 409 Conflict
+      }
     // Create an interest entry
     const interest = await Interested.create({
       userId,
@@ -34,6 +41,7 @@ export const expressInterest = async (req, res) => {
       propertyId,
     });
 
+    // Send response
     res.status(201).json({
       message: "Interest recorded successfully",
       interest,
@@ -44,5 +52,61 @@ export const expressInterest = async (req, res) => {
       message: "Failed to record interest",
       error: error.message,
     });
+  }
+};
+
+
+export const getUserInterest = async (req, res) => {
+  const id  = req.params;
+  const userId = req.userId;
+
+  if (!userId) {
+    return res.status(404).send({ message: "No User id Provided", success: false });
+  }
+   if (!id) {
+     return res
+       .status(404)
+       .send({ message: "No propertyId  Provided", success: false });
+   }
+
+  try {
+    const interest = await Interested.findOne({ userId, id });
+
+    if (interest) {
+      res.status(200).json({ interested: true });
+    } else {
+      res.status(200).json({ interested: false });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to retrieve interest record" });
+  }
+};
+
+// get user interest approved by the Owner
+export const getApprovedInterests = async (req, res) => {
+  try {
+    const userId = req.userId; // Assuming you have middleware to attach user to req
+    const approvedInterests = await Interested.find({ userId, isApprove: true })
+      .populate({
+        path: 'propertyId',
+        select: 'project SellStartprice rentAmount sellOrLease',
+      })
+      .exec();
+
+    if (approvedInterests.length === 0) {
+      return res.status(404).json({ message: 'No approved properties found.' });
+    }
+
+    // Attach additional details to each interest
+    const result = approvedInterests.map(interest => ({
+      ...interest.toObject(),
+      approvedDate: interest.updatedAt.toISOString(), // Date when the user expressed interest
+      propertyDetails: interest.propertyId,
+    }));
+
+    res.json({ approvedProjects: result });
+  } catch (error) {
+    console.error('Error fetching approved properties:', error);
+    res.status(500).json({ message: 'Error fetching approved properties.' });
   }
 };

@@ -16,6 +16,7 @@ const ManageAllUsers = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
   const [error, setError] = useState(null);
+  const [filter, setFilter] = useState("all");
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const navigate = useNavigate();
@@ -57,13 +58,15 @@ const ManageAllUsers = () => {
 
   const token = localStorage.getItem("userToken");
 
-  useEffect(() => {
+
+ useEffect(() => {
     const fetchAllUsers = async () => {
       try {
         const response = await axios.get("/api/v1/admin/users/get/all", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          params: { userType: filter }, // Include filter in query params
         });
         setUsers(response.data);
         console.log("API Response:", response.data);
@@ -74,7 +77,7 @@ const ManageAllUsers = () => {
     };
 
     fetchAllUsers();
-  }, [token]);
+  }, [token, filter]); // Add filter as dependency
 
   const handleModalClose = () => {
     setIsModalOpen(false);
@@ -310,6 +313,19 @@ toast.error("failed to Delete User");
   return (
     <div className="property-list">
       <h1>User Listings</h1>
+      <div className="filter-container">
+        <label htmlFor="filter">Filter by User Type:</label>
+        <select
+          id="filter"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        >
+          <option value="all">All</option>
+          <option value="client">Client</option>
+          <option value="owner">Owner</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
       <table className="property-table">
         <thead>
           <tr>
@@ -345,7 +361,7 @@ toast.error("failed to Delete User");
                   style={{ width: "50px", height: "50px", borderRadius: "50%" }}
                 />
               </td>
-              <td>{user.userType}</td> {/* Display User Type */}
+              <td>{user.userType}</td>
               <td>
                 <button
                   className="action-button"

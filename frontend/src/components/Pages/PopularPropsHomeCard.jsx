@@ -6,7 +6,7 @@ import Card from "./Card.jsx";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
 const PopularPropsHomeCard = () => {
-          console.log("Loog1 before fetchPrps get all api");
+  console.log("Loog1 before fetchPrps get all api");
 
   const [popCards, setPopCards] = useState([]);
   const [error, setError] = useState(null);
@@ -54,14 +54,15 @@ const PopularPropsHomeCard = () => {
     } else if (amount >= 100000) {
       return `${(amount / 100000).toFixed(1)} lac`;
     } else if (amount >= 1000) {
-      return `${(amount / 1000).toFixed(1)} thousand`;
+      return `${(amount / 1000).toFixed(1)} k`;
     } else {
       return amount.toString();
     }
   };
 
-  const displayedCards = popCards.slice(0, 3);
-
+  const displayedCards = popCards
+    .sort(() => Math.random() - 0.5) // Shuffle the array randomly
+    .slice(0, 3); // Take the first 3 cards
   return (
     <div className="Popular-Props-Main">
       <div className="Popular-Props-Content">
