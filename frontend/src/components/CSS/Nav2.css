@@ -1,0 +1,101 @@
+.page-header {
+  background-color: #003366; /* Navy Blue for the header */
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  position: sticky; /* Make the navbar sticky */
+  top: 0; /* Stick the navbar to the top */
+  z-index: 10; /* Ensure it stays on top of other content */
+}
+
+.logo {
+  color: #FFD700; /* Gold for the logo */
+  align-self: center;
+  margin-left: 1rem; /* Reduced from 1.2rem */
+  font-size: 2rem; 
+  font-weight: 800;
+}
+
+.logo a {
+  color: #FFD700; /* Gold for the logo link */
+  font-family: 'Exo', sans-serif;
+  text-decoration: none;
+}
+
+.nav-bar {
+  display: flex;
+  margin-right: 1.875rem; /* Reduced from 2.5rem */
+}
+
+.nav-bar a {
+  color: #87CEEB; /* Sky Blue for navigation links */
+   padding: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.menu-icon {
+  color: #87CEEB; /* Sky Blue for the menu icon */
+  cursor: pointer;
+  display: none;
+}
+
+.login-btn {
+  font-size: 0.9rem;
+  border: 1px solid #003366; /* Navy Blue border */
+  border-radius: 5px;
+    padding: 0.65rem;
+  background-color: #008080; /* Teal for the button background */
+  color: white;
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+@media screen and (max-width: 600px) {
+  .nav-bar {
+    display: none;
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    width: 100%;
+    background-color: #003366; /* Navy Blue for the background */
+    text-align: center;
+    z-index: 10; /* Ensure it is above other content */
+  }
+
+  .nav-bar.responsive {
+    display: block;
+  }
+
+  .nav-bar a {
+    display: block;
+    font-size: 18px;
+    padding: 15px 12px;
+    color: #87CEEB; /* Sky Blue for navigation links */
+  }
+
+  .menu-icon {
+    display: block;
+    z-index: 10; /* Ensure it is above other content */
+    margin-left: 25px;
+    color: #87CEEB; /* Sky Blue for the menu icon */
+  }
+
+  .login-btn {
+    padding: 10px 20px;
+    background-color: #008080; /* Teal for the button background */
+    border: 1px solid #003366; /* Navy Blue border */
+  }
+
+  .logo {
+    font-size: 1.4rem;
+  }
+}

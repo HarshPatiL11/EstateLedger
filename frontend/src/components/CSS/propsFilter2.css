@@ -1,0 +1,50 @@
+/* propsFilter.css */
+
+body {
+  background-color: #f5f5f5; /* Light Gray Background */
+  font-family: 'Arial', sans-serif;
+  color: #333333; /* Dark Charcoal Text Color */
+  margin: 0;
+  padding: 0;
+}
+
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background-color: #003366; /* Navy Blue Background */
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.filter-form select,
+.filter-form input {
+  width: calc(33% - 20px);
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #87ceeb; /* Sky Blue border */
+  font-size: 16px;
+  color: #333333; /* Dark Charcoal Text */
+  background-color: #fff;
+}
+
+.filter-form select:focus,
+.filter-form input:focus {
+  border-color: #ffd700; /* Gold for focus */
+  outline: none;
+}
+
+.filter-form button {
+  padding: 10px 20px;
+  background-color: #008080; /* Teal button */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.filter-form button:hover {
+  background-color: #006666; /* Darker Teal on hover */
+}

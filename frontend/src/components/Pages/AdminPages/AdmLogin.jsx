@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import "../CSS/Login3.css";
+import "../../CSS/Login3.css";
 import axios from "axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../Redux/AuthSlice";
+import { login } from "../../Redux/AuthSlice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const LoginPageB = () => {
+const ADMLogin = () => {
   const [formData, setFormData] = useState({
     userEmail: "",
     userPassword: "",
@@ -36,28 +36,38 @@ const LoginPageB = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-    setSuccess(null);
-    try {
-      const response = await axios.post("/api/v1/user/login", {
-        email: formData.userEmail,
-        password: formData.userPassword,
-      });
-      console.log(response.data);
-      const { token } = response.data;
-      localStorage.setItem("userToken", token);
-      toast.success("Login successful!");
-      setSuccess("Login successful!");
-      dispatch(login());
-      navigate("/");
-    } catch (error) {
-      setError("Login failed! Please check your credentials.");
-      console.error(error);
-      toast.error("User Login failed! Please try again.");
-    }
-  };
+ const handleSubmit = async (e) => {
+   e.preventDefault();
+   setError(null);
+   setSuccess(null);
+
+   try {
+     const response = await axios.post("/api/v1/user/login", {
+       email: formData.userEmail,
+       password: formData.userPassword,
+     });
+
+     console.log("Response data:", response.data); // For debugging
+
+     if (response.data.user.userType === "admin") {
+       const { token } = response.data;
+       localStorage.setItem("userToken", token);
+       toast.success("Login successful!");
+       setSuccess("Login successful!");
+       dispatch(login());
+       navigate("/");
+     } else {
+       toast.error("Only Admin access allowed.");
+       navigate("/user/login"); // Redirect non-admins
+     }
+   } catch (error) {
+     const errorMsg =
+       error.response?.data?.message ||
+       "Login failed! Please check your credentials.";
+     setError(errorMsg);
+     toast.error(errorMsg);
+   }
+ };
 
   return (
     <>
@@ -66,8 +76,7 @@ const LoginPageB = () => {
           <div className="Login-glass-card">
             <div className="Login-header">
               <div>
-                <span>Es</span>
-                <span>Led</span>
+                <span>ADMIN</span>
               </div>
             </div>
             {error && <div className="error-message">{error}</div>}
@@ -93,13 +102,10 @@ const LoginPageB = () => {
                   required
                 />
               </div>
-              <button type="submit" className="register-btn">
+              <button type="submit" className="login-btn">
                 Login
               </button>
             </form>
-            <p className="signup-link">
-              Don't have an account? <Link to="/register">Sign up</Link>
-            </p>
           </div>
         </div>
       </div>
@@ -108,4 +114,4 @@ const LoginPageB = () => {
   );
 };
 
-export default LoginPageB;
+export default ADMLogin;

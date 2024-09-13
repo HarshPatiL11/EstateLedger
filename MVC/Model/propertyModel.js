@@ -55,7 +55,7 @@ const PropertySchema = new mongoose.Schema(
     location: {
       type: String,
       required: [true, "Enter the location"],
-    },//only local location
+    }, //only local location
     loanOffered: {
       type: String,
     },
@@ -122,7 +122,6 @@ const PropertySchema = new mongoose.Schema(
     status: {
       type: String,
       required: [true, "Enter the status"],
-      enum: ["Under Construction", "Ready to Move"],
     },
     totalFloors: {
       type: Number,
@@ -149,8 +148,9 @@ const PropertySchema = new mongoose.Schema(
       },
       validate: {
         validator: function (value) {
+          // Ensure rentAmount is a number and greater than 0 when required
           return this.sellOrLease === "Lease" || this.sellOrLease === "Both"
-            ? value > 0
+            ? typeof value === "number" && !isNaN(value) && value > 0
             : true;
         },
         message: "Rent amount must be greater than 0 when selling or leasing.",
@@ -159,7 +159,19 @@ const PropertySchema = new mongoose.Schema(
     rentFrequency: {
       type: String,
       enum: ["Monthly", "Quarterly", "Yearly"],
-      required: [true, "Enter the rent frequency"],
+      required: function () {
+        return this.sellOrLease === "Lease" || this.sellOrLease === "Both";
+      },
+      validate: {
+        validator: function (value) {
+          // Ensure rentFrequency is valid enum value when required
+          return this.sellOrLease === "Lease" || this.sellOrLease === "Both"
+            ? value === "Monthly" || value === "Quarterly" || value === "Yearly"
+            : true;
+        },
+        message:
+          "Rent frequency is required and must be a valid enum value when selling or leasing.",
+      },
     },
 
     propertyImg: [
@@ -184,8 +196,27 @@ const PropertySchema = new mongoose.Schema(
         required: false,
       },
     },
+      isApproved: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
 
-export default mongoose.model("Property", PropertySchema);
+
+// Custom validation to ensure rentAmount and rentFrequency are both present if either is required
+PropertySchema.pre('validate', function (next) {
+  if ((this.sellOrLease === "Lease" || this.sellOrLease === "Both") &&
+      (!this.rentAmount || !this.rentFrequency)) {
+    this.invalidate('rentAmount', 'Rent amount and frequency are required when leasing or both');
+    this.invalidate('rentFrequency', 'Rent amount and frequency are required when leasing or both');
+  }
+  next();
+});
+
+const PropertyModel =
+  mongoose.models.Property || mongoose.model("Property", PropertySchema);
+
+
+export default PropertyModel;

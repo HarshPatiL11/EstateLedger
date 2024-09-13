@@ -1,0 +1,151 @@
+/* AddProps2.css */
+
+/* Container for the form */
+.add-property-container {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styles */
+.add-property-container h2 {
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 1.5rem;
+  font-size: 2rem; /* Adjust as needed */
+  font-weight: 500;
+}
+
+/* Form styling */
+.add-property-container form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem; /* Adjust gap for spacing */
+}
+
+/* Form group styling */
+.add-property-container .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label styling */
+.add-property-container .form-group label {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #495057;
+}
+
+/* Input and select styling */
+.add-property-container .form-group input,
+.add-property-container .form-group select {
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+/* Focus states for inputs and selects */
+.add-property-container .form-group input:focus,
+.add-property-container .form-group select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Error message styling */
+.add-property-container .error {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Dropzone styling */
+.add-property-container .dropzone {
+  padding: 1.25rem;
+  border: 2px dashed #007bff;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.add-property-container .dropzone:hover {
+  background-color: #e9f7ff;
+}
+
+/* Submit button styling */
+.add-property-container button[type="submit"] {
+  grid-column: span 2;
+  padding: 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.add-property-container button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Image previews */
+.image-previews img,
+.logo-preview img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+/* Responsive Styles for screens with max-width 600px */
+@media (max-width: 600px) {
+  .add-property-container {
+    max-width: 95%;
+    padding: 1rem;
+  }
+
+  .add-property-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .add-property-container form {
+   display: flex;
+    gap: 1.5rem;
+    flex-direction: column;
+  }
+
+  .add-property-container .form-group label {
+    font-size: 1rem;
+  }
+
+  .add-property-container .form-group input,
+  .add-property-container .form-group select {
+    font-size: 1rem;
+  }
+
+  .add-property-container .error {
+    font-size: 0.8rem;
+  }
+
+  .add-property-container .dropzone {
+    padding: 1rem;
+  }
+
+  .add-property-container button[type="submit"] {
+    font-size: 1rem;
+  }
+
+  .image-previews img,
+  .logo-preview img {
+    width: 100px;
+    height: 100px;
+  }
+}

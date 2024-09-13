@@ -1,22 +1,12 @@
 .LoginBody {
   background: url('../Images/Login2.jpg') no-repeat center center;
-  background-size: 100vw;
+  background-size: cover; /* Ensure the background covers the whole viewport */
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: 'Poppins', sans-serif;
 }
-.Login-Bg {
-  background: url('../Images/Login3.jpg') no-repeat center center fixed;
-  background-size: cover;
-  height: 75vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-}
-
 
 .Login-container {
   display: flex;
@@ -24,39 +14,53 @@
   align-items: center;
   width: 100%;
 }
+
 .Login-glass-card {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
+  position: relative; /* Ensures the pseudo-element is positioned correctly */
+  background: rgba(255, 255, 255, 0.3); /* Lightened glass effect */
   border-radius: 10px;
   padding: 30px;
   width: 400px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  z-index: 1; /* Ensures content is above the pseudo-element */
+}
+
+/* Pseudo-element for background blur */
+.Login-glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(8px); /* Apply blur here */
+  z-index: -1; /* Keeps the blur behind the content */
+  background: rgba(255, 255, 255, 0.3); /* Glass effect background */
+  border-radius: 10px; /* Matches the card's border radius */
 }
 
 .Login-header {
   margin-bottom: 20px;
-  color: #fff;
+  color: #FFD700; /* Gold for the header text */
   font-family: 'Exo', sans-serif;
   font-size: 35px;
   font-weight: 200;
   text-align: center;
 }
-
+.Login-header span{
+  font-weight: bolder;
+}
 .Login-header span:first-child {
-  color: #5379fa;
+  color: #003366; /* Navy Blue for the first part */
 }
 
 .Login-header span:last-child {
-  color: white;
+  color: #FFD700; /* Gold for the second part */
 }
 
-.login-glass-card .input-group {
-  margin-bottom: 15px;
-}
 .input-group {
   margin-bottom: 20px; /* Increased margin for better spacing */
 }
-
 
 input {
   width: 100%;
@@ -64,51 +68,76 @@ input {
   border: none;
   border-radius: 5px;
   font-size: 16px;
-  background: rgba(255, 255, 255, 0.5);
-  color:#595959 ;
+  background: rgba(255, 255, 255, 0.6); /* Lightened background */
+  color: #595959;
   font-weight: 300;
   outline: none;
 }
 
 input:focus {
-  border: 2px solid #ffffffcc;
+  border: 2px solid #003366; /* Navy Blue border on focus */
   outline: none;
 }
 
 .login-btn {
   width: 100%;
-  padding: 10px;
-  background: #5379fa;
-  border: none;
-  border-radius: 5px;
+  padding: 5px 8px;
+ background: #008080; /* Darker Teal for hover effect */
   color: #fff;
-  font-size: 18px;
+  border-radius: 5px;
+
+  font-size: 24px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .login-btn:hover {
-  background: #3b5ac9;
+  
+   background: #0080804d; /* Teal for the button background */
+  border: 3px solid #003366; /* Navy Blue border */
+  color: #003366;
+
 }
 
 .error-message {
-  color: #f44336;
+  color: #f44336; /* Red for error messages */
   text-align: center;
   margin-top: 10px;
 }
 
 .success-message {
-  color: #4caf50;
+  color: #4caf50; /* Green for success messages */
   margin-top: 10px;
 }
 
 .signup-link {
   text-align: center;
   color: #fff;
-  margin-top: 15px;
+  margin-top: 15px!important; /* Adjust margin for spacing */
+  margin-bottom: 0;
 }
 
 .signup-link a {
-  color: #5379fa;
+  color: #008080; /* Teal for the signup link */
   text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline; /* Add underline on hover for better user interaction */
+}
+
+
+/* Media Query for smaller screens */
+@media (max-width: 600px) {
+  .LoginBody {
+    height: 80vh; /* Adjust height for mobile */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .Login-glass-card {
+    width: 100%;
+    margin: 0 20px;
+    padding: 20px;
+  }
 }

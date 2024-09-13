@@ -1,4 +1,32 @@
+
 *{
   padding: 0;
   margin: 0;
+}
+body{
+  background: #f5f5f5;
+
+}
+p{
+  padding: 0!important;
+  margin: 0!important;
+}
+
+
+.view-more-card {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 20px;
+  color: #008080; /* Teal color for the 'View More' text */
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.view-more-card p {
+  margin-right: 10px;
+}
+
+.view-more-card svg {
+  font-size: 1.5rem;
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../CSS/UserRegister.css";
+import "../../CSS/UserRegister.css";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -38,7 +38,7 @@ const UserRegister = () => {
         email: "",
         password: "",
       });
-      navigate("/login");
+      navigate("/user/login");
     } catch (error) {
       if (
         error.response.status === 400 &&
@@ -49,7 +49,7 @@ const UserRegister = () => {
           autoClose:1600, // Set autoClose duration to 2 seconds (2000 milliseconds)
         });
         setTimeout(() => {
-          navigate(`/login?email=${encodeURIComponent(formData.email)}`);
+          navigate(`/user/login?email=${encodeURIComponent(formData.email)}`);
         }, 2010);
       } else {
         console.error("Registration failed:", error.response.data);
@@ -106,12 +106,12 @@ const UserRegister = () => {
               </button>
             </form>
             <p className="signup-link">
-              Already have an account? <Link to={"/login"}>Login</Link>
+              Already have an account? <Link to={"/user/login"}>Login</Link>
             </p>
           </div>
         </div>
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </>
   );
 };

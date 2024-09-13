@@ -1,0 +1,122 @@
+.ForgotPasswordBody {
+  background: url('../Images/Login2.jpg') no-repeat center center;
+  background-size: cover; /* Ensure the background covers the whole viewport */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.ForgotPassword-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.ForgotPassword-glass-card {
+  position: relative; /* Ensures the pseudo-element is positioned correctly */
+  background: rgba(255, 255, 255, 0.3); /* Lightened glass effect */
+  border-radius: 10px;
+  padding: 30px;
+  width: 400px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  z-index: 1; /* Ensures content is above the pseudo-element */
+}
+
+/* Pseudo-element for background blur */
+.ForgotPassword-glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(8px); /* Apply blur here */
+  z-index: -1; /* Keeps the blur behind the content */
+  background: rgba(255, 255, 255, 0.3); /* Glass effect background */
+  border-radius: 10px; /* Matches the card's border radius */
+}
+
+.ForgotPassword-header {
+  margin-bottom: 20px;
+  color: #FFD700; /* Gold for the header text */
+  font-family: 'Exo', sans-serif;
+  font-size: 35px;
+  font-weight: 200;
+  text-align: center;
+}
+.ForgotPassword-header span {
+  font-weight: bolder;
+}
+.ForgotPassword-header span:first-child {
+  color: #003366; /* Navy Blue for the first part */
+}
+.ForgotPassword-header span:last-child {
+  color: #FFD700; /* Gold for the second part */
+}
+
+.input-group {
+  margin-bottom: 20px; /* Increased margin for better spacing */
+}
+
+input {
+  width: 100%;
+  padding: 12px; /* Slightly increased padding for a more comfortable input box */
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.6); /* Lightened background */
+  color: #595959;
+  font-weight: 300;
+  outline: none;
+}
+
+input:focus {
+  border: 2px solid #003366; /* Navy Blue border on focus */
+  outline: none;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 5px 8px;
+  background: #008080; /* Darker Teal for hover effect */
+  color: #fff;
+  border-radius: 5px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-btn:hover {
+  background: #0080804d; /* Teal for the button background */
+  border: 3px solid #003366; /* Navy Blue border */
+  color: #003366;
+}
+
+.error-message {
+  color: #f44336; /* Red for error messages */
+  text-align: center;
+  margin-top: 10px;
+}
+
+.success-message {
+  color: #4caf50; /* Green for success messages */
+  margin-top: 10px;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 600px) {
+  .ForgotPasswordBody {
+    height: 80vh; /* Adjust height for mobile */
+    background-size: cover;
+    background-position: center;
+  }
+
+  .ForgotPassword-glass-card {
+    width: 100%;
+    margin: 0 20px;
+    padding: 20px;
+  }
+}

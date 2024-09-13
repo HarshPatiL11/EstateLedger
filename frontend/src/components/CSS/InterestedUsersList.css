@@ -1,0 +1,32 @@
+.interested-users-list {
+  padding: 20px;
+}
+
+.interested-users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.interested-users-table th,
+.interested-users-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.interested-users-table th {
+  background-color: #f4f4f4;
+}
+
+
+
+.user-details {
+  padding: 20px;
+}
+
+.user-details h2 {
+  margin: 0 0 10px;
+}
+
+.user-details p {
+  margin: 5px 0;
+}

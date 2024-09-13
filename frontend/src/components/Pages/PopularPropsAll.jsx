@@ -32,12 +32,9 @@ const PopularProps = () => {
 
   const handleView = (property) => {
     console.log("Navigating to Property with ID:", property._id);
-    navigate(`/Properties/${property._id}`);
+    navigate(`/properties/get/${property._id}`);
   };
 
-  const handleViewMore = () => {
-    navigate("/all-properties");
-  };
 
   const formatAmount = (amount) => {
     if (amount >= 10000000) {
@@ -56,7 +53,7 @@ const PopularProps = () => {
     <div className="popular-props-container">
       <div className="popular-props-content">
         <div className="popular-props-header">
-          <h2>Popular Properties</h2>
+          <h2>All Properties</h2>
         </div>
         {error && <p className="popular-props-error">{error}</p>}
         <div className="popular-props-cards">

@@ -2,9 +2,9 @@ import React from "react";
 import Layout from "../Layout/Layout.jsx";
 import "../CSS/Home.css";
 import PopularPropsHomeCard from "./PopularPropsHomeCard.jsx";
-import { PropertyLocationCard } from "./PropertyLocationCard.jsx";
-import PropBuy from "./PropsBuyHome.jsx";
-import PropertyOnLease from "./PropsLeaseHome.jsx";
+
+import PropertyLocationCard from "./PropertyLocationCard.jsx";
+import InterestedUsersList from "./OwnerPages/InterestedUsersList.jsx";
 
 const Home = () => {
   return (
@@ -16,8 +16,7 @@ const Home = () => {
       </div>
       <PopularPropsHomeCard />
       <PropertyLocationCard />
-      <PropBuy />
-      <PropertyOnLease />
+      {/* <InterestedUsersList/> */}
     </>
   );
 };

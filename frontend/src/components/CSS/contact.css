@@ -1,0 +1,94 @@
+/* contact.css */
+
+.Contact-container {
+  background: linear-gradient(135deg, #003366, #87CEEB); /* Gradient from Navy Blue to Sky Blue */
+  color: #333333; /* Text Color */
+  padding: 40px;
+  border-radius: 8px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.Contact-container h1 {
+  color: #FFFFFF; /* White Text Color for contrast */
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.Contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.Contact-details,
+.Contact-form {
+  background: #FFFFFF; /* Background for sections */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.Contact-details h2,
+.Contact-form h2 {
+  color: #003366; /* Primary Color */
+  border-bottom: 2px solid #FFD700; /* Accent Color */
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.Contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.Contact-item .icon {
+  color: #003366; /* Primary Color */
+  font-size: 24px;
+  margin-right: 15px;
+}
+
+.Contact-item div {
+  font-size: 16px;
+}
+
+.Contact-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #333333; /* Text Color */
+}
+
+.Contact-form input,
+.Contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #CCCCCC; /* Light Gray for input borders */
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.Contact-form button {
+  background-color: #008080; /* Button Color */
+  color: #FFFFFF; /* Text Color */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.Contact-form button:hover {
+  opacity: 0.9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .Contact-content {
+    display: flex;
+    flex-direction: column;
+  }
+}

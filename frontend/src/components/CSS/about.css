@@ -1,0 +1,99 @@
+/* about.css */
+
+.about-Main{
+    background: url(/src/components/Images/Login3.jpg) no-repeat center center;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    padding: 30px;
+    justify-content: center;
+    align-items: center
+}
+.App-info {
+ background-color: #F5F5F5;
+    color: #333333;
+    display: flex;
+    padding: 20px;
+    gap: 29px;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.App-info h1 {
+  color: #003366; /* Primary Color */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.Info h2 {
+  color: #003366; /* Primary Color */
+  border-bottom: 2px solid #FFD700; /* Accent Color */
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.Info ol {
+  padding-left: 20px;
+}
+
+.Info li {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.icon {
+  color: #FFD700; /* Accent Color */
+  margin-right: 8px;
+}
+
+.faqs {
+  margin-top: 20px;
+}
+
+.faqs .faq-title {
+  font-size: 18px;
+  cursor: pointer;
+  color: #003366; /* Primary Color */
+  display: flex;
+  align-items: center;
+}
+
+.faqs ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.faqs li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.faqs li strong {
+  color: #003366; /* Primary Color */
+}
+
+.faqs li br {
+  display: none; /* Hide line breaks for better spacing */
+}
+
+/* Add styles for buttons if needed */
+button {
+  background-color: #008080; /* Button Color */
+  color: #FFFFFF; /* Text Color */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  opacity: 0.9;
+}

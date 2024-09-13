@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "../CSS/Login2.css"; // Import your CSS file here
+import "../../CSS/Login2.css"; // Import your CSS file here
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../Redux/AuthSlice";
+import { login } from "../../Redux/AuthSlice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -83,7 +83,7 @@ const LoginPage = () => {
             <input type="submit" value="Login" />
           </form>
           <p className="signup-link">
-            Don't have an account? <Link to="/register">Sign up</Link>
+            Don't have an account? <Link to="/user/register">Sign up</Link>
           </p>
         </div>
       </div>
