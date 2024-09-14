@@ -3,7 +3,7 @@ import axios from "axios";
 import "../../CSS/UserRegister.css";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+ 
 
 const UserRegister = () => {
   const [formData, setFormData] = useState({
@@ -46,7 +46,7 @@ const UserRegister = () => {
       ) {
         // Display toast message and redirect to login page
         toast.info("Email already in use. Redirecting...", {
-          autoClose:1600, // Set autoClose duration to 2 seconds (2000 milliseconds)
+          autoClose: 1600, // Set autoClose duration to 2 seconds (2000 milliseconds)
         });
         setTimeout(() => {
           navigate(`/user/login?email=${encodeURIComponent(formData.email)}`);
@@ -111,7 +111,6 @@ const UserRegister = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 };

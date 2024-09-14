@@ -5,7 +5,7 @@
   import "../CSS/PropertyById.css";
   import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
   import { MdVerified } from "react-icons/md";
-import "react-toastify/dist/ReactToastify.css";
+ 
 
   const PropertyById = () => {
     const { id } = useParams();
@@ -52,7 +52,10 @@ import "react-toastify/dist/ReactToastify.css";
             const avgRatingRes = await axios.get(
               `/api/v1/property/${id}/getAvgRating`
             );
-            console.log("Average Rating Response (No Token):", avgRatingRes.data);
+            console.log(
+              "Average Rating Response (No Token):",
+              avgRatingRes.data
+            );
             setAverageRating(avgRatingRes.data);
           }
         } catch (error) {
@@ -61,34 +64,37 @@ import "react-toastify/dist/ReactToastify.css";
         setLoading(false);
       };
 
-
-
-    const fetchUserInterest = async () => {
-      const token = localStorage.getItem("userToken");
-      try {
-        if (token) {
-          const response = await axios.get(
-            `/api/v1/user/profile/property/${id}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          setIsInterested(response.data.interested);
+      const fetchUserInterest = async () => {
+        const token = localStorage.getItem("userToken");
+        try {
+          if (token) {
+            const response = await axios.get(
+              `/api/v1/user/profile/property/${id}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+            setIsInterested(response.data.interested);
+          }
+        } catch (error) {
+          console.error("Error fetching user interest:", error);
         }
-      } catch (error) {
-        console.error("Error fetching user interest:", error);
-      }
-    };
+      };
 
-       fetchProperty();
-       fetchRatings();
-       fetchUserInterest();
+      fetchProperty();
+      fetchRatings();
+      fetchUserInterest();
     }, [id]);
 
     const handleInterested = async () => {
       const token = localStorage.getItem("userToken");
+      if (!token) {
+        toast.error("Please Login,Session Expired");
+        setError("No User Token Found");
+        return;
+      }
       try {
         await axios.post(
           "/api/v1/property/interested",
@@ -151,18 +157,18 @@ import "react-toastify/dist/ReactToastify.css";
       setNewRating(rating);
     };
 
-   const renderStarRating = (rating) => {
-     return Array.from({ length: 5 }, (_, index) => {
-       const starRating = index + 1;
-       if (rating >= starRating) {
-         return <FaStar key={index} className="star-icon" />;
-       } else if (rating >= starRating - 0.5) {
-         return <FaStarHalfAlt key={index} className="star-icon" />;
-       } else {
-         return <FaRegStar key={index} className="star-icon" />;
-       }
-     });
-   };
+    const renderStarRating = (rating) => {
+      return Array.from({ length: 5 }, (_, index) => {
+        const starRating = index + 1;
+        if (rating >= starRating) {
+          return <FaStar key={index} className="star-icon" />;
+        } else if (rating >= starRating - 0.5) {
+          return <FaStarHalfAlt key={index} className="star-icon" />;
+        } else {
+          return <FaRegStar key={index} className="star-icon" />;
+        }
+      });
+    };
 
     if (loading) return <div className="loading">Loading...</div>;
     if (error) return <div className="error">Error loading property data.</div>;
@@ -244,7 +250,7 @@ import "react-toastify/dist/ReactToastify.css";
             >
               {isInterested ? "Interested" : "I am Interested"}
             </button>
-            {isInterested ? <p>The Owner Will contact You Soon</p> :(null)}
+            {isInterested ? <p>The Owner Will contact You Soon</p> : null}
           </div>
           {/* New Property Details Section */}
           <div className="props-details-sec2">
@@ -288,7 +294,7 @@ import "react-toastify/dist/ReactToastify.css";
                   )}
                 </span>
               ))}
-              <label onClick={submitRating}>Rate</label>
+              <button onClick={submitRating}>Rate</button>
             </p>
             <p>
               <strong>Average Rating:</strong> {renderStarRating(averageRating)}
@@ -445,7 +451,6 @@ import "react-toastify/dist/ReactToastify.css";
             </table>
           </div>
         </div>
-        <ToastContainer />
       </>
     );
   };

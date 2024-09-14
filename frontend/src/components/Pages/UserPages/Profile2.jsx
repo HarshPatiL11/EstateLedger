@@ -13,7 +13,7 @@ import ManageAllProps from "../AdminPages/ManageAllProps.jsx";
 import InterestedUsersList from "../OwnerPages/InterestedUsersList.jsx";
 import ApprovedInterest from "./ApprovedInterest.jsx";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+ 
 
 
 const UserProfile = () => {

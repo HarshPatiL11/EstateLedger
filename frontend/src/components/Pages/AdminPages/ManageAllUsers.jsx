@@ -25,13 +25,13 @@ const ManageAllUsers = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("userToken");
-        if (!isLoggedIn) {
-          toast.error("Please log in.");
-          setError("Please log in.");
-          dispatch(logout());
-          navigate("/user/login");
-          return;
-        }
+        // if (!isLoggedIn) {
+        //   toast.error("Please log in.");
+        //   setError("Please log in.");
+        //   dispatch(logout());
+        //   navigate("/user/login");
+        //   return;
+        // }
         if (!token) {
           toast.error("Please log in.");
 

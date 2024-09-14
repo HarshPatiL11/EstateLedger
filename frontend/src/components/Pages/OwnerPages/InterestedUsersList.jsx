@@ -5,7 +5,7 @@ import Modal from "../Modal";
 import { FaEye } from "react-icons/fa"; 
 import { MdVerified } from "react-icons/md"; 
 import { toast, ToastContainer } from "react-toastify"; 
-import "react-toastify/dist/ReactToastify.css"; 
+  
 
 const InterestedUsersList = () => {
   const [interestedUsers, setInterestedUsers] = useState([]);
@@ -85,7 +85,6 @@ const InterestedUsersList = () => {
 
   return (
     <div className="property-list">
-      <ToastContainer /> 
       <h1>Interested Users List</h1>
       {error && <p className="error-message">{error}</p>}
       <table className="property-table">

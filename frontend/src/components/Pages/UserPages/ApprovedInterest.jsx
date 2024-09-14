@@ -5,7 +5,7 @@ import { MdVerified } from "react-icons/md";
 import { FaInfoCircle } from "react-icons/fa";
 import Modal from "../Modal"; // Assuming you have a Modal component
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+ 
 
 const ApprovedInterest = () => {
   const [approvedProjects, setApprovedProjects] = useState([]);

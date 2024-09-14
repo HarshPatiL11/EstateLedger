@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "../../Redux/AuthSlice.js";
 import { useNavigate } from "react-router-dom";
 // import "../../Css/UserProfile.css";
-import "react-toastify/dist/ReactToastify.css";
+ 
 
 import AdminPanel from "../AdminPanel.jsx";
 import ClientPanel from "../UserPages/ClientPanel.jsx";
@@ -123,7 +123,6 @@ const UserProfile = () => {
       ) : (
         <p>Loading...</p>
       )}
-      <ToastContainer />
     </div>
   );
 };

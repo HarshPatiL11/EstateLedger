@@ -112,7 +112,6 @@ const LoginPageB = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 };

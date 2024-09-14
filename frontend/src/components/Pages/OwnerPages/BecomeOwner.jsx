@@ -92,7 +92,6 @@ const BecomeOwner = () => {
           Become Owner
         </button>
       </div>
-      <ToastContainer />
     </div>
   );
 };

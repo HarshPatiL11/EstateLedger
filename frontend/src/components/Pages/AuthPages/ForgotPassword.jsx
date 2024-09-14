@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+ 
 import "../../CSS/ForgotPass.css";
 import "../../CSS/Login3.css"; // Reusing the existing CSS
 import { Link, useNavigate } from "react-router-dom";

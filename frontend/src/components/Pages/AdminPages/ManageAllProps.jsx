@@ -23,13 +23,13 @@ const ManageAllProps = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("userToken");
-        if (!isLoggedIn) {
-          toast.warning("Please log in.");
-          setError("Please log in.");
-          dispatch(logout());
-          navigate("/user/login");
-          return;
-        }
+        // if (!isLoggedIn) {
+        //   toast.warning("Please log in.");
+        //   setError("Please log in.");
+        //   dispatch(logout());
+        //   navigate("/user/login");
+        //   return;
+        // }
         if (!token) {
           toast.warning("No authentication token found. Please log in.");
           setError("No authentication token found. Please log in.");
@@ -217,7 +217,6 @@ const ManageAllProps = () => {
           }}
         />
       </Modal>
-      <ToastContainer />
     </div>
   );
 };

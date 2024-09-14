@@ -23,6 +23,8 @@ export const addReview = async (req, res) => {
   try {
     // Check if a review already exists for the given user and property
     const existingReview = await RatingModel.findOne({ propertyId, userId });
+    console.log(existingReview);
+
     if (existingReview) {
       // Update the existing review
       existingReview.rating = rating;
@@ -52,11 +54,13 @@ export const addReview = async (req, res) => {
 };
 
 export const getRatingByUserForProperty = async (req, res) => {
-  const { propertyId } = req.params.id;
+  
+  const propertyId = req.params.id;
   const userId = req.userId;
 
   try {
-    const rating = await RatingModel.findOne({ propertyId, userId }); // Use lean() for plain JavaScript objects
+    const rating = await RatingModel.findOne({ propertyId, userId });
+    console.log(rating);
 
     if (!rating) {
       return res
@@ -67,12 +71,7 @@ export const getRatingByUserForProperty = async (req, res) => {
     res.status(200).json({
       success: true,
       rating: {
-        propertyId: rating.propertyId,
-        userId: rating.userId,
         rating: rating.rating,
-        _id: rating._id,
-        createdAt: rating.createdAt,
-        updatedAt: rating.updatedAt,
       },
     });
   } catch (error) {

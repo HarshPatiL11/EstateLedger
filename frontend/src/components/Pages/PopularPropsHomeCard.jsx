@@ -4,7 +4,7 @@ import axios from "axios";
 import "../CSS/PopularProps.css";
 import Card from "./Card.jsx";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
-import "react-toastify/dist/ReactToastify.css";
+ 
 import { ToastContainer } from "react-toastify";
 
 const PopularPropsHomeCard = () => {

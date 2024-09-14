@@ -5,7 +5,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../Redux/AuthSlice";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+ 
 
 const ADMLogin = () => {
   const [formData, setFormData] = useState({
@@ -36,38 +36,38 @@ const ADMLogin = () => {
     });
   };
 
- const handleSubmit = async (e) => {
-   e.preventDefault();
-   setError(null);
-   setSuccess(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(null);
 
-   try {
-     const response = await axios.post("/api/v1/user/login", {
-       email: formData.userEmail,
-       password: formData.userPassword,
-     });
+    try {
+      const response = await axios.post("/api/v1/user/login", {
+        email: formData.userEmail,
+        password: formData.userPassword,
+      });
 
-     console.log("Response data:", response.data); // For debugging
+      console.log("Response data:", response.data); // For debugging
 
-     if (response.data.user.userType === "admin") {
-       const { token } = response.data;
-       localStorage.setItem("userToken", token);
-       toast.success("Login successful!");
-       setSuccess("Login successful!");
-       dispatch(login());
-       navigate("/");
-     } else {
-       toast.error("Only Admin access allowed.");
-       navigate("/user/login"); // Redirect non-admins
-     }
-   } catch (error) {
-     const errorMsg =
-       error.response?.data?.message ||
-       "Login failed! Please check your credentials.";
-     setError(errorMsg);
-     toast.error(errorMsg);
-   }
- };
+      if (response.data.user.userType === "admin") {
+        const { token } = response.data;
+        localStorage.setItem("userToken", token);
+        toast.success("Login successful!");
+        setSuccess("Login successful!");
+        dispatch(login());
+        navigate("/");
+      } else {
+        toast.error("Only Admin access allowed.");
+        navigate("/user/login"); // Redirect non-admins
+      }
+    } catch (error) {
+      const errorMsg =
+        error.response?.data?.message ||
+        "Login failed! Please check your credentials.";
+      setError(errorMsg);
+      toast.error(errorMsg);
+    }
+  };
 
   return (
     <>
@@ -109,7 +109,6 @@ const ADMLogin = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 };

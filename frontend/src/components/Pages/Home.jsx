@@ -5,8 +5,6 @@ import PopularPropsHomeCard from "./PopularPropsHomeCard.jsx";
 
 import PropertyLocationCard from "./PropertyLocationCard.jsx";
 import InterestedUsersList from "./OwnerPages/InterestedUsersList.jsx";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 
 const Home = () => {
   return (
@@ -18,8 +16,6 @@ const Home = () => {
       </div>
       <PopularPropsHomeCard />
       <PropertyLocationCard />
-      <ToastContainer/>
-      {/* <InterestedUsersList/> */}
     </>
   );
 };

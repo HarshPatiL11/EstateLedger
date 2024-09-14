@@ -31,41 +31,41 @@ import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact-us" element={<Contact />} />
-          {/* User Routes */}
-          <Route path="/user/register" element={<UserRegister />} />
-          <Route path="/user/login" element={<LoginPageB />} />
-          <Route path="/user/profile" element={<UserProfile2 />} />
-          <Route path="/user/forgetpassword" element={<ForgotPassword />} />
+      <ToastContainer/>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact-us" element={<Contact />} />
+            {/* User Routes */}
+            <Route path="/user/register" element={<UserRegister />} />
+            <Route path="/user/login" element={<LoginPageB />} />
+            <Route path="/user/profile" element={<UserProfile2 />} />
+            <Route path="/user/forgetpassword" element={<ForgotPassword />} />
 
-          {/* Property routes */}
-          <Route
-            path="/properties/all-properties"
-            element={<PopularPropsALl />}
-          />
-          <Route path="/properties/filter" element={<PropertyFilter />} />
-          <Route path="/properties/Buy" element={<PropBuy />} />
-          <Route path="/properties/Rent" element={<PropertyOnLease />} />
-          <Route path="/properties/location" element={<PropertyLocation />} />
-          <Route path="/properties/get/:id" element={<PropertyById />} />
-          {/* Owner Routes */}
-          <Route path="/user/become-seller" element={<BecomeOwner />} />
-          <Route path="/owner/property/add" element={<AddProperty />} />
-          {/* admin Routes */}
-          <Route path="/admin" element={<ADMLogin />} />
-          <Route path="/admin/manage/users" element={<ManageAllUsers />} />
-          <Route path="/admin/manage/users/:id" />
-          <Route
-            path="/admin/manage/properties/all"
-            element={<ManageAllProps />}
-          />
-        </Routes>
-        <ToastContainer/>
-      </Layout>
+            {/* Property routes */}
+            <Route
+              path="/properties/all-properties"
+              element={<PopularPropsALl />}
+            />
+            <Route path="/properties/filter" element={<PropertyFilter />} />
+            <Route path="/properties/Buy" element={<PropBuy />} />
+            <Route path="/properties/Rent" element={<PropertyOnLease />} />
+            <Route path="/properties/location" element={<PropertyLocation />} />
+            <Route path="/properties/get/:id" element={<PropertyById />} />
+            {/* Owner Routes */}
+            <Route path="/user/become-seller" element={<BecomeOwner />} />
+            <Route path="/owner/property/add" element={<AddProperty />} />
+            {/* admin Routes */}
+            <Route path="/admin" element={<ADMLogin />} />
+            <Route path="/admin/manage/users" element={<ManageAllUsers />} />
+
+            <Route
+              path="/admin/manage/properties/all"
+              element={<ManageAllProps />}
+            />
+          </Routes>
+        </Layout>
     </BrowserRouter>
   );
 }

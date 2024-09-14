@@ -6,7 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "../../CSS/UpdateProps.css";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import "react-toastify/dist/ReactToastify.css";
+ 
 
 const FACING_OPTIONS = ["North", "South", "East", "West"];
 const FLOORING_OPTIONS = ["Marble", "Wooden", "Tiles"];
