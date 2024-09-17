@@ -27,45 +27,48 @@ import ForgotPassword from "./components/Pages/AuthPages/ForgotPassword.jsx";
 import About from "./components/Pages/About.jsx";
 import Contact from "./components/Pages/Contact.jsx";
 import { ToastContainer } from "react-toastify";
+import NewHome from "./components/Pages/NewPages/NewHome.jsx";
+import HelpWithPost from "./components/Pages/OwnerPages/HelpWithPost.jsx";
 
 function App() {
   return (
     <BrowserRouter>
-      <ToastContainer/>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact-us" element={<Contact />} />
-            {/* User Routes */}
-            <Route path="/user/register" element={<UserRegister />} />
-            <Route path="/user/login" element={<LoginPageB />} />
-            <Route path="/user/profile" element={<UserProfile2 />} />
-            <Route path="/user/forgetpassword" element={<ForgotPassword />} />
+      <ToastContainer />
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/help-buy" element={<About />} />
+          <Route path="/help-sell" element={<HelpWithPost/>} />
+          <Route path="/contact-us" element={<Contact />} />
+          {/* User Routes */}
+          <Route path="/user/register" element={<UserRegister />} />
+          <Route path="/user/login" element={<LoginPageB />} />
+          <Route path="/user/profile" element={<UserProfile2 />} />
+          <Route path="/user/forgetpassword" element={<ForgotPassword />} />
 
-            {/* Property routes */}
-            <Route
-              path="/properties/all-properties"
-              element={<PopularPropsALl />}
-            />
-            <Route path="/properties/filter" element={<PropertyFilter />} />
-            <Route path="/properties/Buy" element={<PropBuy />} />
-            <Route path="/properties/Rent" element={<PropertyOnLease />} />
-            <Route path="/properties/location" element={<PropertyLocation />} />
-            <Route path="/properties/get/:id" element={<PropertyById />} />
-            {/* Owner Routes */}
-            <Route path="/user/become-seller" element={<BecomeOwner />} />
-            <Route path="/owner/property/add" element={<AddProperty />} />
-            {/* admin Routes */}
-            <Route path="/admin" element={<ADMLogin />} />
-            <Route path="/admin/manage/users" element={<ManageAllUsers />} />
+          {/* Property routes */}
+          <Route
+            path="/properties/all-properties"
+            element={<PopularPropsALl />}
+          />
+          <Route path="/properties/filter" element={<PropertyFilter />} />
+          <Route path="/properties/Buy" element={<PropBuy />} />
+          <Route path="/properties/Rent" element={<PropertyOnLease />} />
+          <Route path="/properties/location" element={<PropertyLocation />} />
+          <Route path="/properties/get/:id" element={<PropertyById />} />
+          {/* Owner Routes */}
+          <Route path="/user/become-seller" element={<BecomeOwner />} />
+          <Route path="/owner/property/add" element={<AddProperty />} />
+          {/* admin Routes */}
+          <Route path="/admin" element={<ADMLogin />} />
+          <Route path="/admin/manage/users" element={<ManageAllUsers />} />
 
-            <Route
-              path="/admin/manage/properties/all"
-              element={<ManageAllProps />}
-            />
-          </Routes>
-        </Layout>
+          <Route
+            path="/admin/manage/properties/all"
+            element={<ManageAllProps />}
+          />
+        </Routes>
+      </Layout>
     </BrowserRouter>
   );
 }

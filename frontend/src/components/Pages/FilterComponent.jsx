@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../CSS/propsFilter.css";
 import { ToastContainer } from "react-toastify";
+import Card from "./Card";
+import { useNavigate } from "react-router-dom";
 
+import "../CSS/propsFilter.css";
 const PropertyFilter = () => {
   const [filters, setFilters] = useState({
     layout: "",
@@ -22,6 +24,8 @@ const PropertyFilter = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -74,6 +78,24 @@ const PropertyFilter = () => {
       setLoading(false);
     }
   };
+ const formatAmount = (amount) => {
+   if (amount >= 10000000) {
+     return `${(amount / 10000000).toFixed(1)} cr`;
+   } else if (amount >= 100000) {
+     return `${(amount / 100000).toFixed(1)} lac`;
+   } else if (amount >= 1000) {
+     return `${(amount / 1000).toFixed(1)} k`;
+   } else {
+     return amount.toString();
+   }
+ };
+
+  const handleView = (property) => {
+    navigate(`/properties/get/${property._id}`);
+  };
+useEffect(() => {
+  handleFilter();
+}, []); 
 
   return (
     <div>
@@ -206,28 +228,45 @@ const PropertyFilter = () => {
         {loading && <p>Loading...</p>}
         {error && <p className="error-message">{error}</p>}
         {properties.length > 0 ? (
-          <ul>
-            {properties.map((property) => (
-              <li key={property._id}>
-                <h3>{property.layout}</h3>
-                <p>Location: {property.location}</p>
-                <p>Price: {property.SellStartprice}</p>
-                <p>Rent: {property.rentAmount}</p>
-                {property.propertyImg && property.propertyImg.length > 0 && (
-                  <img
-                    src={property.propertyImg[0].data}
-                    alt="Property"
-                    style={{ width: "100px", height: "100px" }}
-                  />
-                )}
-              </li>
-            ))}
-          </ul>
+          <div className="Popular-Props-Main">
+            <div className="Popular-Props-Content">
+              <div className="Popular-Props-Header">
+                <h2> Filter Result</h2>
+              </div>
+              <div className="Popular-cards">
+                {properties.map((property) => {
+                  const amount =
+                    filters.sellOrLease === "Sell"
+                      ? property.SellStartprice
+                      : property.rentAmount > 0
+                      ? property.rentAmount
+                      : property.SellStartprice;
+
+                  const formattedAmount = formatAmount(amount);
+
+                  return (
+                    <Card
+                      key={property._id}
+                      layout={property.layout}
+                      type={property.propClass}
+                      imageNum={property.propertyImg.length}
+                      amount={formattedAmount}
+                      carpetArea={property.carpetarea}
+                      location={property.location}
+                      status={property.status}
+                      image={property.propertyImg[0]?.data}
+                      onClick={() => handleView(property)}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         ) : (
           !loading && <p>No properties found</p>
         )}
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };

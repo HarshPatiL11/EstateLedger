@@ -75,14 +75,14 @@ input {
 }
 
 input:focus {
-  border: 2px solid #003366; /* Navy Blue border on focus */
+  border: 2px solid #ff0000; /* Navy Blue border on focus */
   outline: none;
 }
 
 .login-btn {
   width: 100%;
   padding: 5px 8px;
- background: #008080; /* Darker Teal for hover effect */
+ background: #ff0000; /* Darker Teal for hover effect */
   color: #fff;
   border-radius: 5px;
 
@@ -93,9 +93,9 @@ input:focus {
 
 .login-btn:hover {
   
-   background: #0080804d; /* Teal for the button background */
-  border: 3px solid #003366; /* Navy Blue border */
-  color: #003366;
+   background: #ff00004d; /* Teal for the button background */
+  border: 3px solid #ff0000; /* Navy Blue border */
+  color: #ffffff;
 
 }
 
@@ -118,7 +118,7 @@ input:focus {
 }
 
 .signup-link a {
-  color: #008080; /* Teal for the signup link */
+  color: #ff0000; /* Teal for the signup link */
   text-decoration: none;
 }
 
@@ -134,7 +134,10 @@ input:focus {
     background-size: cover;
     background-position: center;
   }
-  
+  .Login-container{ 
+width: 85vw;
+margin-bottom: 50px;
+  }
   .Login-glass-card {
     width: 100%;
     margin: 0 20px;

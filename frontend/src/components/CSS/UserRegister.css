@@ -42,10 +42,9 @@
 
 .register-glass-card h2 {
   font-weight: bolder;
-  color: #FFD700; /* Gold for the header text */
+  color: #ff0000; /* Red for the header text */
   font-family: 'Exo', sans-serif;
   font-size: 35px;
-  font-weight: 200;
   text-align: center;
 }
 
@@ -71,26 +70,24 @@ input {
 }
 
 input:focus {
-  border: 2px solid #003366; /* Navy Blue border on focus */
+  border: 2px solid #ff0000; /* Red border on focus */
 }
 
 .register-btn {
- width: 100%;
-  padding: 5px 8px;
- background: #008080; /* Darker Teal for hover effect */
+  width: 100%;
+  padding: 10px 15px;
+  background: #ff0000; /* Red button background */
   color: #fff;
   border-radius: 5px;
-
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .register-btn:hover {
-  
-   background: #0080804d; /* Teal for the button background */
-  border: 3px solid #003366; /* Navy Blue border */
-  color: #003366;
+  background: #cc0000; /* Darker red on hover */
+  border: none;
+  color: #fff;
 }
 
 .error-message {

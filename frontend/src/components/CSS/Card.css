@@ -9,15 +9,18 @@
   cursor: pointer;
   transition: box-shadow 0.25s ease-out, transform 0.25s ease-out; 
   position: relative; 
+  font-family: 'Montserrat', Arial, sans-serif; /* Applied font family */
 }
-.card p{
+
+.card p {
   margin: 0!important;
   padding: 0!important;
 }
 
 .card:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   transform: scale(1); 
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .image-container {
@@ -32,21 +35,20 @@
   border-radius: 8px;
   transition: transform 0.3s ease-in-out;
 }
- 
-.image-label {
-    position: absolute;
-    top: 74%;
-    left: 81%;
-    display: flex;
-    gap: 3px;
-    background-color: rgba(0, 0, 0, 0.4);
-    color: #fff;
-    padding: 4px 8px;
-    font-size: 0.95rem;
-    border-radius: 4px;
-    align-items: center;
-    justify-content: center;
 
+.image-label {
+  position: absolute;
+  top: 74%;
+  left: 81%;
+  display: flex;
+  gap: 3px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
 }
 
 .card:hover .card-thumbnail {
@@ -88,15 +90,15 @@
   display: none;
   margin-top: 12px;
   padding: 10px 20px;
-  background-color: transparent;
-  color: orange;
+  background-color: #fff; /* Red background color */
+  color: #ff0000; /* White text color */
   font-size: 19px;
   font-weight: bold;
   text-align: center;
-  border: 2px solid orange;
+  border: 2px solid #ff0000; /* Red border */
   border-radius: 30px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease-in;
   user-select: none;
 }
 
@@ -109,12 +111,15 @@
 }
 
 .cardbtn:hover {
-  background-color: orange;
-  transform: scale(1.05);
+  background-color: #d10000; /* Darker red for hover */
+  border: #d8d8d8;
   color: #fff;
+  /* transform: scale(1.05); */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+
+    
 }
 
 .cardbtn:active {
   transform: scale(0.98);
 }
-

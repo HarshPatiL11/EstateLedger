@@ -56,32 +56,28 @@
 .ForgotPassword-header span:last-child {
   color: #FFD700; /* Gold for the second part */
 }
-
+/* 
 .input-group {
-  margin-bottom: 20px; /* Increased margin for better spacing */
+  margin-bottom: 20px; Increased margin for better spacing
 }
 
 input {
   width: 100%;
-  padding: 12px; /* Slightly increased padding for a more comfortable input box */
+  padding: 12px; Slightly increased padding for a more comfortable input box
   border: none;
   border-radius: 5px;
   font-size: 16px;
-  background: rgba(255, 255, 255, 0.6); /* Lightened background */
+  background: rgba(255, 255, 255, 0.6); Lightened background
   color: #595959;
   font-weight: 300;
   outline: none;
-}
+} */
 
-input:focus {
-  border: 2px solid #003366; /* Navy Blue border on focus */
-  outline: none;
-}
-
+/* 
 .login-btn {
   width: 100%;
   padding: 5px 8px;
-  background: #008080; /* Darker Teal for hover effect */
+  background: #008080; Darker Teal for hover effect
   color: #fff;
   border-radius: 5px;
   font-size: 24px;
@@ -90,21 +86,21 @@ input:focus {
 }
 
 .login-btn:hover {
-  background: #0080804d; /* Teal for the button background */
-  border: 3px solid #003366; /* Navy Blue border */
+  background: #0080804d; Teal for the button background
+  border: 3px solid #003366; Navy Blue border
   color: #003366;
 }
 
 .error-message {
-  color: #f44336; /* Red for error messages */
+  color: #f44336; Red for error messages
   text-align: center;
   margin-top: 10px;
 }
 
 .success-message {
-  color: #4caf50; /* Green for success messages */
+  color: #4caf50; Green for success messages
   margin-top: 10px;
-}
+} */
 
 /* Media Query for smaller screens */
 @media (max-width: 600px) {

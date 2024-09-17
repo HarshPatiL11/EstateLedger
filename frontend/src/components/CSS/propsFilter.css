@@ -6,16 +6,16 @@
   flex-wrap: wrap;
   gap: 1rem;
   padding: 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid #e8e8e8; /* Light border for consistency */
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #fff; /* Background color matching the lower nav */
 }
 
 /* Style individual input fields and select elements */
 .filter-form input,
 .filter-form select {
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd; /* Lighter border color */
   border-radius: 4px;
   font-size: 1rem;
   width: 100%;
@@ -27,7 +27,7 @@
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
+  background-color: #d8232a; /* Main theme color */
   color: #fff;
   font-size: 1rem;
   cursor: pointer;
@@ -35,7 +35,7 @@
 }
 
 .filter-form button:hover {
-  background-color: #0056b3;
+  background-color: #a91b1f; /* Darker shade for hover */
 }
 
 /* Style the properties list container */

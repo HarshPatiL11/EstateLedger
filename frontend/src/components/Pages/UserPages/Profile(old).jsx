@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
  
 
 import AdminPanel from "../AdminPanel.jsx";
-import ClientPanel from "../UserPages/ClientPanel.jsx";
+import ClientPanel from "./ClientPanel.jsx";
 import { ToastContainer } from "react-toastify";
 
 const UserProfile = () => {

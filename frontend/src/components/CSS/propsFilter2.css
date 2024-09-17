@@ -1,9 +1,9 @@
 /* propsFilter.css */
 
 body {
-  background-color: #f5f5f5; /* Light Gray Background */
-  font-family: 'Arial', sans-serif;
-  color: #333333; /* Dark Charcoal Text Color */
+  background-color: #f9f9f9; /* Light background to match header */
+  font-family: 'Montserrat', Arial, sans-serif; /* Consistent font family */
+  color: #303030; /* Dark Charcoal Text Color to match header text */
   margin: 0;
   padding: 0;
 }
@@ -11,40 +11,41 @@ body {
 .filter-form {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  background-color: #003366; /* Navy Blue Background */
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 30px;
+  gap: 1rem; /* Adjust gap to match header design */
+  background-color: #fff; /* White background for consistency */
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd; /* Light border to match header */
+  margin-bottom: 1rem; /* Adjust margin to match layout */
 }
 
 .filter-form select,
 .filter-form input {
-  width: calc(33% - 20px);
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #87ceeb; /* Sky Blue border */
-  font-size: 16px;
-  color: #333333; /* Dark Charcoal Text */
-  background-color: #fff;
+  width: calc(33% - 1rem); /* Adjust width to match layout and gap */
+  padding: 0.75rem; /* Adjust padding for consistency */
+  border-radius: 4px;
+  border: 1px solid #ddd; /* Light border to match header */
+  font-size: 1rem;
+  color: #303030; /* Dark Charcoal Text */
+  background-color: #fff; /* White background for input fields */
 }
 
 .filter-form select:focus,
 .filter-form input:focus {
-  border-color: #ffd700; /* Gold for focus */
+  border-color: #d8232a; /* Match header theme color for focus */
   outline: none;
 }
 
 .filter-form button {
-  padding: 10px 20px;
-  background-color: #008080; /* Teal button */
+  padding: 0.75rem 1.5rem;
+  background-color: #d8232a; /* Main theme color */
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .filter-form button:hover {
-  background-color: #006666; /* Darker Teal on hover */
+  background-color: #a91b1f; /* Darker shade of theme color for hover */
 }

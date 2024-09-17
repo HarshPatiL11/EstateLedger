@@ -1,123 +1,137 @@
-import RatingModel from "../Model/RatingModel.js";
+import Rating from "../Model/RatingModel.js";
+import mongoose from "mongoose";
 
-// Add a review
-export const addReview = async (req, res) => {
+export const createRating = async (req, res) => {
+  const userId = req.userId; // Assuming userId is obtained from authentication middleware
+  const propertyId = req.params.id; // Extract propertyId from route parameters
   const { rating } = req.body;
-  const userId = req.userId;
-  const propertyId = req.params.id;
+  console.log(
+    "userId :",
+    userId,
+    " PropertyId :",
+    propertyId,
+    "and rated :",
+    rating
+  );
 
-  // Validate incoming data
-  if (!rating || !userId || !propertyId) {
-    return res
-      .status(400)
-      .json({ success: false, message: "Missing required fields" });
+  // Validate input
+  if (!userId) {
+    return res.status(400).json({ message: "User ID is required" });
+  }
+
+  if (!mongoose.Types.ObjectId.isValid(propertyId)) {
+    return res.status(400).json({ message: "Invalid property ID" });
   }
 
   if (typeof rating !== "number" || rating < 1 || rating > 5) {
-    return res.status(400).json({
-      success: false,
-      message: "Rating must be a number between 1 and 5",
-    });
+    return res
+      .status(400)
+      .json({ message: "Rating must be a number between 1 and 5" });
   }
 
   try {
-    // Check if a review already exists for the given user and property
-    const existingReview = await RatingModel.findOne({ propertyId, userId });
-    console.log(existingReview);
+    // Check if the user has already rated the same property
+    const existingRating = await Rating.findOne({ propertyId, userId });
 
-    if (existingReview) {
-      // Update the existing review
-      existingReview.rating = rating;
-      await existingReview.save();
-      return res.status(200).json({
-        success: true,
-        message: "Review updated successfully",
-        review: existingReview,
-      });
+    if (existingRating) {
+      console.log("found entry for user",userId,", prop ",propertyId,", old rating :-",existingRating);
+      return res
+        .status(404)
+        .json({ message: "User has already rated this property" });
     }
+    // Create and save the new rating
+    const newRating = new Rating({ propertyId, userId, rating });
+    console.log(newRating);
+    
+    await newRating.save();
 
-    // Create a new review
-    const newReview = await RatingModel.create({
-      propertyId,
-      userId,
-      rating,
-    });
-
-    res.status(201).json({
-      success: true,
-      message: "Review added successfully",
-      review: newReview,
-    });
+    res.status(201).json(newRating);
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
 export const getRatingByUserForProperty = async (req, res) => {
-  
-  const propertyId = req.params.id;
-  const userId = req.userId;
+  const userId = req.userId; // Assuming userId is obtained from authentication middleware
+  const propertyId = req.params.id; // Extract propertyId from route parameters
+  console.log(
+    "checking and geting User(",
+    userId,
+    ") Rating for property:-",
+    propertyId
+  );
+  // Validate propertyId
+  if (!mongoose.Types.ObjectId.isValid(propertyId)) {
+    return res.status(400).json({ message: "Invalid property ID" });
+  }
+
+  // Validate userId
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).json({ message: "Invalid user ID" });
+  }
 
   try {
-    const rating = await RatingModel.findOne({ propertyId, userId });
-    console.log(rating);
+    // Fetch the rating for the specified property given by the specified user
+    const rating = await Rating.findOne({ propertyId, userId }).populate(
+      "userId",
+      "name"
+    );
 
     if (!rating) {
+  console.log(
+    "checking and geting User(",
+    userId,
+    ") Rating for property:-",
+    propertyId,"found no rating"
+  );
+
       return res
         .status(404)
-        .json({ success: false, message: "Rating not found" });
+        .json({ message: "No rating found for this property by this user" });
     }
-
-    res.status(200).json({
-      success: true,
-      rating: {
-        rating: rating.rating,
-      },
-    });
+    console.log(rating)
+    res.status(200).json(rating);
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
-// Get reviews for a property
-export const getReviewByProperty = async (req, res) => {
-  const { propertyId } = req.params;
-
-  try {
-    const reviews = await RatingModel.find({ propertyId }).populate(
-      "userId",
-      "name email"
-    );
-    res.status(200).json({ success: true, reviews });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-};
 export const getAverageRating = async (req, res) => {
-  const { propertyId } = req.params.id;
+  const propertyId = req.params.id; // Extract propertyId from route parameters
+console.log("geting the avg for the prop:-", propertyId);
+
+  // Validate propertyId
+  if (!mongoose.Types.ObjectId.isValid(propertyId)) {
+    return res.status(400).json({ message: "Invalid property ID" });
+  }
 
   try {
-    // Find all ratings for the property
-    const ratings = await RatingModel.find({ propertyId });
+    // Fetch all ratings for the specified property
+    const ratings = await Rating.find({ propertyId });
+console.log("got the avg for the prop:-", propertyId,"equals to ", ratings);
 
+    // If no ratings are found, return a 404 status
     if (ratings.length === 0) {
-      return res.status(200).json({
-        success: true,
-        totalRatings: 0,
-        averageRating: 0,
-      });
+      return res
+        .status(404)
+        .json({ message: "No ratings found for this property" });
     }
 
+    // Calculate the average rating
     const totalRatings = ratings.length;
-    const averageRating =
-      ratings.reduce((sum, rating) => sum + rating.rating, 0) / totalRatings;
+    console.log(totalRatings, "is the total amounts of review,");
+    
+    const sumOfRatings = ratings.reduce(
+      (sum, rating) => sum + rating.rating,
+      0
+    );
+    console.log(sumOfRatings, "is the total sum of review,");
 
-    res.status(200).json({
-      success: true,
-      totalRatings,
-      averageRating: parseFloat(averageRating.toFixed(2)), // Format average rating to 2 decimal places
-    });
+    const averageRating = sumOfRatings / totalRatings;
+console.log("ang avg is",averageRating);
+
+    res.status(200).json({ averageRating });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };

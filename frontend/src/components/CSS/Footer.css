@@ -8,6 +8,8 @@
   font-family: "Roboto Mono", monospace;
   font-size: 0.9rem;
   position: relative;
+  margin-top: 100px;
+
 }
 
 /* Ensure the footer sticks to the bottom of the page only if content is insufficient */

@@ -1,39 +1,63 @@
 .Popular-Props-Main {
   padding: 20px;
-  background-color: #fff;
-
+  background-color: #fff; /* White background for the main container */
+  margin-bottom: 70px;
+  font-family: 'Montserrat', Arial, sans-serif; /* Applied font family */
 }
 
 .Popular-Props-Header {
   margin: 20px 30px;
-  color: #87CEEB; /* Header text color */
+  color: #ff0000; /* Red color for header text */
 }
 
 .Popular-Props-Header h2 {
   font-size: 2.4rem;
   font-weight: 500;
   margin-bottom: 10px;
-    line-height: 32px;
-    position: relative;
-    display: inline-block;
-    margin: 0;
-    padding: 0;
+  line-height: 32px;
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  color: #ff0000; /* Red color for the h2 text */
 }
 
 .Popular-Props-Header h5 {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif; /* Applied font family */
   font-weight: 300;
   font-size: 1.4rem;
   margin-bottom: 30px;
-}
-.Popular-Props-Header p {
-    margin-bottom: 0px;
+  color: #ff0000; /* Red color for the h5 text */
 }
 
+.Popular-Props-Header p {
+  margin-bottom: 0px;
+  color: #ff0000; /* Red color for paragraph text, if needed */
+}
 
 .Popular-cards {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  font-family: 'Montserrat', Arial, sans-serif; /* Applied font family */
+}
+
+
+/* Container for the cards */
+.Popular-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between cards */
+  justify-content: center; /* Center cards horizontally */
+}
+
+/* Individual card styles */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }

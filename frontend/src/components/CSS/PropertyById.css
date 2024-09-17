@@ -1,3 +1,6 @@
+/* @import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css"; */
+
 /* Container for all property details */
 .property-details-container {
   display: flex;
@@ -9,6 +12,7 @@
   border-radius: 8px;
   width: 80%;
   max-width: 1200px;
+  font-family: 'Montserrat', Arial, sans-serif; /* Updated font family */
 }
 
 /* Section 1 styling */
@@ -19,18 +23,17 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Property title styling */
 .property-details-section1 h1 {
   font-size: 2.5rem;
   line-height: 3rem;
-  color: #003366; /* Navy blue */
+  color: #ff0000; /* Red color for headers */
 }
 
 /* Subheader styling */
 .Sec1-subheader1 {
   font-size: 1.1rem;
   margin-top: 1rem;
-  color: #333; /* Dark charcoal text */
+  color: #333; /* Red color for subheaders */
 }
 
 /* Image section styling */
@@ -51,7 +54,7 @@
 
 .main-image img {
   width: 100%;
-  height: auto;
+  height: 400px;
   object-fit: cover;
   border-radius: 8px;
 }
@@ -105,37 +108,30 @@
     width: 70vw; /* Set width for larger screens */
   }
 }
-@media (max-width) {
 
-  .Intrested-Btn-div{
-    position: static;
-  }
-}
 /* Interested button section */
 .Intrested-Btn-div {
   display: flex;
-  position: sticky;
-  /* right: 10vh;
-  top: 10vh; */
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  /* background-color: red; */
-  background-color: #87ceeb; 
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgb(135, 206, 235,0.5);
-  gap: 10px;
+    position: sticky;
+    border: 3px solid #ff0000;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #ff000008;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgb(135, 206, 235, 0.5);
+    gap: 10px;
 }
 
 .Intrested-Btn-div h6 {
   font-size: 1.2rem;
-  color: #003366; /* Navy blue */
+  color: #Ff0000; /* Navy blue */
 }
 
 .interested-btn {
   padding: 10px 20px;
   font-size: 1.1rem;
-  background-color: #008080; /* Teal button */
+  background-color: #Ff0000; /* Teal button */
   color: white;
   border: none;
   border-radius: 5px;
@@ -144,11 +140,15 @@
 }
 
 .interested-btn:hover {
-  background-color: #006666; /* Darker teal on hover */
+  background-color: transparent; 
+  border: 2px solid red;
+  color: red;
 }
 
 .interested-btn:disabled {
-  background-color: #ccc; /* Disabled state */
+  background-color: transparent; /* Disabled state */
+    border: 2px solid red;
+  color: red;
   cursor: not-allowed;
 }
 
@@ -163,8 +163,6 @@
   gap: 10px;
 }
 
-
-/* Two columns on screens wider than 600px */
 @media screen and (min-width: 600px) {
   .props-details-sec2 {
     grid-template-columns: 1fr 1fr; /* Two equal-width columns */
@@ -187,13 +185,7 @@
 .props-details-sec2 h2 {
   grid-column: span 2;
   font-size: 1.8rem;
-  color: #003366; /* Navy blue */
-}
-
-.props-details-sec2 h2 {
-  grid-column: span 2;
-  font-size: 1.8rem;
-  color: #003366; /* Navy blue */
+  color: #ff0000; /* Red color for headers */
 }
 
 /* Table of other details */
@@ -203,7 +195,9 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
+.Props-other-details h2{
+   color: #ff0000; 
+}
 .property-details-table {
   width: 100%;
   border-collapse: collapse;
