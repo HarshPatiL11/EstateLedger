@@ -50,44 +50,47 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <div className="Login-Bg"></div>
-      <div className="Login-overlay"></div>
-      <div className="loginContent">
-        <div className="Login-header">
-          <div>
-            <span>Es</span>
-            <span>Led</span>
+    <>
+      <div>
+        <div className="Login-Bg"></div>
+        <div className="Login-overlay"></div>
+        <div className="loginContent">
+          <div className="Login-header">
+            <div>
+              <span>Es</span>
+              <span>Led</span>
+            </div>
+          </div>
+          <div className="login">
+            {error && <div className="error">{error}</div>}
+            {success && <div className="success">{success}</div>}
+            <form onSubmit={handleSubmit}>
+              <input
+                type="email"
+                placeholder="Email"
+                name="userEmail"
+                value={formData.userEmail}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="userPassword"
+                value={formData.userPassword}
+                onChange={handleChange}
+                required
+              />
+              <input type="submit" value="Login" />
+            </form>
+            <p className="signup-link">
+              Don't have an account? <Link to="/user/register">Sign up</Link>
+            </p>
           </div>
         </div>
-        <div className="login">
-          {error && <div className="error">{error}</div>}
-          {success && <div className="success">{success}</div>}
-          <form onSubmit={handleSubmit}>
-            <input
-              type="email"
-              placeholder="Email"
-              name="userEmail"
-              value={formData.userEmail}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              name="userPassword"
-              value={formData.userPassword}
-              onChange={handleChange}
-              required
-            />
-            <input type="submit" value="Login" />
-          </form>
-          <p className="signup-link">
-            Don't have an account? <Link to="/user/register">Sign up</Link>
-          </p>
-        </div>
       </div>
-    </div>
+      <ToastContainer/>
+    </>
   );
 };
 

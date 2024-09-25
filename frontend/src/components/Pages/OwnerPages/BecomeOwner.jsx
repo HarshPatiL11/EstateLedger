@@ -79,20 +79,23 @@ const BecomeOwner = () => {
   }
 
   return (
-    <div className="BO-form-container">
-      <div className="BO-form-content">
-        {error && <div className="error-message">{error}</div>}
-        <h1 className="BO-form-title">Become an Owner</h1>
-        <p className="BO-form-text">
-          By clicking the button below, you agree to change your user type to
-          "owner". This action is irreversible and will grant you new
-          permissions.
-        </p>
-        <button className="BO-form-button" onClick={handleBecomeOwner}>
-          Become Owner
-        </button>
+    <>
+      <div className="BO-form-container">
+        <div className="BO-form-content">
+          {error && <div className="error-message">{error}</div>}
+          <h1 className="BO-form-title">Become an Owner</h1>
+          <p className="BO-form-text">
+            By clicking the button below, you agree to change your user type to
+            "owner". This action is irreversible and will grant you new
+            permissions.
+          </p>
+          <button className="BO-form-button" onClick={handleBecomeOwner}>
+            Become Owner
+          </button>
+        </div>
       </div>
-    </div>
+      <ToastContainer/>
+    </>
   );
 };
 

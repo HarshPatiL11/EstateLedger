@@ -238,7 +238,9 @@ const NewHome = () => {
             )}
           </div>
 
-          <div className="search-bar-submit">Search</div>
+          <div className="search-bar-submit" onClick={handleSearch}>
+            Search
+          </div>
         </div>
       </div>
 

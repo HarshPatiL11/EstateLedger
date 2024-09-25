@@ -67,7 +67,6 @@ const ClientPanel = () => {
           )}
         </tbody>
       </table>
-      <ToastContainer/>
     </div>
   );
 };

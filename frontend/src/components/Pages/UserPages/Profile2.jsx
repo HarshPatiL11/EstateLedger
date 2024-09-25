@@ -301,7 +301,6 @@ const UserProfile = () => {
           </div>
         </div>
       </Modal>
-      <ToastContainer/>
     </div>
   );
 };

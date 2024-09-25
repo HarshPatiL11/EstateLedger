@@ -84,85 +84,88 @@ const InterestedUsersList = () => {
   };
 
   return (
-    <div className="property-list">
-      <h1>Interested Users List</h1>
-      {error && <p className="error-message">{error}</p>}
-      <table className="property-table">
-        <thead>
-          <tr>
-            <th>User Name</th>
-            <th>Property Project</th>
-            <th>Interested Date</th>
-            <th>Approved</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Array.isArray(interestedUsers) && interestedUsers.length > 0 ? (
-            interestedUsers.map((user) => (
-              <tr key={user._id}>
-                <td>{user.name || "N/A"}</td>
-                <td>{user.projectName || "N/A"}</td>
-                <td>
-                  {user.interestedDate
-                    ? new Date(user.interestedDate).toLocaleDateString()
-                    : "N/A"}
-                </td>
-                <td>{user.isApprove ? <MdVerified /> : "Pending"}</td>
-                <td>
-                  <button
-                    className="action-button"
-                    onClick={() => handleViewDetails(user)}
-                  >
-                    <FaEye /> View Details
-                  </button>
-                  {!user.isApprove && (
-                    <button
-                      className="approve-button"
-                      onClick={() => handleApproveUser(user._id)}
-                    >
-                      Approve
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))
-          ) : (
+    <>
+      <div className="property-list">
+        <h1>Interested Users List</h1>
+        {error && <p className="error-message">{error}</p>}
+        <table className="property-table">
+          <thead>
             <tr>
-              <td colSpan="5">No interested users found</td>
+              <th>User Name</th>
+              <th>Property Project</th>
+              <th>Interested Date</th>
+              <th>Approved</th>
+              <th>Action</th>
             </tr>
-          )}
-        </tbody>
-      </table>
-      <Modal isOpen={isModalOpen} onClose={handleModalClose}>
-        {selectedUser && (
-          <div className="user-view-detail-form">
-            <h2>User Details</h2>
-            <p>Name: {selectedUser.name || "N/A"}</p>
-            <p>Phone: {selectedUser.phone || "N/A"}</p>
-            <p>Email: {selectedUser.email || "N/A"}</p>
-            <p>
-              Interested Date:{" "}
-              {selectedUser.interestedDate
-                ? new Date(selectedUser.interestedDate).toLocaleDateString()
-                : "N/A"}
-            </p>
-
-            {selectedUser.isApprove ? (
+          </thead>
+          <tbody>
+            {Array.isArray(interestedUsers) && interestedUsers.length > 0 ? (
+              interestedUsers.map((user) => (
+                <tr key={user._id}>
+                  <td>{user.name || "N/A"}</td>
+                  <td>{user.projectName || "N/A"}</td>
+                  <td>
+                    {user.interestedDate
+                      ? new Date(user.interestedDate).toLocaleDateString()
+                      : "N/A"}
+                  </td>
+                  <td>{user.isApprove ? <MdVerified /> : "Pending"}</td>
+                  <td>
+                    <button
+                      className="action-button"
+                      onClick={() => handleViewDetails(user)}
+                    >
+                      <FaEye /> View Details
+                    </button>
+                    {!user.isApprove && (
+                      <button
+                        className="approve-button"
+                        onClick={() => handleApproveUser(user._id)}
+                      >
+                        Approve
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5">No interested users found</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+        <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+          {selectedUser && (
+            <div className="user-view-detail-form">
+              <h2>User Details</h2>
+              <p>Name: {selectedUser.name || "N/A"}</p>
+              <p>Phone: {selectedUser.phone || "N/A"}</p>
+              <p>Email: {selectedUser.email || "N/A"}</p>
               <p>
-                Approved Date:{" "}
-                {selectedUser.approvedDate
-                  ? new Date(selectedUser.approvedDate).toLocaleDateString()
+                Interested Date:{" "}
+                {selectedUser.interestedDate
+                  ? new Date(selectedUser.interestedDate).toLocaleDateString()
                   : "N/A"}
               </p>
-            ) : null}
-            <button className="close-button" onClick={handleModalClose}>
-              Close
-            </button>
-          </div>
-        )}
-      </Modal>
-    </div>
+
+              {selectedUser.isApprove ? (
+                <p>
+                  Approved Date:{" "}
+                  {selectedUser.approvedDate
+                    ? new Date(selectedUser.approvedDate).toLocaleDateString()
+                    : "N/A"}
+                </p>
+              ) : null}
+              <button className="close-button" onClick={handleModalClose}>
+                Close
+              </button>
+            </div>
+          )}
+        </Modal>
+      </div>
+      <ToastContainer/>
+    </>
   );
 };
 

@@ -101,7 +101,6 @@ const PopularPropsHomeCard = () => {
           </div>
         </div>
       </div>
-      <ToastContainer/>
     </div>
   );
 };

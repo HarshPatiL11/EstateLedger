@@ -206,6 +206,7 @@ const PropertyById = () => {
 
   return (
     <>
+    <ToastContainer/>
       <div className="property-details-container">
         {/* Existing Sections */}
         <div className="property-details-section1">

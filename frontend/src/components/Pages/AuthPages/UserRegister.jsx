@@ -61,6 +61,7 @@ const UserRegister = () => {
 
   return (
     <>
+    <ToastContainer/>
       <div className="registerbody">
         <div className="register-container">
           <div className="register-glass-card">

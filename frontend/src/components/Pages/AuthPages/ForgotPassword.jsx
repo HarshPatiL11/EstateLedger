@@ -64,6 +64,7 @@ const ForgotPassword = () => {
 
   return (
     <>
+    <ToastContainer/>
       <div className="ForgotPasswordBody">
         <div className="ForgotPassword-container">
           <div className="ForgotPassword-glass-card">
@@ -127,7 +128,6 @@ const ForgotPassword = () => {
             </div>
           </div>
         </div>
-        <ToastContainer/>
       </div>
     </>
   );

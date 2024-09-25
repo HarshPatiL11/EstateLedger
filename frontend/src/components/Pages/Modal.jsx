@@ -13,7 +13,6 @@ const Modal = ({ isOpen, onClose, children }) => {
        
         {children}
       </div>
-      <ToastContainer/>
     </div>
   );
 };

@@ -139,85 +139,88 @@ const ManageAllProps = () => {
   };
 
   return (
-    <div className="property-list">
-      <h1>Property Listings</h1>
-      <table className="property-table">
-        <thead>
-          <tr>
-            <th>Owner</th>
-            <th>Project</th>
-            <th>Carpet Area (sqft)</th>
-            <th>Selling Price (₹)</th>
-            <th>Rent Amount (₹)</th>
-            <th>Sell or Lease</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {properties.map((property) => (
-            <tr key={property._id}>
-              <td>{property.owner}</td>
-              <td>
-                {property.project}
-                {property.isApproved && (
-                  <MdVerified
-                    style={{
-                      color: "green",
-                      fontSize: "1.5em",
-                      marginLeft: "10px",
-                    }}
-                  />
-                )}
-              </td>
-              <td>{property.carpetarea}</td>
-              <td>{property.SellStartprice}</td>
-              <td>{property.rentAmount}</td>
-              <td>{property.sellOrLease}</td>
-              <td>
-                <button
-                  className="action-button"
-                  onClick={() => handleUpdate(property)}
-                >
-                  <FaPencilAlt />
-                </button>
-                <button
-                  className="action-button"
-                  onClick={() => handleDelete(property._id)}
-                >
-                  <FaTrash />
-                </button>
-                <button
-                  className="action-button"
-                  onClick={() => handleApprove(property._id)}
-                >
-                  {property.isApproved ? (
-                    <FaCheckCircle style={{ color: "green" }} />
-                  ) : (
-                    <FaCheck />
-                  )}
-                </button>
-              </td>
+    <>
+      <div className="property-list">
+        <h1>Property Listings</h1>
+        <table className="property-table">
+          <thead>
+            <tr>
+              <th>Owner</th>
+              <th>Project</th>
+              <th>Carpet Area (sqft)</th>
+              <th>Selling Price (₹)</th>
+              <th>Rent Amount (₹)</th>
+              <th>Sell or Lease</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {properties.map((property) => (
+              <tr key={property._id}>
+                <td>{property.owner}</td>
+                <td>
+                  {property.project}
+                  {property.isApproved && (
+                    <MdVerified
+                      style={{
+                        color: "green",
+                        fontSize: "1.5em",
+                        marginLeft: "10px",
+                      }}
+                    />
+                  )}
+                </td>
+                <td>{property.carpetarea}</td>
+                <td>{property.SellStartprice}</td>
+                <td>{property.rentAmount}</td>
+                <td>{property.sellOrLease}</td>
+                <td>
+                  <button
+                    className="action-button"
+                    onClick={() => handleUpdate(property)}
+                  >
+                    <FaPencilAlt />
+                  </button>
+                  <button
+                    className="action-button"
+                    onClick={() => handleDelete(property._id)}
+                  >
+                    <FaTrash />
+                  </button>
+                  <button
+                    className="action-button"
+                    onClick={() => handleApprove(property._id)}
+                  >
+                    {property.isApproved ? (
+                      <FaCheckCircle style={{ color: "green" }} />
+                    ) : (
+                      <FaCheck />
+                    )}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <PropertyUpdatePage
-          property={selectedProperty}
-          onClose={() => setIsModalOpen(false)}
-          onSuccess={(updatedProperty) => {
-            setProperties(
-              properties.map((prop) =>
-                prop._id === updatedProperty._id ? updatedProperty : prop
-              )
-            );
-            setIsModalOpen(false);
-            toast.success("Property updated successfully!");
-          }}
-        />
-      </Modal>
-    </div>
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <PropertyUpdatePage
+            property={selectedProperty}
+            onClose={() => setIsModalOpen(false)}
+            onSuccess={(updatedProperty) => {
+              setProperties(
+                properties.map((prop) =>
+                  prop._id === updatedProperty._id ? updatedProperty : prop
+                )
+              );
+              setIsModalOpen(false);
+              toast.success("Property updated successfully!");
+            }}
+          />
+        </Modal>
+      </div>
+      <ToastContainer/>
+    </>
   );
 };
 

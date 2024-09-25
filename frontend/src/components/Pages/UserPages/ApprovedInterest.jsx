@@ -124,7 +124,6 @@ const ApprovedInterest = () => {
           </div>
         </Modal>
       )}
-      <ToastContainer/>
     </div>
   );
 };

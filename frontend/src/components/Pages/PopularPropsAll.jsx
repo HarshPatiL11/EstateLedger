@@ -84,7 +84,6 @@ const PopularProps = () => {
           
         </div>
       </div>
-      <ToastContainer/>
     </div>
   );
 };

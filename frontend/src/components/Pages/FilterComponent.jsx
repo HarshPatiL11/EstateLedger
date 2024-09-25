@@ -266,7 +266,6 @@ useEffect(() => {
           !loading && <p>No properties found</p>
         )}
       </div>
-      <ToastContainer />
     </div>
   );
 };

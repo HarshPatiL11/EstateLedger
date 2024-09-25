@@ -33,12 +33,11 @@ import HelpWithPost from "./components/Pages/OwnerPages/HelpWithPost.jsx";
 function App() {
   return (
     <BrowserRouter>
-      <ToastContainer />
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/help-buy" element={<About />} />
-          <Route path="/help-sell" element={<HelpWithPost/>} />
+          <Route path="/help-sell" element={<HelpWithPost />} />
           <Route path="/contact-us" element={<Contact />} />
           {/* User Routes */}
           <Route path="/user/register" element={<UserRegister />} />
@@ -69,6 +68,7 @@ function App() {
           />
         </Routes>
       </Layout>
+      <ToastContainer />
     </BrowserRouter>
   );
 }

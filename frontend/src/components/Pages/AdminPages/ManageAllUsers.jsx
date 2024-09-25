@@ -8,7 +8,7 @@ import Modal from "../Modal"; // Ensure this is the correct path
 import { logout } from "../../Redux/AuthSlice";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify"; // Import react-toastify
+import { toast, ToastContainer } from "react-toastify"; // Import react-toastify
 
 const ManageAllUsers = () => {
   const [users, setUsers] = useState([]);
@@ -311,91 +311,98 @@ toast.error("failed to Delete User");
   };
 
   return (
-    <div className="property-list">
-      <h1>User Listings</h1>
-      <div className="filter-container">
-        <label htmlFor="filter">Filter by User Type:</label>
-        <select
-          id="filter"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        >
-          <option value="all">All</option>
-          <option value="client">Client</option>
-          <option value="owner">Owner</option>
-          <option value="admin">Admin</option>
-        </select>
-      </div>
-      <table className="property-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Profile</th>
-            <th>User Type</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user._id}>
-              <td>
-                {user.name}
-                {user.approved && (
-                  <MdVerified
+    <>
+      <div className="property-list">
+        <h1>User Listings</h1>
+        <div className="filter-container">
+          <label htmlFor="filter">Filter by User Type:</label>
+          <select
+            id="filter"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          >
+            <option value="all">All</option>
+            <option value="client">Client</option>
+            <option value="owner">Owner</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <table className="property-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Profile</th>
+              <th>User Type</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user._id}>
+                <td>
+                  {user.name}
+                  {user.approved && (
+                    <MdVerified
+                      style={{
+                        color: "green",
+                        fontSize: "1.5em",
+                        marginLeft: "10px",
+                      }}
+                    />
+                  )}
+                </td>
+                <td>{user.email}</td>
+                <td>{user.phone}</td>
+                <td>
+                  <img
+                    src={user.profile}
+                    alt="profile"
                     style={{
-                      color: "green",
-                      fontSize: "1.5em",
-                      marginLeft: "10px",
+                      width: "50px",
+                      height: "50px",
+                      borderRadius: "50%",
                     }}
                   />
-                )}
-              </td>
-              <td>{user.email}</td>
-              <td>{user.phone}</td>
-              <td>
-                <img
-                  src={user.profile}
-                  alt="profile"
-                  style={{ width: "50px", height: "50px", borderRadius: "50%" }}
-                />
-              </td>
-              <td>{user.userType}</td>
-              <td>
-                <button
-                  className="action-button"
-                  onClick={() => handleUpdate(user)}
-                >
-                  <FaPencilAlt />
-                </button>
-                <button
-                  className="action-button"
-                  onClick={() => handleDelete(user)}
-                >
-                  <FaTrash />
-                </button>
-                <button
-                  className="action-button"
-                  onClick={() => handleUpgrade(user)}
-                >
-                  <GrUpgrade />
-                </button>
-                <button
-                  className="action-button"
-                  onClick={() => handleApprove(user)}
-                >
-                  <MdOutlineVerified />
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <Modal isOpen={isModalOpen} onClose={handleModalClose}>
-        {renderModalContent()}
-      </Modal>
-    </div>
+                </td>
+                <td>{user.userType}</td>
+                <td>
+                  <button
+                    className="action-button"
+                    onClick={() => handleUpdate(user)}
+                  >
+                    <FaPencilAlt />
+                  </button>
+                  <button
+                    className="action-button"
+                    onClick={() => handleDelete(user)}
+                  >
+                    <FaTrash />
+                  </button>
+                  <button
+                    className="action-button"
+                    onClick={() => handleUpgrade(user)}
+                  >
+                    <GrUpgrade />
+                  </button>
+                  <button
+                    className="action-button"
+                    onClick={() => handleApprove(user)}
+                  >
+                    <MdOutlineVerified />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+          {renderModalContent()}
+        </Modal>
+      </div>
+      <ToastContainer/>
+    </>
   );
 };
 
