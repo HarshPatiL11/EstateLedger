@@ -131,7 +131,14 @@ const NewHome = () => {
       <div className="home-main-section">
         <h2 className="home-header">
           Find a home you'll{" "}
-          <span style={{ fontFamily: "Damion, Arial, sans-serif" ,fontSize:"48px"}}>love</span>
+          <span
+            style={{
+              fontFamily: "Damion, Arial, sans-serif",
+              fontSize: "48px",
+            }}
+          >
+            love
+          </span>
         </h2>
 
         <div className="home-nav-bar">
@@ -170,7 +177,7 @@ const NewHome = () => {
             />
           </div>
           <div className="home-search-layout">
-            <MdHome/>
+            <MdHome />
             <select
               name="layout"
               value={filters.layout}
@@ -179,7 +186,17 @@ const NewHome = () => {
               <option value="">Select Layout</option>
               <option value="1 RK">1 RK</option>
               <option value="1 BHK">1 BHK</option>
-              {/* Add more layout options */}
+              <option value="1.5 BHK">1.5 BHK</option>
+              <option value="2 BHK">2 BHK</option>
+              <option value="2.5 BHK">2.5 BHK</option>
+              <option value="3 BHK">3 BHK</option>
+              <option value="3.5 BHK">3.5 BHK</option>
+              <option value="4 BHK">4 BHK</option>
+              <option value="4.5 BHK">4.5 BHK</option>
+              <option value="5 BHK">5 BHK</option>
+              <option value="5.5 BHK">5.5 BHK</option>
+              <option value="6 BHK">6 BHK</option>
+              <option value="7.5 BHK">7.5 BHK</option>
             </select>
           </div>
 
@@ -221,10 +238,7 @@ const NewHome = () => {
             )}
           </div>
 
-          <div className="search-bar-submit">
-              Search
-
-          </div>
+          <div className="search-bar-submit">Search</div>
         </div>
       </div>
 

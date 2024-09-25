@@ -33,7 +33,6 @@ app.get("/", (req, res) => {
   res.send(`<h1>hello port ${PORT}</h1>`);
 });
 
-
 router.use("/user", authRouter);
 router.use("/user/profile", userRouter);
 router.use("/admin", adminRouter);

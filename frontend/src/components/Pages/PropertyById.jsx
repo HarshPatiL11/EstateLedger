@@ -310,14 +310,13 @@ const PropertyById = () => {
                 )}
               </span>
             ))}
-            <button onClick={submitRating}>Rate</button>
+            <button className="rate-Btn" onClick={submitRating}>Rate</button>
           </p>
           <p>
             <strong>Average Rating:</strong> {renderStarRating(averageRating)}
           </p>
         </div>
 
-        {/* Other Details Section */}
         {/* Other Details Section */}
         <div className="Props-other-details">
           <h2>Other Property Details</h2>

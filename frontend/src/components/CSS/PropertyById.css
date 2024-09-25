@@ -145,6 +145,7 @@
   color: red;
 }
 
+
 .interested-btn:disabled {
   background-color: transparent; /* Disabled state */
     border: 2px solid red;
@@ -162,7 +163,18 @@
   grid-template-columns: 1fr;
   gap: 10px;
 }
+.rate-Btn{
+      background: red;
+    padding: 2px 3px;
+    margin-left: 10px;
+}
 
+.rate-Btn:hover{
+  color: red;
+      background:#fff;
+      border:2px solid #ff0000 ;
+      box-shadow: 1px 4px 10px  red;
+}
 @media screen and (min-width: 600px) {
   .props-details-sec2 {
     grid-template-columns: 1fr 1fr; /* Two equal-width columns */
