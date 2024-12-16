@@ -58,7 +58,7 @@ const NewHeader1 = () => {
             </Link>
           ) : (
             <Link to="/user/login" className="login-a">
-              Login{" "}
+              Login
               <span>
                 <FaAngleDown />
               </span>

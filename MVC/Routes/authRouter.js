@@ -11,7 +11,7 @@ import { getUserByToken, resetPasswordController } from "../Controller/userContr
 
 const authRouter = express.Router();
 //Routers
-authRouter.post("/register", registerUser);//working
+authRouter.post("/register", registerUser);
 authRouter.post("/login", userLoginController);//working
 authRouter.post("/logout", authMiddle, userLogoutController);//working
 authRouter.get("/profile",authMiddle,getUserByToken);//working

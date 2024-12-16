@@ -81,7 +81,7 @@ const PopularPropsHomeCard = () => {
             const formattedAmount = formatAmount(amount);
 
             return (
-              <Card
+              <Card 
                 key={property._id}
                 layout={property.layout}
                 type={property.propClass}
