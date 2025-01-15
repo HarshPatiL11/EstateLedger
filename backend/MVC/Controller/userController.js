@@ -1,6 +1,6 @@
 import { comparePassword, hashPassword } from "../Helper/AuthHelper.js";
 import UserSchema from "../Model/userModel.js";
-import Property from "../Model/propertyModel.js";
+// import Property from "../Model/propertyModel.js";
 import InterestPropsModel from "../Model/InterestPropsModel.js";
 
 // get all users (admin only)

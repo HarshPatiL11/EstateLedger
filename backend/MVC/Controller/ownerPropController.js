@@ -1,5 +1,5 @@
 import fs from "fs";
-import PropertySchema from "../Model/PropertyModel.js";
+import PropertySchema from "../Model/propertyModel.js";
 
 import UserSchema from "../Model/userModel.js";
 import InterestPropsModel from "../Model/InterestPropsModel.js";
