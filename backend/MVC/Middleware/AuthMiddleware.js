@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../../config/config.js";
-import UserSchema from "../Model/userModel.js"; 
+import UserSchema from "../Model/userModel.js";
 
 export const authMiddle = async (req, res, next) => {
   try {
